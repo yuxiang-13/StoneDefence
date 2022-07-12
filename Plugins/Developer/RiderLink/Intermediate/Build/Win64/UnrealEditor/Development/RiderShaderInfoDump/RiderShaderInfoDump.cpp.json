@@ -1,11 +1,11 @@
 {
     "Version": "1.1",
     "Data": {
-        "Source": "c:\\users\\helloword\\music\\project\\stone\\stonedefence\\plugins\\developer\\riderlink\\source\\ridershaderinfodump\\ridershaderinfodump.cpp",
+        "Source": "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\developer\\riderlink\\source\\ridershaderinfodump\\ridershaderinfodump.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\helloword\\music\\project\\stone\\stonedefence\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\ridershaderinfodump\\definitions.h",
-            "c:\\users\\helloword\\music\\project\\stone\\stonedefence\\plugins\\developer\\riderlink\\source\\ridershaderinfodump\\ridershaderinfodump.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\ridershaderinfodump\\definitions.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\developer\\riderlink\\source\\ridershaderinfodump\\ridershaderinfodump.h",
             "c:\\ue5\\unrealengine-release\\engine\\source\\runtime\\core\\public\\modules\\moduleinterface.h",
             "c:\\ue5\\unrealengine-release\\engine\\source\\runtime\\core\\public\\coretypes.h",
             "c:\\ue5\\unrealengine-release\\engine\\source\\runtime\\core\\public\\hal\\platform.h",
