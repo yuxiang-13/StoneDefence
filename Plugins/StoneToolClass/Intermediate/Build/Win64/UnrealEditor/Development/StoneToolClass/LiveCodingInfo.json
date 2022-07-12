@@ -1,0 +1,15 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.StoneToolClass.cpp.obj": [
+			"ToolBase.cpp.obj",
+			"StoneToolClass.cpp.obj",
+			"DisplacementTrgger.cpp.obj"
+		],
+		"Module.StoneToolClass.gen.cpp.obj": [
+			"DisplacementTrgger.gen.cpp.obj",
+			"StoneToolClass.init.gen.cpp.obj",
+			"ToolBase.gen.cpp.obj"
+		]
+	}
+}

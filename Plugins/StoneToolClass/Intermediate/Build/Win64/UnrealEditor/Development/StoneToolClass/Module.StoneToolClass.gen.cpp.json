@@ -1,0 +1,17 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\intermediate\\build\\win64\\unrealeditor\\development\\stonetoolclass\\module.stonetoolclass.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\ue5\\unrealengine-release\\engine\\intermediate\\build\\win64\\unrealeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\intermediate\\build\\win64\\unrealeditor\\development\\stonetoolclass\\definitions.stonetoolclass.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\intermediate\\build\\win64\\unrealeditor\\inc\\stonetoolclass\\stonetoolclass.init.gen.cpp",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\intermediate\\build\\win64\\unrealeditor\\inc\\stonetoolclass\\toolbase.gen.cpp",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\source\\stonetoolclass\\public\\core\\toolbase.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\intermediate\\build\\win64\\unrealeditor\\inc\\stonetoolclass\\toolbase.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
