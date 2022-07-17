@@ -23,9 +23,19 @@ public:
 
 	//初始化我们的操作
 	virtual void BeginPlay()override;
+
+	
+	//***********************************控制函数***********************************
+	/** 允许玩家自己更新自己的绑定响应. */
+	virtual void SetupInputComponent()override;
+
+	//鼠标滚轮控制
+	void MouseWheelUp();
+	void MouseWheelDown();
 public:
 	// 锁定鼠标
 	void SetInputModeGameAndUI();
+	
 protected:
 	
 	FScreenMoveUnits ScreenMoveUnits;

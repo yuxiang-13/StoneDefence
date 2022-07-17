@@ -2,3 +2,4 @@
 #include "C:/Users/helloword/Music/project/StoneDefence/Plugins/StoneToolClass/Source/StoneToolClass/Private/Core/ToolBase.cpp"
 #include "C:/Users/helloword/Music/project/StoneDefence/Plugins/StoneToolClass/Source/StoneToolClass/Private/StoneToolClass.cpp"
 #include "C:/Users/helloword/Music/project/StoneDefence/Plugins/StoneToolClass/Source/StoneToolClass/Private/Tool/DisplacementTrgger.cpp"
+#include "C:/Users/helloword/Music/project/StoneDefence/Plugins/StoneToolClass/Source/StoneToolClass/Private/Tool/ScreenMove.cpp"
