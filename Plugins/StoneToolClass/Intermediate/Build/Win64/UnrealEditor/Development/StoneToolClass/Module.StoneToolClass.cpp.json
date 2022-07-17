@@ -13,7 +13,9 @@
             "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\source\\stonetoolclass\\public\\stonetoolclass.h",
             "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\source\\stonetoolclass\\private\\tool\\displacementtrgger.cpp",
             "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\source\\stonetoolclass\\public\\tool\\displacementtrgger.h",
-            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\intermediate\\build\\win64\\unrealeditor\\inc\\stonetoolclass\\displacementtrgger.generated.h"
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\intermediate\\build\\win64\\unrealeditor\\inc\\stonetoolclass\\displacementtrgger.generated.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\source\\stonetoolclass\\private\\tool\\screenmove.cpp",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\stonetoolclass\\source\\stonetoolclass\\public\\tool\\screenmove.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

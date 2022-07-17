@@ -3,3 +3,8 @@
 
 #include "UI/HallUI/UMG/UI_MainHall.h"
 
+void UUI_MainHall::NativeConstruct()
+{
+	Super::NativeConstruct();
+	
+}

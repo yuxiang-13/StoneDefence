@@ -3,3 +3,8 @@
 
 #include "Core/HallCore/TowerDefenceHallPlayerController.h"
 
+ATowerDefenceHallPlayerController::ATowerDefenceHallPlayerController()
+{
+	// 显示鼠标
+	bShowMouseCursor = true;
+}
