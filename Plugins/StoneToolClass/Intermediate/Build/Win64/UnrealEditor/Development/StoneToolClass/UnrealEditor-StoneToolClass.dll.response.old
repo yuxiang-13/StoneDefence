@@ -34,7 +34,8 @@
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"C:\Users\helloword\Music\project\StoneDefence\Plugins\StoneToolClass\Intermediate\Build\Win64\UnrealEditor\Development\StoneToolClass\StoneToolClass.cpp.obj"
+"C:\Users\helloword\Music\project\StoneDefence\Plugins\StoneToolClass\Intermediate\Build\Win64\UnrealEditor\Development\StoneToolClass\Module.StoneToolClass.cpp.obj"
+"C:\Users\helloword\Music\project\StoneDefence\Plugins\StoneToolClass\Intermediate\Build\Win64\UnrealEditor\Development\StoneToolClass\Module.StoneToolClass.gen.cpp.obj"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Default.rc2.res"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\CoreUObject\UnrealEditor-CoreUObject.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\UnrealEditor-Engine.lib"

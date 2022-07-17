@@ -4,7 +4,8 @@
 		"Module.StoneToolClass.cpp.obj": [
 			"ToolBase.cpp.obj",
 			"StoneToolClass.cpp.obj",
-			"DisplacementTrgger.cpp.obj"
+			"DisplacementTrgger.cpp.obj",
+			"ScreenMove.cpp.obj"
 		],
 		"Module.StoneToolClass.gen.cpp.obj": [
 			"DisplacementTrgger.gen.cpp.obj",
