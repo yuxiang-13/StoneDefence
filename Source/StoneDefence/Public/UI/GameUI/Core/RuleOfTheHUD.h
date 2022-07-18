@@ -6,6 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "RuleOfTheHUD.generated.h"
 
+class UUI_MainScreen;
 /**
  * 
  */
@@ -13,5 +14,12 @@ UCLASS()
 class STONEDEFENCE_API ARuleOfTheHUD : public AHUD
 {
 	GENERATED_BODY()
-	
+public:
+	ARuleOfTheHUD();
+
+	virtual void BeginPlay() override;
+
+private:
+	TSubclassOf<UUI_MainScreen> MainScreenClass;
+	UUI_MainScreen *MainScreen;
 };

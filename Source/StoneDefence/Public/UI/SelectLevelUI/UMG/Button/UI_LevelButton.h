@@ -14,4 +14,18 @@ class STONEDEFENCE_API UUI_LevelButton : public UUI_RuleOfTheWidget
 {
 	GENERATED_BODY()
 	
+	UPROPERTY(meta = (BindWidget))
+	class UBorder* LevelBorder;
+
+	UPROPERTY(meta = (BindWidget))
+	class UProgressBar* LevelProBar;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* SelectLevelButton;
+public:
+	virtual void NativeConstruct()override;
+
+	UFUNCTION()
+	void SelectLevel();
+	
 };

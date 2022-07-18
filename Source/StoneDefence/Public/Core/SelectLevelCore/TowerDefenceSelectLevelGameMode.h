@@ -3,15 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/GameModeBase.h"
+#include "GameFramework/GameMode.h"
 #include "TowerDefenceSelectLevelGameMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class STONEDEFENCE_API ATowerDefenceSelectLevelGameMode : public AGameModeBase
+class STONEDEFENCE_API ATowerDefenceSelectLevelGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	
+public:
+	ATowerDefenceSelectLevelGameMode();
+
+	virtual void BeginPlay() override;
 };
