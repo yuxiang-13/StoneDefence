@@ -1,0 +1,22 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplescreenloading\\intermediate\\build\\win64\\unrealeditor\\development\\simplescreenloading\\module.simplescreenloading.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\ue5\\unrealengine-release\\engine\\intermediate\\build\\win64\\unrealeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplescreenloading\\intermediate\\build\\win64\\unrealeditor\\development\\simplescreenloading\\definitions.simplescreenloading.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplescreenloading\\source\\simplescreenloading\\private\\simplescreenloading.cpp",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplescreenloading\\source\\simplescreenloading\\public\\simplescreenloading.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplescreenloading\\source\\simplescreenloading\\public\\sscrrenloading.h",
+            "c:\\ue5\\unrealengine-release\\engine\\source\\runtime\\movieplayer\\public\\movieplayer.h",
+            "c:\\ue5\\unrealengine-release\\engine\\source\\runtime\\engine\\public\\slate\\slatetextures.h",
+            "c:\\ue5\\unrealengine-release\\engine\\source\\runtime\\slatecore\\public\\textures\\slateupdatabletexture.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplescreenloading\\source\\simplescreenloading\\private\\sscrrenloading.cpp",
+            "c:\\ue5\\unrealengine-release\\engine\\source\\runtime\\slate\\public\\widgets\\notifications\\sprogressbar.h",
+            "c:\\ue5\\unrealengine-release\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\slate\\sprogressbar.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

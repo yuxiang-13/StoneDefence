@@ -1,0 +1,9 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.SimpleScreenLoading.cpp.obj": [
+			"SimpleScreenLoading.cpp.obj",
+			"SScrrenLoading.cpp.obj"
+		]
+	}
+}
