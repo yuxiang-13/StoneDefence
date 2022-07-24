@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-SimpleArchives.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\SimpleArchives.cpp.obj"
+"..\Intermediate\Build\Win64\UnrealEditor\Development\Default.rc2.res"
+/OUT:"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\UnrealEditor-SimpleArchives.lib"

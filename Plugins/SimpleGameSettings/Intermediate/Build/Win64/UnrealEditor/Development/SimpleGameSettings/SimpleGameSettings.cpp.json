@@ -1,0 +1,14 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplegamesettings\\source\\simplegamesettings\\private\\simplegamesettings.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\ue5\\unrealengine-release\\engine\\intermediate\\build\\win64\\unrealeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplegamesettings\\intermediate\\build\\win64\\unrealeditor\\development\\simplegamesettings\\definitions.simplegamesettings.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simplegamesettings\\source\\simplegamesettings\\public\\simplegamesettings.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

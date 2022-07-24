@@ -1,0 +1,14 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\private\\simpletutoria.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\ue5\\unrealengine-release\\engine\\intermediate\\build\\win64\\unrealeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\development\\simpletutoria\\definitions.simpletutoria.h",
+            "c:\\users\\helloword\\music\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\public\\simpletutoria.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
