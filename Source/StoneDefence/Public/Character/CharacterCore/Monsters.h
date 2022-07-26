@@ -7,11 +7,13 @@
 #include "Monsters.generated.h"
 
 /**
- * 
+ * 怪物
  */
 UCLASS()
 class STONEDEFENCE_API AMonsters : public ARuleOfTheCharacter
 {
 	GENERATED_BODY()
-	
+public:
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaSeconds) override;
 };

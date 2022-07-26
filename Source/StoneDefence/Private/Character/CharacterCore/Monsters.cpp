@@ -3,3 +3,12 @@
 
 #include "Character/CharacterCore/Monsters.h"
 
+void AMonsters::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
+void AMonsters::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+}

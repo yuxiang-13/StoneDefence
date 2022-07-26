@@ -20,6 +20,7 @@ public class StoneDefence : ModuleRules
 			"SimpleTutoria",
 			"SimpleGameSettings",
 			"SimpleArchives",
+			"ApexDestruction",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "SimpleScreenLoading" });
