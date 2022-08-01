@@ -59,4 +59,12 @@ public:
 	// 获取跟踪点，为子弹做准备
 	FORCEINLINE USceneComponent* GetHomingPoint() const {return HomingPoint; };
 	FORCEINLINE UArrowComponent* GetFirePoint() const {return OpenFirePoint; };
+	
+public:
+	// 是否死亡
+	UFUNCTION(Blueprintable,BlueprintPure,Category = "Towers|Attrubute")
+	bool IsActive() { return !IsDeath(); }
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AnimAttrubute")
+	bool bAttack;
 };
