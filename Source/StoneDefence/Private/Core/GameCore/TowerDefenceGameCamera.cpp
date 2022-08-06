@@ -23,6 +23,8 @@ ATowerDefenceGameCamera::ATowerDefenceGameCamera()
 	//控制我们摄像机的角距离地面的长度
 	CameraBoom->TargetArmLength = 800.f;
 	CameraBoom->SetRelativeRotation(FRotator(-60.f, 0.f, 0.f));
+
+	MarkBox->SetCollisionProfileName(TEXT("ControllerPawnProfile"));
 }
 
 // Called when the game starts or when spawned
