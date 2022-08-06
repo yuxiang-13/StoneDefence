@@ -1,6 +1,6 @@
-D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.gen.cpp
+C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.gen.cpp
 /I .
-/I D:\project\StoneDefence\Plugins\SimpleGameSettings\Source\SimpleGameSettings\Private
+/I C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleGameSettings\Source\SimpleGameSettings\Private
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject
 /I Runtime
 /I Runtime\CoreUObject\Public
@@ -252,9 +252,9 @@ D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\Unre
 /I Runtime\ClothingSystemRuntimeInterface\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationDataController
 /I Developer\AnimationDataController\Public
-/I D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Inc\SimpleGameSettings
-/I D:\project\StoneDefence\Plugins\SimpleGameSettings\Source
-/I D:\project\StoneDefence\Plugins\SimpleGameSettings\Source\SimpleGameSettings\Public
+/I C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Inc\SimpleGameSettings
+/I C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleGameSettings\Source
+/I C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleGameSettings\Source\SimpleGameSettings\Public
 /I ThirdParty\mimalloc\include
 /I ThirdParty\LibTiff\Source\Win64
 /I ThirdParty\LibTiff\Source
@@ -269,18 +269,18 @@ D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\Unre
 /I ThirdParty\PhysX3\PhysX_3.4\Include\common
 /I ThirdParty\PhysX3\PhysX_3.4\Include\extensions
 /I ThirdParty\PhysX3\PhysX_3.4\Include\geometry
-/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
-/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.2\include\um"
+/I "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
+/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
-/FI"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/FI"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Definitions.SimpleGameSettings.h"
-/Yu"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-/Fo"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.gen.cpp.obj"
-/sourceDependencies D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.gen.cpp.json
+/FI"C:\Users\yuxiang\Documents\UnrealProjects\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/FI"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Definitions.SimpleGameSettings.h"
+/Yu"C:\Users\yuxiang\Documents\UnrealProjects\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"C:\Users\yuxiang\Documents\UnrealProjects\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+/Fo"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.gen.cpp.obj"
+/sourceDependencies C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.gen.cpp.json
 /Zc:inline
 /nologo
 /Oi
@@ -288,7 +288,7 @@ D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\Unre
 /c
 /Gw
 /Gy
-/Zm1000
+/Zm2000
 /wd4819
 /D_CRT_STDIO_LEGACY_WIDE_SPECIFIERS=1
 /D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1

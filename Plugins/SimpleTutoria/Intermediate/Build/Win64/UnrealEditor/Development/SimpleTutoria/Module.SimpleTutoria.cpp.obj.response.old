@@ -1,6 +1,6 @@
-C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp
+D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp
 /I .
-/I C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Source\SimpleTutoria\Private
+/I D:\project\StoneDefence\Plugins\SimpleTutoria\Source\SimpleTutoria\Private
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject
 /I Runtime
 /I Runtime\CoreUObject\Public
@@ -252,9 +252,9 @@ C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Intermediate
 /I Runtime\ClothingSystemRuntimeInterface\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationDataController
 /I Developer\AnimationDataController\Public
-/I C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Inc\SimpleTutoria
-/I C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Source
-/I C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Source\SimpleTutoria\Public
+/I D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Inc\SimpleTutoria
+/I D:\project\StoneDefence\Plugins\SimpleTutoria\Source
+/I D:\project\StoneDefence\Plugins\SimpleTutoria\Source\SimpleTutoria\Public
 /I ThirdParty\mimalloc\include
 /I ThirdParty\LibTiff\Source\Win64
 /I ThirdParty\LibTiff\Source
@@ -276,11 +276,11 @@ C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Intermediate
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
 /FI"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/FI"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Definitions.SimpleTutoria.h"
+/FI"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Definitions.SimpleTutoria.h"
 /Yu"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
 /Fp"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-/Fo"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp.obj"
-/sourceDependencies C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp.json
+/Fo"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp.obj"
+/sourceDependencies D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp.json
 /Zc:inline
 /nologo
 /Oi

@@ -34,8 +34,8 @@
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.cpp.obj"
-"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.gen.cpp.obj"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Default.rc2.res"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\CoreUObject\UnrealEditor-CoreUObject.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\UnrealEditor-Engine.lib"
@@ -67,7 +67,7 @@
 "setupapi.lib"
 "dwmapi.lib"
 "imm32.lib"
-/OUT:"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleGameSettings\Binaries\Win64\UnrealEditor-SimpleGameSettings.dll"
-/IMPLIB:"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\UnrealEditor-SimpleGameSettings.suppressed.lib"
-/PDB:"C:\Users\helloword\Music\project\StoneDefence\Plugins\SimpleGameSettings\Binaries\Win64\UnrealEditor-SimpleGameSettings.pdb"
+/OUT:"D:\project\StoneDefence\Plugins\SimpleGameSettings\Binaries\Win64\UnrealEditor-SimpleGameSettings.dll"
+/IMPLIB:"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\UnrealEditor-SimpleGameSettings.suppressed.lib"
+/PDB:"D:\project\StoneDefence\Plugins\SimpleGameSettings\Binaries\Win64\UnrealEditor-SimpleGameSettings.pdb"
 /ignore:4078
