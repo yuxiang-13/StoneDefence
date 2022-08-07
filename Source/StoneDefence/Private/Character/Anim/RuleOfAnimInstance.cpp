@@ -4,14 +4,22 @@
 #include "Character/Anim/RuleOfAnimInstance.h"
 #include "Character/Core/RuleOfTheCharacter.h"
 
-URuleOfAnimInstance::URuleOfAnimInstance():bDeath(false), bAttack(false), Speed(0.0f)
+URuleOfAnimInstance::URuleOfAnimInstance()
+	:bDeath(false),
+	bAttack(false),
+	Speed(0.0f)
 {
 }
 
 void URuleOfAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
-	
+
+	ARuleOfTheCharacter* RuleOfTheCharacter = Cast<ARuleOfTheCharacter>(TryGetPawnOwner());
+	if (RuleOfTheCharacter)
+	{
+		
+	}
 }
 
 void URuleOfAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
@@ -22,6 +30,11 @@ void URuleOfAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	{
 		bAttack = RuleOfTheCharacter->bAttack;
 		Speed = RuleOfTheCharacter->GetVelocity().Size();
-		bDeath = RuleOfTheCharacter->IsActive();
+		bDeath = !RuleOfTheCharacter->IsActive();
 	}
+}
+
+void URuleOfAnimInstance::SetDeath(bool InDeath)
+{
+	bDeath = InDeath;
 }

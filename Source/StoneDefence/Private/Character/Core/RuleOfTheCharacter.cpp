@@ -12,13 +12,14 @@ ARuleOfTheCharacter::ARuleOfTheCharacter(): bAttack(false)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+
 	HomingPoint = CreateDefaultSubobject<USceneComponent>(TEXT("HomePoint"));
+	HomingPoint = RootComponent;
+	
 	Widget = CreateDefaultSubobject<UWidgetComponent>(TEXT("Widget"));
 	OpenFirePoint = CreateDefaultSubobject<UArrowComponent>(TEXT("OpenFilePoint"));
 	TraceShowCharacterInformation = CreateDefaultSubobject<UBoxComponent>(TEXT("TraceShowCharacterInformation"));
 
-	HomingPoint->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	Widget->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	OpenFirePoint->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	TraceShowCharacterInformation->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
@@ -69,3 +70,10 @@ bool ARuleOfTheCharacter::IsTream()
 {
 	return false;
 }
+
+
+
+EGameCharacterType::Type ARuleOfTheCharacter::GetType()
+{
+	return EGameCharacterType::Type::MAX;
+};

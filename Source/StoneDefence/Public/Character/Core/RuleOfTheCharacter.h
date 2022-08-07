@@ -49,6 +49,8 @@ public:
 	virtual float GetHealth();
 	virtual float GetMaxHealth();
 	virtual bool IsTream();
+	
+	virtual EGameCharacterType::Type GetType();
 
 	// 获取游戏控制器 的接口
 	FORCEINLINE ATowerDefencePlayerController* GetGameController() { return GetWorld() ? GetWorld()->GetFirstPlayerController<ATowerDefencePlayerController>() : nullptr; };

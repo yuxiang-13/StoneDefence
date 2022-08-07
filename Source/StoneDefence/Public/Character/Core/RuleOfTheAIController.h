@@ -13,5 +13,7 @@ UCLASS()
 class STONEDEFENCE_API ARuleOfTheAIController : public AAIController
 {
 	GENERATED_BODY()
+public:
+	virtual AActor* FindTarget() { return nullptr; };
 	
 };

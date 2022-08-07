@@ -24,3 +24,8 @@ float ATowers::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 
 	return 0;
 }
+
+EGameCharacterType::Type ATowers::GetType()
+{
+	return EGameCharacterType::Type::TOWER;
+};

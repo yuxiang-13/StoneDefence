@@ -19,13 +19,22 @@ public:
 	virtual void NativeInitializeAnimation() override;
 
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+
+	UFUNCTION(BlueprintCallable)
+	void SetDeath(bool InDeath);
+
+	// UPROPERTY(BlueprintCallable, Category="Anim")
+	// void SetAttack(bool InAttack);
+	//
+	// UPROPERTY(BlueprintCallable, Category="Anim")
+	// void SetSpeed(float InSpeed);
 public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AnimAttrubute")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="AnimAttrubute")
 		bool bDeath;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AnimAttrubute")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="AnimAttrubute")
 		bool bAttack;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AnimAttrubute")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="AnimAttrubute")
 		float Speed;
 };
