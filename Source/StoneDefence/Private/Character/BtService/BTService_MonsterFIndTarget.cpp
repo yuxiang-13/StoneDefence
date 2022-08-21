@@ -31,8 +31,14 @@ void UBTService_MonsterFIndTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 				{
 					if (Target->IsActive()) // 目标存活
 					{
+						FVector CurrentLocation = FVector::ZeroVector;
+						FVector NewTargetV = MonsterAIController->GetPawn()->GetActorLocation() - Target.Get()->GetActorLocation();
+						NewTargetV.Normalize();
+						CurrentLocation = NewTargetV * 800.f + Target.Get()->GetActorLocation();
+						
+						
 						MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, Target.Get());
-						MyBlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, Target.Get()->GetActorLocation());
+						MyBlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, CurrentLocation);
 					} else
 					{
 						MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, nullptr);
