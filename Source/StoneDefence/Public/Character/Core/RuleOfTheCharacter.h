@@ -48,7 +48,7 @@ public:
 	virtual bool IsDeath();
 	virtual float GetHealth();
 	virtual float GetMaxHealth();
-	virtual bool IsTream();
+	virtual bool IsTeam(); 
 	
 	virtual EGameCharacterType::Type GetType();
 

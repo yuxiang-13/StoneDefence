@@ -29,7 +29,15 @@ void UAnimNotify_SpawnBullet::Notify(USkeletalMeshComponent* MeshComp, UAnimSequ
 	if (ARuleOfTheCharacter* Character = Cast<ARuleOfTheCharacter>(MeshComp->GetOuter()))
 	{
 		UArrowComponent* Arrow = Character->GetFirePoint();
-		if (ARuleOfTheBullet* Bullet = Character->GetWorld()->SpawnActor<ARuleOfTheBullet>(BulletClass, Arrow->GetComponentLocation(), Arrow->GetComponentRotation()))
+
+		FTransform Transform;
+		Transform.SetLocation(Arrow->GetComponentLocation());
+		Transform.SetRotation(Arrow->GetComponentRotation().Quaternion());
+		
+		FActorSpawnParameters ActorSpawnParameters;
+		ActorSpawnParameters.Instigator = Character; // 施法者
+		
+		if (ARuleOfTheBullet* Bullet = Character->GetWorld()->SpawnActor<ARuleOfTheBullet>(BulletClass, Transform, ActorSpawnParameters))
 		{
 			
 		}

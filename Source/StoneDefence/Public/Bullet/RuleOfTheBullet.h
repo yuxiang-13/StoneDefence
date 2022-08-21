@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "StoneDefence/StoneDefenceType.h"
 #include "RuleOfTheBullet.generated.h"
 
 UCLASS()
@@ -20,8 +21,16 @@ class STONEDEFENCE_API ARuleOfTheBullet : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttrubute", meta = (AllowPrivateAccess = "true"))
 	class USceneComponent* RootBullet;
 	
-public:	
+public:
+	UPROPERTY(EditDefaultsOnly, Category="Bullet")
+	TEnumAsByte<EBulletType> BulletType;
 
+	// 子弹的伤害特效(碰撞特效)
+	UPROPERTY(EditDefaultsOnly, Category="Bullet")
+	class UParticleSystem* DamgageParticle;
+	// 开火 特效
+	UPROPERTY(EditDefaultsOnly, Category="Bullet")
+	class UParticleSystem* OpenFireParticle;
 	
 	// Sets default values for this actor's properties
 	ARuleOfTheBullet();

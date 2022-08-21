@@ -66,7 +66,7 @@ float ARuleOfTheCharacter::GetMaxHealth()
 	return 0.0f;
 }
 
-bool ARuleOfTheCharacter::IsTream()
+bool ARuleOfTheCharacter::IsTeam()
 {
 	return false;
 }
