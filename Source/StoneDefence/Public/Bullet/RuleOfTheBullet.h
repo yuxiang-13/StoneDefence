@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "RuleOfTheBullet.generated.h"
 
 UCLASS()
@@ -19,10 +20,9 @@ class STONEDEFENCE_API ARuleOfTheBullet : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttrubute", meta = (AllowPrivateAccess = "true"))
 	class USceneComponent* RootBullet;
 	
-	//具有移动属性的组件
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttrubute", meta = (AllowPrivateAccess = "true"))
-	class UProjectileMovementComponent* ProjectileMovement;
 public:	
+
+	
 	// Sets default values for this actor's properties
 	ARuleOfTheBullet();
 
@@ -38,4 +38,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UProjectileMovementComponent* ProjectileMovement;
 };
