@@ -18,7 +18,7 @@ void UBTService_MonsterFIndTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 		{
 			if (ARuleOfTheCharacter* NewTarget = Cast<ARuleOfTheCharacter>(MonsterAIController->FindTarget()))
 			{
-				if (Target == NewTarget)
+				if (Target != NewTarget)
 				{
 					if (ARuleOfTheCharacter* MonsterSelf = Cast<ARuleOfTheCharacter>(MonsterAIController->GetPawn()))
 					{
@@ -32,13 +32,16 @@ void UBTService_MonsterFIndTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 					if (Target->IsActive()) // 目标存活
 					{
 						MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, Target.Get());
+						MyBlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, Target.Get()->GetActorLocation());
 					} else
 					{
 						MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, nullptr);
+						MyBlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, FVector::Zero());
 					}
 				} else
 				{
 					MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, nullptr);
+					MyBlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, FVector::Zero());
 				}
 			}
 

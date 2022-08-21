@@ -24,6 +24,10 @@ public:
 	UPROPERTY(EditAnywhere, Category="BlackBoard")
 	struct FBlackboardKeySelector BlackBoardKey_Distance;
 	
+	// 要移动的 终点位置
+	UPROPERTY(EditAnywhere, Category="BlackBoard")
+	struct FBlackboardKeySelector BlackBoardKey_TargetLocation;
+	
 	virtual void OnGameplayTaskInitialized(UGameplayTask& Task) override;
 
 	virtual void OnGameplayTaskActivated(UGameplayTask& Task) override;
