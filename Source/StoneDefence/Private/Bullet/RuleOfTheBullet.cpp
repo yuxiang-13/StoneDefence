@@ -3,6 +3,7 @@
 
 #include "Bullet/RuleOfTheBullet.h"
 
+#include "Character/Core/RuleOfTheAIController.h"
 #include "Character/Core/RuleOfTheCharacter.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -37,18 +38,37 @@ void ARuleOfTheBullet::BeginPlay()
 	{
 	case EBulletType::BULLET_DIRECT_LINE:
 		{
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), OpenFireParticle, GetActorLocation());
 			break;
 		}
 	case EBulletType::BULLET_LINE:
 		{
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), OpenFireParticle, GetActorLocation());
 			break;
 		}
 	case EBulletType::BULLET_TRACK_LINE: // 跟踪
 		{
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), OpenFireParticle, GetActorLocation());
 			// 打开跟踪
 			if (ProjectileMovement) ProjectileMovement->bIsHomingProjectile = true;
 			// 旋转方向跟随速度（速度向哪 旋转到哪）
 			if (ProjectileMovement) ProjectileMovement->bRotationFollowsVelocity = true;
+
+			
+			// 获取 施法对象
+			if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(GetInstigator())) // GetInstigator() 就是 AnimNotify中SpawnActor时传的
+			{
+				if (ARuleOfTheAIController* InstigatorControll = Cast<ARuleOfTheAIController>(InstigatorCharacter->GetController()))
+				{
+					if (ARuleOfTheCharacter* TargetCharacter = InstigatorControll->Target.Get())
+					{
+						// 归位加速度 大小
+						if (ProjectileMovement) ProjectileMovement->HomingAccelerationMagnitude = 4000.0f;
+						// 设置跟踪的物体
+						if (ProjectileMovement) ProjectileMovement->HomingTargetComponent = TargetCharacter->GetHomingPoint();
+					}
+				}
+			}
 			
 			break;
 		}
@@ -93,7 +113,8 @@ void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 				if (OtherCharacter->IsActive())
 				{
 					// 创建特效
-					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, SweepResult.Location);
+					// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, SweepResult.Location);
+					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, GetActorLocation());
 
 					// 伤害数据
 					UGameplayStatics::ApplyDamage(OtherCharacter, 100.f, InstigatorCharacter->GetController(), InstigatorCharacter, UDamageType::StaticClass());
@@ -105,9 +126,22 @@ void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 						virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent) override;
 					 */
 				}
+
+
+				// 碰撞玩尽兴子弹自身销毁
+				switch (BulletType)
+				{
+				case EBulletType::BULLET_LINE:
+				case EBulletType::BULLET_TRACK_LINE:
+					{
+						Destroy();
+						break;
+					}
+				}
 			}
 		}
 	}
+
 }
 
 // Called every frame

@@ -28,4 +28,9 @@ float ATowers::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 EGameCharacterType::Type ATowers::GetType()
 {
 	return EGameCharacterType::Type::TOWER;
+}
+
+bool ATowers::IsTeam()
+{
+	return true;
 };

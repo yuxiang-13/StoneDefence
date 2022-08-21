@@ -18,26 +18,26 @@ void UBTService_MonsterFIndTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 		{
 			if (ARuleOfTheCharacter* NewTarget = Cast<ARuleOfTheCharacter>(MonsterAIController->FindTarget()))
 			{
-				if (Target != NewTarget)
+				if (MonsterAIController->Target != NewTarget)
 				{
 					if (ARuleOfTheCharacter* MonsterSelf = Cast<ARuleOfTheCharacter>(MonsterAIController->GetPawn()))
 					{
 						// 立刻停止 移动
 						MonsterSelf->GetCharacterMovement()->StopMovementImmediately();
 					}
-					Target = NewTarget;
+					MonsterAIController->Target = NewTarget;
 				}
-				if (Target.IsValid())
+				if (MonsterAIController->Target.IsValid())
 				{
-					if (Target->IsActive()) // 目标存活
+					if (MonsterAIController->Target->IsActive()) // 目标存活
 					{
 						FVector CurrentLocation = FVector::ZeroVector;
-						FVector NewTargetV = MonsterAIController->GetPawn()->GetActorLocation() - Target.Get()->GetActorLocation();
+						FVector NewTargetV = MonsterAIController->GetPawn()->GetActorLocation() - MonsterAIController->Target.Get()->GetActorLocation();
 						NewTargetV.Normalize();
-						CurrentLocation = NewTargetV * 800.f + Target.Get()->GetActorLocation();
+						CurrentLocation = NewTargetV * 800.f + MonsterAIController->Target.Get()->GetActorLocation();
 						
 						
-						MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, Target.Get());
+						MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, MonsterAIController->Target.Get());
 						MyBlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, CurrentLocation);
 					} else
 					{
@@ -53,10 +53,10 @@ void UBTService_MonsterFIndTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 
 
 			// 获取距离
-			if (Target.IsValid())
+			if (MonsterAIController->Target.IsValid())
 			{
 				FVector MyLocation = MonsterAIController->GetPawn()->GetActorLocation();
-				FVector TMDistance = MyLocation - Target->GetActorLocation();
+				FVector TMDistance = MyLocation - MonsterAIController->Target->GetActorLocation();
 				if (TMDistance.Size() > 2000)
 				{
 					if (ARuleOfTheCharacter* MonsterAI = Cast<ARuleOfTheCharacter>(MonsterAIController->GetPawn()))

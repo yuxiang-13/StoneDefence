@@ -33,6 +33,4 @@ public:
 	virtual void OnGameplayTaskActivated(UGameplayTask& Task) override;
 
 	virtual void OnGameplayTaskDeactivated(UGameplayTask& Task) override;
-private:
-	TWeakObjectPtr<class ARuleOfTheCharacter> Target;
 };

@@ -18,4 +18,6 @@ public:
 	virtual AActor* FindTarget() { return nullptr; };
 
 	virtual void AttackTarget(class ARuleOfTheCharacter* AttackTargeter) {};
+	
+	TWeakObjectPtr<class ARuleOfTheCharacter> Target;
 };

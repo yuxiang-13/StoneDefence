@@ -16,6 +16,7 @@ class STONEDEFENCE_API AMonsters : public ARuleOfTheCharacter
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
+	virtual bool IsTeam(); 
 	
 	virtual EGameCharacterType::Type GetType();
 };
