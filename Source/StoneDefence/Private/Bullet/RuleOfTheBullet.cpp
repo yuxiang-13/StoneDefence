@@ -3,6 +3,8 @@
 
 #include "Bullet/RuleOfTheBullet.h"
 
+#include "EngineUtils.h"
+#include "Character/CharacterCore/Towers.h"
 #include "Character/Core/RuleOfTheAIController.h"
 #include "Character/Core/RuleOfTheCharacter.h"
 #include "Components/SphereComponent.h"
@@ -72,20 +74,46 @@ void ARuleOfTheBullet::BeginPlay()
 			
 			break;
 		}
-	case EBulletType::BULLET_RANGE: // 范围
+		
+	case EBulletType::BULLET_RANGE_LINE: // 范围 自身抛手雷
 		{
-			if (ProjectileMovement) ProjectileMovement->StopMovementImmediately();
+			break;
+		}
+	case EBulletType::BULLET_RANGE: // 范围 手雷
+		{
+			if (ARuleOfTheCharacter * InstigatorCharacter= Cast<ARuleOfTheCharacter>(GetInstigator()))
+			{
+				if (ProjectileMovement) ProjectileMovement->StopMovementImmediately();
+				TArray<AActor*> IgnoreActors;
+				// TArray<ARuleOfTheCharacter*> TargetActors;
+			
+				for (TActorIterator<ARuleOfTheCharacter>it(GetWorld(), ARuleOfTheCharacter::StaticClass()); it; ++it)
+				{
+					if (ARuleOfTheCharacter* TheCharacter = *it)
+					{
+						FVector VDistance = TheCharacter->GetActorLocation() - InstigatorCharacter->GetActorLocation();
+						if (VDistance.Size() <= 1400)
+						{
+							if (TheCharacter->IsTeam() == InstigatorCharacter->IsTeam())
+							{
+								IgnoreActors.Add(TheCharacter);
+							} else
+							{
+								// 生成伤害特效
+								UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, TheCharacter->GetActorLocation());
+								// TargetActors.Add(TheCharacter);
+							}
+						}
+					}
+				}
+				UGameplayStatics::ApplyRadialDamageWithFalloff(GetWorld(), 100.f, 10.f, GetActorLocation(), 400.f, 1000.f, 1.0f, UDamageType::StaticClass(), IgnoreActors, GetInstigator());
+			}
 			break;
 		}
 	case EBulletType::BULLET_CHAIN: // 链击
 		{
 			if (ProjectileMovement) ProjectileMovement->StopMovementImmediately();
 			BoxDamage->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-			break;
-		}
-		
-	case EBulletType::BULLET_RANGE_LINE:
-		{
 			break;
 		}
 	case EBulletType::BULLET_NONE:
