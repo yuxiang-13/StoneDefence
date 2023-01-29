@@ -31,7 +31,4 @@ protected:
 	
 	// 心跳
 	float HeartbeatDiagnosis;
-	
-	// 目标对象
-	TWeakObjectPtr<class ARuleOfTheCharacter> Target;
 };

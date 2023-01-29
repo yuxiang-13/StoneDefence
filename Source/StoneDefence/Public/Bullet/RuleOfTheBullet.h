@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Character/Core/RuleOfTheCharacter.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "StoneDefence/StoneDefenceType.h"
@@ -42,7 +43,8 @@ protected:
 	
 	UFUNCTION()
 	void BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
- 
+
+	void RadialDamage(const FVector& Origin, ARuleOfTheCharacter* InstigatorCharacter);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -24,8 +24,6 @@ ARuleOfTheBullet::ARuleOfTheBullet()
  
 	InitialLifeSpan = 4.0f;
 
-	ProjectileMovement = Cast<UProjectileMovementComponent>(GetComponentByClass(UProjectileMovementComponent::StaticClass()));
-
 	// 默认直线
 	BulletType = EBulletType::BULLET_DIRECT_LINE;
 }
@@ -34,6 +32,7 @@ ARuleOfTheBullet::ARuleOfTheBullet()
 void ARuleOfTheBullet::BeginPlay()
 {
 	Super::BeginPlay();
+	ProjectileMovement = Cast<UProjectileMovementComponent>(GetComponentByClass(UProjectileMovementComponent::StaticClass()));
 	BoxDamage->OnComponentBeginOverlap.AddUniqueDynamic(this, &ARuleOfTheBullet::BeginOverlap);
 
 	switch (BulletType)
@@ -77,6 +76,34 @@ void ARuleOfTheBullet::BeginPlay()
 		
 	case EBulletType::BULLET_RANGE_LINE: // 范围 自身抛手雷
 		{
+			if (ProjectileMovement) ProjectileMovement->StopMovementImmediately();
+			
+			if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(GetInstigator()))
+			{
+				if (ARuleOfTheAIController *InstigatorController = Cast<ARuleOfTheAIController>(InstigatorCharacter->GetController()))
+				{
+					if (ARuleOfTheCharacter * TargetCharacter = InstigatorController->Target.Get())
+					{
+						ProjectileMovement->ProjectileGravityScale = 1.f;
+						// 算出距离
+						FVector TargetFormOwnerVector = TargetCharacter->GetActorLocation() - GetActorLocation();
+						// 算出时间
+						float InTime = (TargetFormOwnerVector.Size() / ProjectileMovement->InitialSpeed);
+						float Y = ProjectileMovement->GetGravityZ() * InTime;
+						float X = ProjectileMovement->InitialSpeed * InTime;
+						float V = FMath::Sqrt(X * X + Y * Y);
+
+						float CosRadian = FMath::Acos(TargetFormOwnerVector.Size() / V * (InTime * (PI * 0.1f)));
+						FRotator Rot = GetActorRotation();
+						// 把弧度转化成角度  只设置pitch(上下抬头  Yaw是左右看  Roll是旋转)
+						Rot.Pitch = CosRadian * (180 / PI);
+						SetActorRotation(Rot);
+
+						// 设置速度，只设置水平速度
+						ProjectileMovement->SetVelocityInLocalSpace(FVector(1.f, 0.f, 0.f) * ProjectileMovement->InitialSpeed);
+					}
+				}
+			}
 			break;
 		}
 	case EBulletType::BULLET_RANGE: // 范围 手雷
@@ -84,29 +111,7 @@ void ARuleOfTheBullet::BeginPlay()
 			if (ARuleOfTheCharacter * InstigatorCharacter= Cast<ARuleOfTheCharacter>(GetInstigator()))
 			{
 				if (ProjectileMovement) ProjectileMovement->StopMovementImmediately();
-				TArray<AActor*> IgnoreActors;
-				// TArray<ARuleOfTheCharacter*> TargetActors;
-			
-				for (TActorIterator<ARuleOfTheCharacter>it(GetWorld(), ARuleOfTheCharacter::StaticClass()); it; ++it)
-				{
-					if (ARuleOfTheCharacter* TheCharacter = *it)
-					{
-						FVector VDistance = TheCharacter->GetActorLocation() - InstigatorCharacter->GetActorLocation();
-						if (VDistance.Size() <= 1400)
-						{
-							if (TheCharacter->IsTeam() == InstigatorCharacter->IsTeam())
-							{
-								IgnoreActors.Add(TheCharacter);
-							} else
-							{
-								// 生成伤害特效
-								UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, TheCharacter->GetActorLocation());
-								// TargetActors.Add(TheCharacter);
-							}
-						}
-					}
-				}
-				UGameplayStatics::ApplyRadialDamageWithFalloff(GetWorld(), 100.f, 10.f, GetActorLocation(), 400.f, 1000.f, 1.0f, UDamageType::StaticClass(), IgnoreActors, GetInstigator());
+				RadialDamage(GetActorLocation(), Cast<ARuleOfTheCharacter>(GetInstigator()));
 			}
 			break;
 		}
@@ -144,6 +149,33 @@ void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 					// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, SweepResult.Location);
 					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, GetActorLocation());
 
+					
+					// 碰撞玩尽兴子弹自身销毁
+					switch (BulletType)
+					{
+						case EBulletType::BULLET_DIRECT_LINE:
+						case EBulletType::BULLET_LINE:
+						case EBulletType::BULLET_TRACK_LINE:
+							{
+								UGameplayStatics::ApplyDamage(
+									OtherCharacter,
+									100.f,
+									InstigatorCharacter->GetController(),
+									InstigatorCharacter,
+									UDamageType::StaticClass()
+								);
+								Destroy();
+								break;
+							}
+						case EBulletType::BULLET_RANGE_LINE:
+								{
+									RadialDamage(OtherCharacter->GetActorLocation(), InstigatorCharacter);
+									Destroy();
+									break;
+								}
+					}
+
+					
 					// 伤害数据
 					UGameplayStatics::ApplyDamage(OtherCharacter, 100.f, InstigatorCharacter->GetController(), InstigatorCharacter, UDamageType::StaticClass());
 					/*
@@ -154,22 +186,40 @@ void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 						virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent) override;
 					 */
 				}
-
-
-				// 碰撞玩尽兴子弹自身销毁
-				switch (BulletType)
-				{
-				case EBulletType::BULLET_LINE:
-				case EBulletType::BULLET_TRACK_LINE:
-					{
-						Destroy();
-						break;
-					}
-				}
 			}
 		}
 	}
 
+}
+
+void ARuleOfTheBullet::RadialDamage(const FVector& Origin, ARuleOfTheCharacter* InstigatorCharacter)
+{
+	if (InstigatorCharacter)
+	{
+		TArray<AActor*> IgnoreActors;
+		// TArray<ARuleOfTheCharacter*> TargetActors;
+			
+		for (TActorIterator<ARuleOfTheCharacter>it(GetWorld(), ARuleOfTheCharacter::StaticClass()); it; ++it)
+		{
+			if (ARuleOfTheCharacter* TheCharacter = *it)
+			{
+				FVector VDistance = TheCharacter->GetActorLocation() - InstigatorCharacter->GetActorLocation();
+				if (VDistance.Size() <= 1400)
+				{
+					if (TheCharacter->IsTeam() == InstigatorCharacter->IsTeam())
+					{
+						IgnoreActors.Add(TheCharacter);
+					} else
+					{
+						// 生成伤害特效
+						UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, TheCharacter->GetActorLocation());
+						// TargetActors.Add(TheCharacter);
+					}
+				}
+			}
+		}
+		UGameplayStatics::ApplyRadialDamageWithFalloff(GetWorld(), 100.f, 10.f, Origin, 400.f, 1000.f, 1.0f, UDamageType::StaticClass(), IgnoreActors, GetInstigator());
+	}
 }
 
 // Called every frame
