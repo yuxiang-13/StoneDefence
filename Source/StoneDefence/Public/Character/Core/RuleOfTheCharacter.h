@@ -19,7 +19,7 @@ private:
 	class UBoxComponent *TraceShowCharacterInformation;
 	// 开火点
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttrubute", meta = (AllowPrivateAccess = "true"))
-	class UArrowComponent *OpenFirePoint;
+	class USceneComponent *OpenFirePoint;
 	// UMG
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttrubute", meta = (AllowPrivateAccess = "true"))
 	class UWidgetComponent *Widget;
@@ -60,7 +60,7 @@ public:
 
 	// 获取跟踪点，为子弹做准备
 	FORCEINLINE USceneComponent* GetHomingPoint() const {return HomingPoint; };
-	FORCEINLINE UArrowComponent* GetFirePoint() const {return OpenFirePoint; };
+	FORCEINLINE USceneComponent* GetFirePoint() const {return OpenFirePoint; };
 	
 public:
 	// 是否死亡

@@ -28,7 +28,7 @@ void UAnimNotify_SpawnBullet::Notify(USkeletalMeshComponent* MeshComp, UAnimSequ
 	// GetOuter 不是 GetOwner
 	if (ARuleOfTheCharacter* Character = Cast<ARuleOfTheCharacter>(MeshComp->GetOuter()))
 	{
-		UArrowComponent* Arrow = Character->GetFirePoint();
+		USceneComponent* Arrow = Character->GetFirePoint();
 
 		FTransform Transform;
 		Transform.SetLocation(Arrow->GetComponentLocation());

@@ -119,6 +119,19 @@ void ARuleOfTheBullet::BeginPlay()
 		{
 			if (ProjectileMovement) ProjectileMovement->StopMovementImmediately();
 			BoxDamage->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+			
+			// 获取 施法对象
+			if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(GetInstigator())) // GetInstigator() 就是 AnimNotify中SpawnActor时传的
+			{
+				if (ARuleOfTheAIController* InstigatorControll = Cast<ARuleOfTheAIController>(InstigatorCharacter->GetController()))
+				{
+					if (ARuleOfTheCharacter* TargetCharacter = InstigatorControll->Target.Get())
+					{
+						UGameplayStatics::SpawnEmitterAttached(DamgageParticle, TargetCharacter->GetHomingPoint());
+					}
+				}
+			}
 			break;
 		}
 	case EBulletType::BULLET_NONE:
@@ -227,5 +240,27 @@ void ARuleOfTheBullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+	
+	if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(GetInstigator())) // GetInstigator() 就是 AnimNotify中SpawnActor时传的
+		{
+			if (ARuleOfTheAIController* InstigatorControll = Cast<ARuleOfTheAIController>(InstigatorCharacter->GetController()))
+			{
+				if (ARuleOfTheCharacter* TargetCharacter = InstigatorControll->Target.Get())
+				{
+					TArray<USceneComponent*> SceneComponent;
+					RootComponent->GetChildrenComponents(true, SceneComponent);
+					for(auto & Tmp: SceneComponent)
+					{
+						if (UParticleSystemComponent *ParticleSystem = Cast<UParticleSystemComponent>(Tmp))
+						{
+							// 设置粒子 起点、终点
+							ParticleSystem->SetBeamSourcePoint(0, TargetCharacter->GetHomingPoint()->GetComponentLocation(), 0);
+							ParticleSystem->SetBeamEndPoint(0, InstigatorCharacter->GetFirePoint()->GetComponentLocation());
+						}
+					}
+				}
+			}
+		}
 }
 
