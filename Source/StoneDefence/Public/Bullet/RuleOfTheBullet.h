@@ -32,6 +32,10 @@ public:
 	// 开火 特效
 	UPROPERTY(EditDefaultsOnly, Category="Bullet")
 	class UParticleSystem* OpenFireParticle;
+
+	
+	UPROPERTY(EditDefaultsOnly, Category="BULLET TRACK LINE SP")
+	float SplineOffset;
 	
 	// Sets default values for this actor's properties
 	ARuleOfTheBullet();
@@ -50,4 +54,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UProjectileMovementComponent* ProjectileMovement;
+private:
+	UPROPERTY()
+	class USplineComponent *Spline;
+	float CurrentSplineTime;
 };
