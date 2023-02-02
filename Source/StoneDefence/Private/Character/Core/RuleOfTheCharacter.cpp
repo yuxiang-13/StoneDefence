@@ -6,6 +6,7 @@
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Data/Core/CharacterData.h"
 
 // Sets default values
 ARuleOfTheCharacter::ARuleOfTheCharacter(): bAttack(false)
@@ -53,17 +54,17 @@ float ARuleOfTheCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Da
 
 bool ARuleOfTheCharacter::IsDeath()
 {
-	return false;
+	return GetHealth() <= 0.0f;
 }
 
 float ARuleOfTheCharacter::GetHealth()
 {
-	return 0.0f;
+	return GetCharacterData().MaxHealth;
 }
 
 float ARuleOfTheCharacter::GetMaxHealth()
 {
-	return 0.0f;
+	return GetCharacterData().Health;
 }
 
 bool ARuleOfTheCharacter::IsTeam()
@@ -74,4 +75,14 @@ bool ARuleOfTheCharacter::IsTeam()
 EGameCharacterType::Type ARuleOfTheCharacter::GetType()
 {
 	return EGameCharacterType::Type::MAX;
+}
+
+const FCharacterData& ARuleOfTheCharacter::GetCharacterData()
+{
+	if (GetGameState())
+	{
+		return GetGameState()->GetCharacterData(GUID);
+	}
+	// ATowerDefenceGameState 中 定义了这个变量
+	return CharacterDataNULL;
 };

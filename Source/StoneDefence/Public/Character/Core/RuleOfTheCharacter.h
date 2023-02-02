@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Core/GameCore/TowerDefenceGameState.h"
 #include "Core/GameCore/TowerDefencePlayerController.h"
 #include "GameFramework/Character.h"
-#include "Interface/Character/IRuleCharacter.h"
+#include "Interface/Character/RuleCharacterInterface.h"
 #include "RuleOfTheCharacter.generated.h"
 
+class ATowerDefenceGameState;
 UCLASS()
-class STONEDEFENCE_API ARuleOfTheCharacter : public ACharacter, public IRuleCharacter
+class STONEDEFENCE_API ARuleOfTheCharacter : public ACharacter, public IRuleCharacterInterface
 {
 	GENERATED_BODY()
 private:
@@ -43,7 +43,7 @@ protected:
 	// 承伤
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
-	
+	// 角色属性
 public:	
 	virtual bool IsDeath();
 	virtual float GetHealth();
@@ -51,6 +51,9 @@ public:
 	virtual bool IsTeam(); 
 	
 	virtual EGameCharacterType::Type GetType();
+	virtual const FCharacterData &GetCharacterData();
+	
+public:	
 
 	// 获取游戏控制器 的接口
 	FORCEINLINE ATowerDefencePlayerController* GetGameController() { return GetWorld() ? GetWorld()->GetFirstPlayerController<ATowerDefencePlayerController>() : nullptr; };
@@ -69,4 +72,7 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AnimAttrubute")
 	bool bAttack;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="ID")
+	FGuid GUID;
 };
