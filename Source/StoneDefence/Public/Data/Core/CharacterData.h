@@ -25,10 +25,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category="Character Attribute")
 	FName Name;
 	
-	// 玩家ID
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character Attribute")
-	FString GUID;
-	
 	// 玩家等级
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character Attribute")
 	int32 Lv;

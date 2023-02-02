@@ -5,7 +5,7 @@
 
 // Guid.NewGuid() 是生成不为零的guid,字符串为:14870550-1334-4AA6-A229-3726B7AAB2AE new Guid() 是生成为零的guid,字符串为:00000000-0000-0000-0000-00000000
 // 如果你需要一个唯一的标识符,答案是Guid.NewGuid() 
-FCharacterData::FCharacterData(): GUID(FGuid::NewGuid().ToString()), Lv(1.f)
+FCharacterData::FCharacterData(): Lv(1.f) // ,GUID(FGuid::NewGuid().ToString())
 {
 	
 }
