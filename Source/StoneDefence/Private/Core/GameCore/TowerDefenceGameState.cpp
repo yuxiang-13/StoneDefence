@@ -17,19 +17,57 @@ FCharacterData CharacterDataNULL;
 
 ATowerDefenceGameState::ATowerDefenceGameState()
 {
+	static ConstructorHelpers::FObjectFinder<UDataTable> MyTable_Towers(TEXT("/Game/GameData/TowersData"));
+	static ConstructorHelpers::FObjectFinder<UDataTable> MyTable_Monster(TEXT("/Game/GameData/MonsterData"));
+
 	
+	AITowerCharacterData = MyTable_Towers.Object;
+	AIMonsterCharacterData = MyTable_Towers.Object;
 }
 
-ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(const FVector& Location, const FRotator& Rotator)
+ATowers* ATowerDefenceGameState::SpawTowner(int32 CharacterID, int32 CharacterLevel, const FVector& Location,
+	const FRotator& Rotator)
 {
-	if (GetWorld())
-	{
-		if (ARuleOfTheCharacter * RuleOfTheCharacter = GetWorld()->SpawnActor<ARuleOfTheCharacter>(ARuleOfTheCharacter::StaticClass(), Location, Rotator))
-		{
-			RuleOfTheCharacter->GUID = FGuid::NewGuid();
+	return SpawnCharacter<ATowers>(CharacterID, CharacterLevel, AITowerCharacterData, Location, Rotator);
+}
 
-			FCharacterData CharacterData;
-			AddCharacterData(RuleOfTheCharacter->GUID, CharacterData);
+AMonsters* ATowerDefenceGameState::SpawnMonster(int32 CharacterID, int32 CharacterLevel, const FVector& Location,
+	const FRotator& Rotator)
+{
+	return SpawnCharacter<AMonsters>(CharacterID, CharacterLevel, AIMonsterCharacterData, Location, Rotator);
+}
+
+ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, int32 CharacterLevel, UDataTable* InCharacterData,const FVector& Location, const FRotator& Rotator)
+{
+	if (InCharacterData)
+	{
+		TArray<FCharacterData*> Datas;
+		InCharacterData->GetAllRows(TEXT("CharacterData Error"), Datas);
+		auto GetCharacterData = [&](int32 ID) -> FCharacterData*
+		{
+			for (auto &Tmp : Datas)
+			{
+				if (Tmp->ID == ID)
+				{
+					return Tmp;
+				}
+			}
+			return nullptr;
+		};
+		if (FCharacterData *CharacterData = GetCharacterData(CharacterID))
+		{
+			// 获取DataTable配置好的 class  LoadSynchronous 同步加载
+			UClass* NewClass = CharacterData->CharacterBlueprintKey.LoadSynchronous();
+
+		
+			if (GetWorld() && NewClass)
+			{
+				if (ARuleOfTheCharacter * RuleOfTheCharacter = GetWorld()->SpawnActor<ARuleOfTheCharacter>(NewClass, Location, Rotator))
+				{
+					RuleOfTheCharacter->GUID = FGuid::NewGuid();
+					AddCharacterData(RuleOfTheCharacter->GUID, *CharacterData);
+				}
+			}
 		}
 	}
 	return nullptr;

@@ -17,6 +17,20 @@ struct FCharacterData: public FTableRowBase
 public:
 	FCharacterData();
 	
+	///////////////////////////////////////////////////////////////////////资源
+	//////// 
+	// 角色相关资源
+	////////
+	//初始化角色的 实例蓝图
+	// TAssetSubclassOf ==== TSubclassOf<>
+	UPROPERTY(EditDefaultsOnly, Category="Table")
+	TAssetSubclassOf<class ARuleOfTheCharacter> CharacterBlueprintKey;
+	
+	//角色图片
+	UPROPERTY(EditDefaultsOnly, Category="Table")
+	TAssetPtr<class UTexture2D> Icon;
+
+	///////////////////////////////////////////////////////////////////////属性
 	//////// 
 	// 基础
 	////////
@@ -24,6 +38,10 @@ public:
 	// 玩家名字
 	UPROPERTY(EditDefaultsOnly, Category="Character Attribute")
 	FName Name;
+	
+	// CHaracter的ID
+	UPROPERTY(EditDefaultsOnly, Category="Character Attribute")
+	int32 ID;
 	
 	// 玩家等级
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character Attribute")
@@ -142,5 +160,8 @@ public:
 	////////
 	UPROPERTY(EditDefaultsOnly,Category= "Character Skill")
 	TMap<int32, FSkillData> CharacterSkill;
+
 	
+public:
+	bool IsValid();
 };
