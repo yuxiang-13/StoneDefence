@@ -6,6 +6,7 @@
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Core/GameCore/TowerDefenceGameState.h"
 #include "Data/Core/CharacterData.h"
 
 // Sets default values
@@ -34,7 +35,12 @@ ARuleOfTheCharacter::ARuleOfTheCharacter(): bAttack(false)
 void ARuleOfTheCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	// 生成默认 controller
+	if (!GetController())
+	{
+		SpawnDefaultController();
+	}
 }
 
 // Called every frame
@@ -59,12 +65,12 @@ bool ARuleOfTheCharacter::IsDeath()
 
 float ARuleOfTheCharacter::GetHealth()
 {
-	return GetCharacterData().MaxHealth;
+	return GetCharacterData().Health;
 }
 
 float ARuleOfTheCharacter::GetMaxHealth()
 {
-	return GetCharacterData().Health;
+	return GetCharacterData().MaxHealth;
 }
 
 bool ARuleOfTheCharacter::IsTeam()
@@ -81,7 +87,7 @@ const FCharacterData& ARuleOfTheCharacter::GetCharacterData()
 {
 	if (GetGameState())
 	{
-		return GetGameState()->GetCharacterData(GUID);
+		return GetGameState()->GetCharacterData(GetUniqueID());
 	}
 	// ATowerDefenceGameState 中 定义了这个变量
 	return CharacterDataNULL;

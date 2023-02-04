@@ -22,11 +22,11 @@ ATowerDefenceGameState::ATowerDefenceGameState()
 
 	
 	AITowerCharacterData = MyTable_Towers.Object;
-	AIMonsterCharacterData = MyTable_Towers.Object;
+	AIMonsterCharacterData = MyTable_Monster.Object;
 }
 
 ATowers* ATowerDefenceGameState::SpawTowner(int32 CharacterID, int32 CharacterLevel, const FVector& Location,
-	const FRotator& Rotator)
+                                            const FRotator& Rotator)
 {
 	return SpawnCharacter<ATowers>(CharacterID, CharacterLevel, AITowerCharacterData, Location, Rotator);
 }
@@ -64,8 +64,7 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 			{
 				if (ARuleOfTheCharacter * RuleOfTheCharacter = GetWorld()->SpawnActor<ARuleOfTheCharacter>(NewClass, Location, Rotator))
 				{
-					RuleOfTheCharacter->GUID = FGuid::NewGuid();
-					AddCharacterData(RuleOfTheCharacter->GUID, *CharacterData);
+					AddCharacterData(RuleOfTheCharacter->GetUniqueID(), *CharacterData);
 				}
 			}
 		}
@@ -73,22 +72,22 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 	return nullptr;
 }
 
-const FCharacterData &ATowerDefenceGameState::AddCharacterData(const FGuid &Hash, const FCharacterData& Data)
+const FCharacterData &ATowerDefenceGameState::AddCharacterData(const uint32 &ID, const FCharacterData& Data)
 {
-	return CharacterDatas.Add(Hash, Data);
+	return CharacterDatas.Add(ID, Data);
 }
 
-bool ATowerDefenceGameState::RemoveCharacterData(const FGuid& Hash)
+bool ATowerDefenceGameState::RemoveCharacterData(const uint32& ID)
 {
-	CharacterDatas.Remove(Hash);
+	CharacterDatas.Remove(ID);
 	return true;
 }
 
-FCharacterData& ATowerDefenceGameState::GetCharacterData(const FGuid& Hash)
+FCharacterData& ATowerDefenceGameState::GetCharacterData(const uint32& ID)
 {
-	if (CharacterDatas.Contains(Hash))
+	if (CharacterDatas.Contains(ID))
 	{
-		return CharacterDatas[Hash];
+		return CharacterDatas[ID];
 	} else
 	{
 		// SD_print_r(Error, "The current [%s] is invalid", *Hash);

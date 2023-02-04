@@ -35,8 +35,10 @@ class STONEDEFENCE_API ATowerDefenceGameState : public AGameState
 public:
 	ATowerDefenceGameState();
 	
+	UFUNCTION(BlueprintCallable, Category="Spawn")
 	ATowers *SpawTowner(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
 	
+	UFUNCTION(BlueprintCallable, Category="Spawn")
 	AMonsters *SpawnMonster(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
 	
 protected:
@@ -48,11 +50,11 @@ protected:
 	}
 	
 public:
-	const FCharacterData &AddCharacterData(const FGuid &Hash, const FCharacterData &Data);
-	bool RemoveCharacterData(const FGuid &Hash);
-	FCharacterData &GetCharacterData(const FGuid& Hash);
+	const FCharacterData &AddCharacterData(const uint32 &ID, const FCharacterData &Data);
+	bool RemoveCharacterData(const uint32 &ID);
+	FCharacterData &GetCharacterData(const uint32& ID);
 private:
 	// 所有角色数据（包括所有建筑 和 所有的塔）
 	UPROPERTY()
-	TMap<FGuid,FCharacterData> CharacterDatas;
+	TMap<uint32, FCharacterData> CharacterDatas;
 };

@@ -68,11 +68,9 @@ public:
 public:
 	// 是否死亡
 	UFUNCTION(Blueprintable,BlueprintPure,Category = "Towers|Attrubute")
-	bool IsActive() { return !IsDeath(); }
+	bool IsActive() { return true; }
+	// bool IsActive() { return !IsDeath(); }
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AnimAttrubute")
 	bool bAttack;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="ID")
-	FGuid GUID;
 };

@@ -19,7 +19,7 @@ public:
 	virtual void NativeInitializeAnimation() override;
 
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
-
+	
 	UFUNCTION(BlueprintCallable)
 	void SetDeath(bool InDeath);
 
