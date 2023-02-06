@@ -28,7 +28,7 @@ void ATowersAIController::Tick(float DeltaSeconds)
 	{
 		if (ATowers* Towers = GetPawn<ATowers>())
 		{
-			if (IsValid(Towers))
+			if (!Target.IsValid() || !Target->IsActive())
 			{
 				Target = Cast<ARuleOfTheCharacter>(FindTarget());
 			}

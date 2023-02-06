@@ -9,32 +9,38 @@
 
 AActor* AMonsterAIController::FindTarget()
 {
-	TArray<ARuleOfTheCharacter*> TargetMainTowersArray;
-	TArray<ARuleOfTheCharacter*> TargetTowersArray;
-
-	for (TActorIterator<ATowers> It(GetWorld(), ATowers::StaticClass()); It; ++It)
+	if (!Target.IsValid() || !Target->IsActive())
 	{
-		ATowers* TheCharacter = *It;
-		if (TheCharacter && TheCharacter->IsActive())
+		
+		TArray<ARuleOfTheCharacter*> TargetMainTowersArray;
+		TArray<ARuleOfTheCharacter*> TargetTowersArray;
+
+		for (TActorIterator<ATowers> It(GetWorld(), ATowers::StaticClass()); It; ++It)
 		{
-			if (TheCharacter->GetType() == EGameCharacterType::Type::TOWER)
+			ATowers* TheCharacter = *It;
+			if (TheCharacter && TheCharacter->IsActive())
 			{
-				TargetTowersArray.Add(TheCharacter);
-			} else if (TheCharacter->GetType() == EGameCharacterType::Type::MAIN_TOWER)
-			{
-				TargetMainTowersArray.Add(TheCharacter);
+				if (TheCharacter->GetType() == EGameCharacterType::Type::TOWER)
+				{
+					TargetTowersArray.Add(TheCharacter);
+				} else if (TheCharacter->GetType() == EGameCharacterType::Type::MAIN_TOWER)
+				{
+					TargetMainTowersArray.Add(TheCharacter);
+				}
 			}
 		}
-	}
 
-	ATowers* MainTowers = Cast<ATowers>(StoneDefenceUtils::FindTargetRecently(TargetMainTowersArray, GetPawn()->GetActorLocation()));
-	ATowers* NorTowers =Cast<ATowers>(StoneDefenceUtils::FindTargetRecently(TargetTowersArray, GetPawn()->GetActorLocation()));
+		ATowers* MainTowers = Cast<ATowers>(StoneDefenceUtils::FindTargetRecently(TargetMainTowersArray, GetPawn()->GetActorLocation()));
+		ATowers* NorTowers =Cast<ATowers>(StoneDefenceUtils::FindTargetRecently(TargetTowersArray, GetPawn()->GetActorLocation()));
 
-	if (MainTowers)
-	{
-		return MainTowers;
+		if (MainTowers)
+		{
+			return MainTowers;
+		}
+
+		return NorTowers;
 	}
-	return NorTowers;
+	return Target.Get();
 }
 
 void AMonsterAIController::AttackTarget(ARuleOfTheCharacter* AttackTargeter)

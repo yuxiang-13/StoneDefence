@@ -4,6 +4,11 @@
 
 #include "Character/Core/RuleOfTheCharacter.h"
 
+
+#if PLATFORM_WINDOWS
+#pragma optimize("",off)
+#endif
+
 ARuleOfTheCharacter* StoneDefenceUtils::FindTargetRecently(const TArray<ARuleOfTheCharacter*>& InCharacters, const FVector &Loc)
 {
 	if (InCharacters.Num())
@@ -34,3 +39,7 @@ ARuleOfTheCharacter* StoneDefenceUtils::FindTargetRecently(const TArray<ARuleOfT
 
 	return nullptr;
 }
+
+#if PLATFORM_WINDOWS
+#pragma optimize("",on)
+#endif

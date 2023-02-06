@@ -3,7 +3,12 @@
 
 #include "Character/Anim/RuleOfAnimInstance.h"
 #include "Character/Core/RuleOfTheCharacter.h"
-#include "Kismet/KismetSystemLibrary.h"
+
+#if PLATFORM_WINDOWS
+#pragma optimize("",off)
+#endif
+
+
 
 URuleOfAnimInstance::URuleOfAnimInstance()
 	:bDeath(false),
@@ -31,7 +36,13 @@ void URuleOfAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	{
 		bAttack = RuleOfTheCharacter->bAttack;
 		Speed = RuleOfTheCharacter->GetVelocity().Size();
-		SetDeath(!RuleOfTheCharacter->IsActive());
+		if (!RuleOfTheCharacter->IsActive())
+		{
+			SetDeath(true);
+		} else
+		{
+			SetDeath(false);
+		}
 	}
 }
 
@@ -39,3 +50,7 @@ void URuleOfAnimInstance::SetDeath(bool InDeath)
 {
 	bDeath = InDeath;
 }
+
+#if PLATFORM_WINDOWS
+#pragma optimize("",on)
+#endif

@@ -49,6 +49,9 @@ void UBTService_MonsterFIndTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 					MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, nullptr);
 					MyBlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, FVector::Zero());
 				}
+			} else
+			{
+				MyBlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, nullptr);
 			}
 
 

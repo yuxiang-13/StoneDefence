@@ -4,7 +4,6 @@
 #include "Bullet/RuleOfTheBullet.h"
 
 #include "EngineUtils.h"
-#include "Character/CharacterCore/Towers.h"
 #include "Character/Core/RuleOfTheAIController.h"
 #include "Character/Core/RuleOfTheCharacter.h"
 #include "Components/SphereComponent.h"
@@ -12,6 +11,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "StoneDefence/StoneDefenceUtils.h"
 
 // Sets default values
 ARuleOfTheBullet::ARuleOfTheBullet()
@@ -235,13 +235,13 @@ void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 						// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, SweepResult.Location);
 						UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamgageParticle, GetActorLocation());
 
-					
 						// 碰撞玩尽兴子弹自身销毁
 						switch (BulletType)
 						{
 							case EBulletType::BULLET_DIRECT_LINE:
 							case EBulletType::BULLET_LINE:
 							case EBulletType::BULLET_TRACK_LINE:
+							case EBulletType::BULLET_TRACK_LINE_SP:
 								{
 									UGameplayStatics::ApplyDamage(
 										OtherCharacter,
@@ -260,17 +260,6 @@ void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 									break;
 								}
 						}
-
-					
-						// 伤害数据
-						UGameplayStatics::ApplyDamage(OtherCharacter, 100.f, InstigatorCharacter->GetController(), InstigatorCharacter, UDamageType::StaticClass());
-						/*
-						 * // 会激活 ARuleOfTheCharacter 的 TakeDamage
-						 * 
-						 *	protected:
-							// 承伤
-							virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent) override;
-						 */
 					}
 				}
 			}

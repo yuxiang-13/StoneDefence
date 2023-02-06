@@ -8,7 +8,12 @@
 #include "Components/WidgetComponent.h"
 #include "Core/GameCore/TowerDefenceGameState.h"
 #include "Data/Core/CharacterData.h"
+#include "StoneDefence/StoneDefenceUtils.h"
 #include "UI/Character/UI_Health.h"
+
+#if PLATFORM_WINDOWS
+#pragma optimize("",off)
+#endif
 
 // Sets default values
 ARuleOfTheCharacter::ARuleOfTheCharacter(): bAttack(false)
@@ -56,10 +61,16 @@ float ARuleOfTheCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Da
 	AActor* DamageCauser)
 {
 	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
-
-	GetCharacterData().Health -= DamageAmount / 10.f;
+	
+	float DamageValue = Expression::GetDamage(Cast<ARuleOfTheCharacter>(DamageCauser), this);
+	
+	GetCharacterData().Health -= DamageValue;
+	if (!IsActive())
+	{
+		GetCharacterData().Health = 0.0f;
+	}
 	UpdateUI();
-	return 0;
+	return DamageValue;
 }
 
 void ARuleOfTheCharacter::UpdateUI()
@@ -74,9 +85,27 @@ void ARuleOfTheCharacter::UpdateUI()
 	}
 }
 
+
+bool ARuleOfTheCharacter::IsActive()
+{
+	if (!IsDeath())
+	{
+		return true;
+	} else
+	{
+		return false;
+	}
+};
+
 bool ARuleOfTheCharacter::IsDeath()
 {
-	return GetHealth() <= 0.0f;
+	if (GetHealth() <= 0.f)
+	{
+		return true;
+	} else
+	{
+		return false;
+	}
 }
 
 float ARuleOfTheCharacter::GetHealth()
@@ -107,4 +136,8 @@ FCharacterData& ARuleOfTheCharacter::GetCharacterData()
 	}
 	// ATowerDefenceGameState 中 定义了这个变量
 	return CharacterDataNULL;
-};
+}
+
+#if PLATFORM_WINDOWS
+#pragma optimize("",on)
+#endif

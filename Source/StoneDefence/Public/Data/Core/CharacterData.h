@@ -52,7 +52,7 @@ public:
 	float MaxHealth;
 
 	// 生命
-	UPROPERTY()
+	UPROPERTY(EditDefaultsOnly,Category= "Character Attribute")
 	float Health;
 
 	// 基础攻击
