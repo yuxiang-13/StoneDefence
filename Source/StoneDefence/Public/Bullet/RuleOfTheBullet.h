@@ -49,6 +49,9 @@ protected:
 	void BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
 	void RadialDamage(const FVector& Origin, ARuleOfTheCharacter* InstigatorCharacter);
+
+	UFUNCTION()
+	void ChainAttack();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -58,4 +61,10 @@ private:
 	UPROPERTY()
 	class USplineComponent *Spline;
 	float CurrentSplineTime;
+
+	FTimerHandle ChainAttackHandle;
+
+	
+	UPROPERTY()
+	uint8 ChainAttackCount;
 };

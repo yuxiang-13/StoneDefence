@@ -164,4 +164,6 @@ public:
 	
 public:
 	bool IsValid();
+
+	void UpdateHealth();
 };

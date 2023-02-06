@@ -64,6 +64,7 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 			{
 				if (ARuleOfTheCharacter * RuleOfTheCharacter = GetWorld()->SpawnActor<ARuleOfTheCharacter>(NewClass, Location, Rotator))
 				{
+					CharacterData->UpdateHealth();
 					AddCharacterData(RuleOfTheCharacter->GetUniqueID(), *CharacterData);
 				}
 			}

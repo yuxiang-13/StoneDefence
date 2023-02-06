@@ -30,9 +30,8 @@ ARuleOfTheBullet::ARuleOfTheBullet()
 
 	CurrentSplineTime = 0.0f;
 	SplineOffset = 0.0f;
+	ChainAttackCount = 3;
 }
-
-
 
 // Called every frame
 void ARuleOfTheBullet::Tick(float DeltaTime)
@@ -109,7 +108,6 @@ void ARuleOfTheBullet::BeginPlay()
 {
 	Super::BeginPlay();
 	ProjectileMovement = Cast<UProjectileMovementComponent>(GetComponentByClass(UProjectileMovementComponent::StaticClass()));
-	BoxDamage->OnComponentBeginOverlap.AddUniqueDynamic(this, &ARuleOfTheBullet::BeginOverlap);
 
 	
 	// 获取 施法对象
@@ -198,6 +196,7 @@ void ARuleOfTheBullet::BeginPlay()
 				case EBulletType::BULLET_RANGE: // 范围 手雷
 					{
 						if (ProjectileMovement) ProjectileMovement->StopMovementImmediately();
+						BoxDamage->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 						RadialDamage(GetActorLocation(), Cast<ARuleOfTheCharacter>(GetInstigator()));
 						break;
 					}
@@ -207,6 +206,9 @@ void ARuleOfTheBullet::BeginPlay()
 						BoxDamage->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 				
 						UGameplayStatics::SpawnEmitterAttached(DamgageParticle, TargetCharacter->GetHomingPoint());
+
+						GetWorld()->GetTimerManager().SetTimer(ChainAttackHandle, this, &ARuleOfTheBullet::ChainAttack, 0.1f);
+						
 						break;
 					}
 				case EBulletType::BULLET_NONE:
@@ -216,6 +218,41 @@ void ARuleOfTheBullet::BeginPlay()
 				}
 			}
 		}
+	}
+	
+	BoxDamage->OnComponentBeginOverlap.AddUniqueDynamic(this, &ARuleOfTheBullet::BeginOverlap);
+}
+
+void ARuleOfTheBullet::ChainAttack()
+{
+	if (ChainAttackHandle.IsValid())
+	{
+		GetWorld()->GetTimerManager().ClearTimer(ChainAttackHandle);
+	}
+	// 主要伤害区
+	{
+		if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(GetInstigator())) // GetInstigator() 就是 AnimNotify中SpawnActor时传的
+		{
+			if (ARuleOfTheAIController* InstigatorControll = Cast<ARuleOfTheAIController>(InstigatorCharacter->GetController()))
+			{
+				if (ARuleOfTheCharacter* TargetCharacter = InstigatorControll->Target.Get())
+				{
+					
+					UGameplayStatics::ApplyDamage(
+						TargetCharacter,
+						100.f,
+						InstigatorCharacter->GetController(),
+						InstigatorCharacter,
+						UDamageType::StaticClass()
+					);
+				}
+			}
+		}
+	}
+	ChainAttackCount--;
+	if (ChainAttackCount > 0)
+	{
+		GetWorld()->GetTimerManager().SetTimer(ChainAttackHandle, this, &ARuleOfTheBullet::ChainAttack, 0.3f);
 	}
 }
 
@@ -292,7 +329,19 @@ void ARuleOfTheBullet::RadialDamage(const FVector& Origin, ARuleOfTheCharacter* 
 				}
 			}
 		}
-		UGameplayStatics::ApplyRadialDamageWithFalloff(GetWorld(), 100.f, 10.f, Origin, 400.f, 1000.f, 1.0f, UDamageType::StaticClass(), IgnoreActors, GetInstigator());
+		UGameplayStatics::ApplyRadialDamageWithFalloff(
+			GetWorld(),
+			100.f,
+			10.f,
+			Origin, 400.f, 
+			1000.f, 
+			1.0f, 
+			UDamageType::StaticClass(), 
+			IgnoreActors, 
+			GetInstigator(),
+			GetInstigator()->GetController(),
+			ECollisionChannel::ECC_MAX
+			);
 	}
 }
 
