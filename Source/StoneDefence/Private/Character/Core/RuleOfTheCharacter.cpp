@@ -8,6 +8,7 @@
 #include "Components/WidgetComponent.h"
 #include "Core/GameCore/TowerDefenceGameState.h"
 #include "Data/Core/CharacterData.h"
+#include "UI/Character/UI_Health.h"
 
 // Sets default values
 ARuleOfTheCharacter::ARuleOfTheCharacter(): bAttack(false)
@@ -41,6 +42,7 @@ void ARuleOfTheCharacter::BeginPlay()
 	{
 		SpawnDefaultController();
 	}
+	UpdateUI();
 }
 
 // Called every frame
@@ -55,7 +57,21 @@ float ARuleOfTheCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Da
 {
 	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
+	GetCharacterData().Health -= DamageAmount / 10.f;
+	UpdateUI();
 	return 0;
+}
+
+void ARuleOfTheCharacter::UpdateUI()
+{
+	if (Widget)
+	{
+		if (UUI_Health* HealthUI = Cast<UUI_Health>(Widget->GetUserWidgetObject()))
+		{
+			HealthUI->SetTitle(GetCharacterData().Name.ToString());
+			HealthUI->SetHealth(GetHealth() / GetMaxHealth());
+		}
+	}
 }
 
 bool ARuleOfTheCharacter::IsDeath()
@@ -83,7 +99,7 @@ EGameCharacterType::Type ARuleOfTheCharacter::GetType()
 	return EGameCharacterType::Type::MAX;
 }
 
-const FCharacterData& ARuleOfTheCharacter::GetCharacterData()
+FCharacterData& ARuleOfTheCharacter::GetCharacterData()
 {
 	if (GetGameState())
 	{

@@ -72,7 +72,7 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 	return nullptr;
 }
 
-const FCharacterData &ATowerDefenceGameState::AddCharacterData(const uint32 &ID, const FCharacterData& Data)
+const FCharacterData &ATowerDefenceGameState::AddCharacterData(const uint32 &ID,const FCharacterData& Data)
 {
 	return CharacterDatas.Add(ID, Data);
 }

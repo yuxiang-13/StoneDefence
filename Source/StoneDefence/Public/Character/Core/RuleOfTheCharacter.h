@@ -42,7 +42,8 @@ public:
 protected:
 	// 承伤
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
-
+public:
+	void UpdateUI();
 	// 角色属性
 public:	
 	virtual bool IsDeath();
@@ -51,7 +52,7 @@ public:
 	virtual bool IsTeam(); 
 	
 	virtual EGameCharacterType::Type GetType();
-	virtual const FCharacterData &GetCharacterData();
+	virtual FCharacterData &GetCharacterData();
 	
 public:	
 

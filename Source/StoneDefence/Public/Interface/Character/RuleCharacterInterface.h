@@ -30,6 +30,6 @@ public:
 	virtual float GetMaxHealth() = 0;
 	virtual bool IsTeam() = 0;
 
-	virtual const FCharacterData &GetCharacterData() = 0;
+	virtual FCharacterData &GetCharacterData() = 0;
 	virtual EGameCharacterType::Type GetType() { return EGameCharacterType::Type::TOWER; };
 };
