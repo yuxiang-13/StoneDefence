@@ -1,0 +1,14 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\yuxiang\\documents\\unrealprojects\\plugins\\simpledrawtext\\source\\simpledrawtext\\private\\simpledrawtext.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\yuxiang\\documents\\unrealprojects\\intermediate\\build\\win64\\stonedefenceeditor\\development\\engine\\sharedpch.engine.shadowerrors.inclorderunreal5_0.h.pch",
+        "Includes": [
+            "c:\\users\\yuxiang\\documents\\unrealprojects\\plugins\\simpledrawtext\\intermediate\\build\\win64\\unrealeditor\\development\\simpledrawtext\\definitions.simpledrawtext.h",
+            "c:\\users\\yuxiang\\documents\\unrealprojects\\plugins\\simpledrawtext\\source\\simpledrawtext\\public\\simpledrawtext.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
