@@ -5,6 +5,9 @@
 
 #include "Character/Core/RuleOfTheCharacter.h"
 #include "Data/Core/CharacterData.h"
+#include "Data/Save/GameSaveData.h"
+#include "Data/Save/GameSaveSlotList.h"
+#include "Kismet/GameplayStatics.h"
 #include "StoneDefence/StoneDefenceMacro.h"
 
 //static 与 extern 联系：
@@ -25,6 +28,11 @@ ATowerDefenceGameState::ATowerDefenceGameState()
 	AIMonsterCharacterData = MyTable_Monster.Object;
 }
 
+void ATowerDefenceGameState::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
 ATowers* ATowerDefenceGameState::SpawTowner(int32 CharacterID, int32 CharacterLevel, const FVector& Location,
                                             const FRotator& Rotator)
 {
@@ -35,6 +43,24 @@ AMonsters* ATowerDefenceGameState::SpawnMonster(int32 CharacterID, int32 Charact
 	const FRotator& Rotator)
 {
 	return SpawnCharacter<AMonsters>(CharacterID, CharacterLevel, AIMonsterCharacterData, Location, Rotator);
+}
+
+bool ATowerDefenceGameState::SaveGameData(int32 SaveNumber)
+{
+	if (SaveData && SlotList)
+	{
+		SlotList->SlotList.AddGameDataByNumber(SaveNumber);
+		
+		return UGameplayStatics::SaveGameToSlot(SlotList, TEXT("SlotList"), 0)
+			&& UGameplayStatics::SaveGameToSlot(SaveData, FString::Printf(TEXT("SaveSlot_%i"), SaveNumber), 0);
+	}
+	return false;
+}
+
+bool ATowerDefenceGameState::ReadGameData(int32 SaveNumber)
+{
+	SaveData = Cast<UGameSaveData>(UGameplayStatics::LoadGameFromSlot(FString::Printf(TEXT("SaveSlot_%i"), SaveNumber), 0));
+	return SaveData != nullptr;
 }
 
 ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, int32 CharacterLevel, UDataTable* InCharacterData,const FVector& Location, const FRotator& Rotator)
@@ -75,23 +101,46 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 
 const FCharacterData &ATowerDefenceGameState::AddCharacterData(const uint32 &ID,const FCharacterData& Data)
 {
-	return CharacterDatas.Add(ID, Data);
+	return GetSaveData()->CharacterDatas.Add(ID, Data);
 }
 
 bool ATowerDefenceGameState::RemoveCharacterData(const uint32& ID)
 {
-	CharacterDatas.Remove(ID);
+	GetSaveData()->CharacterDatas.Remove(ID);
 	return true;
 }
 
 FCharacterData& ATowerDefenceGameState::GetCharacterData(const uint32& ID)
 {
-	if (CharacterDatas.Contains(ID))
+	if (GetSaveData()->CharacterDatas.Contains(ID))
 	{
-		return CharacterDatas[ID];
+		return GetSaveData()->CharacterDatas[ID];
 	} else
 	{
 		// SD_print_r(Error, "The current [%s] is invalid", *Hash);
 		return CharacterDataNULL;
 	}
+}
+
+UGameSaveData* ATowerDefenceGameState::GetSaveData()
+{
+	if (!SaveData)
+	{
+		// 创建SaveGame
+		SaveData = Cast<UGameSaveData>(UGameplayStatics::CreateSaveGameObject(UGameSaveData::StaticClass()));
+	}
+	return SaveData;
+}
+
+UGameSaveSlotList* ATowerDefenceGameState::GetGameSaveSlotList()
+{
+	if (!SlotList)
+	{
+		SlotList = Cast<UGameSaveSlotList>(UGameplayStatics::LoadGameFromSlot(TEXT("SlotList"), 0));
+		if (!SlotList)
+		{
+			SlotList = Cast<UGameSaveSlotList>(UGameplayStatics::CreateSaveGameObject(UGameSaveSlotList::StaticClass()));
+		}
+	}
+	return SlotList;
 }

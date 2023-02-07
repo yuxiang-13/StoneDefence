@@ -16,6 +16,9 @@ extern FCharacterData CharacterDataNULL;
 class UDataTable;
 class AMonsters;
 class ATowers;
+class UGameSaveData;
+class UGameSaveSlotList;
+
 /**
  * 
  */
@@ -34,6 +37,8 @@ class STONEDEFENCE_API ATowerDefenceGameState : public AGameState
 	// 怪物数据
 public:
 	ATowerDefenceGameState();
+
+	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable, Category="Spawn")
 	ATowers *SpawTowner(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
@@ -41,6 +46,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Spawn")
 	AMonsters *SpawnMonster(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
 	
+	UFUNCTION(BlueprintCallable, Category="SaveData")
+	bool SaveGameData(int32 SaveNumber);
+	UFUNCTION(BlueprintCallable, Category="SaveData")
+	bool ReadGameData(int32 SaveNumber);
 protected:
 	ARuleOfTheCharacter *SpawnCharacter(int32 CharacterID, int32 CharacterLevel, UDataTable* InCharacterData,  const FVector &Location, const FRotator &Rotator);
 	template<class T>
@@ -53,8 +62,13 @@ public:
 	const FCharacterData &AddCharacterData(const uint32 &ID, const FCharacterData &Data);
 	bool RemoveCharacterData(const uint32 &ID);
 	FCharacterData &GetCharacterData(const uint32& ID);
+protected:
+	UGameSaveData *GetSaveData();
+	UGameSaveSlotList *GetGameSaveSlotList();
 private:
-	// 所有角色数据（包括所有建筑 和 所有的塔）
 	UPROPERTY()
-	TMap<uint32, FCharacterData> CharacterDatas;
+	UGameSaveData *SaveData;
+	
+	UPROPERTY()
+	UGameSaveSlotList *SlotList;
 };
