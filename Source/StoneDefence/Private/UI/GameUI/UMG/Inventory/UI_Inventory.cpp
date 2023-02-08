@@ -7,6 +7,7 @@
 
 #include "Components/UniformGridPanel.h"
 #include "Components/UniformGridSlot.h"
+#include "Core/GameCore/TowerDefenceGameState.h"
 
 void UUI_Inventory::NativeConstruct()
 {
@@ -37,6 +38,13 @@ void UUI_Inventory::LayoutInventroySlot(int32 ColumnNumber, int32 RowNumber)
 					InventorySlotArray.Add(SlotWidget);
 				}
 			}
+		}
+
+		// 给 UI item绑定 Guid
+		const TArray<const FGuid*> IDs = GetGameState()->GetBuildingTowersID();
+		for (int32 i = 0; i < ColumnNumber * RowNumber; i++)
+		{
+			InventorySlotArray[i]->GUID = *IDs[i];
 		}
 	}
 }

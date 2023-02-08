@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Data/Save/GameSaveData.h"
 #include "GameFramework/GameState.h"
 #include "TowerDefenceGameState.generated.h"
 
@@ -13,6 +14,9 @@ class ARuleOfTheCharacter;
 //加了static修饰的全局变量或函数，无法在使用extern在其他源文件中使用。
 // 声明这个变量，cpp上边给 定义这个是静态变量
 extern FCharacterData CharacterDataNULL;
+extern FBuildingTower BuildingTowerNULL;
+
+
 class UDataTable;
 class AMonsters;
 class ATowers;
@@ -59,9 +63,15 @@ protected:
 	}
 	
 public:
-	const FCharacterData &AddCharacterData(const uint32 &ID, const FCharacterData &Data);
-	bool RemoveCharacterData(const uint32 &ID);
-	FCharacterData &GetCharacterData(const uint32& ID);
+	const FCharacterData &AddCharacterData(const FGuid &ID, const FCharacterData &Data);
+	bool RemoveCharacterData(const FGuid &ID);
+	FCharacterData &GetCharacterData(const FGuid& ID);
+
+	const FBuildingTower &AddBuildingTower(const FGuid &ID, const FBuildingTower &Data);
+	// 获取塔数据
+	FBuildingTower &GetBuildingTower(const FGuid& ID);
+	// 获取所有塔ID 数据
+	const TArray<const FGuid*> GetBuildingTowersID();
 protected:
 	UGameSaveData *GetSaveData();
 	UGameSaveSlotList *GetGameSaveSlotList();

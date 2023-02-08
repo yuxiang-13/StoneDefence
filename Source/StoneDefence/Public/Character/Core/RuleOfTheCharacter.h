@@ -31,6 +31,9 @@ public:
 	// 伤害字
 	UPROPERTY(EditDefaultsOnly, Category="UI")
 	TSubclassOf<ADrawText> DrawTextClass;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
+	FGuid GUID;
 public:
 	// Sets default values for this character's properties
 	ARuleOfTheCharacter();

@@ -17,6 +17,7 @@
 // extern ：extern（外部引用）可以置于变量或者函数前，以标示变量或函数的定义在别的文件中，在一个文件中用到的extern这些变量或函数是外来的，
 // 不是本文件定义的，提示编译器遇到此变量和函数时在其他模块中寻找其定义。注意，只有其他文件中的全局变量才能被其他文件所extern。
 FCharacterData CharacterDataNULL;
+FBuildingTower BuildingTowerNULL;
 
 ATowerDefenceGameState::ATowerDefenceGameState()
 {
@@ -26,6 +27,11 @@ ATowerDefenceGameState::ATowerDefenceGameState()
 	
 	AITowerCharacterData = MyTable_Towers.Object;
 	AIMonsterCharacterData = MyTable_Monster.Object;
+
+	for (int32 i = 0; i < 21; i++)
+	{
+		GetSaveData()->BuildingTowers.Add(FGuid::NewGuid(), FBuildingTower());
+	}
 }
 
 void ATowerDefenceGameState::BeginPlay()
@@ -91,7 +97,7 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 				if (ARuleOfTheCharacter * RuleOfTheCharacter = GetWorld()->SpawnActor<ARuleOfTheCharacter>(NewClass, Location, Rotator))
 				{
 					CharacterData->UpdateHealth();
-					AddCharacterData(RuleOfTheCharacter->GetUniqueID(), *CharacterData);
+					AddCharacterData(RuleOfTheCharacter->GUID, *CharacterData);
 				}
 			}
 		}
@@ -99,18 +105,23 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 	return nullptr;
 }
 
-const FCharacterData &ATowerDefenceGameState::AddCharacterData(const uint32 &ID,const FCharacterData& Data)
+const FCharacterData &ATowerDefenceGameState::AddCharacterData(const FGuid &ID,const FCharacterData& Data)
 {
 	return GetSaveData()->CharacterDatas.Add(ID, Data);
 }
 
-bool ATowerDefenceGameState::RemoveCharacterData(const uint32& ID)
+const FBuildingTower& ATowerDefenceGameState::AddBuildingTower(const FGuid& ID, const FBuildingTower& Data)
+{
+	return GetSaveData()->BuildingTowers.Add(ID, Data);
+}
+
+bool ATowerDefenceGameState::RemoveCharacterData(const FGuid& ID)
 {
 	GetSaveData()->CharacterDatas.Remove(ID);
 	return true;
 }
 
-FCharacterData& ATowerDefenceGameState::GetCharacterData(const uint32& ID)
+FCharacterData& ATowerDefenceGameState::GetCharacterData(const FGuid& ID)
 {
 	if (GetSaveData()->CharacterDatas.Contains(ID))
 	{
@@ -120,6 +131,29 @@ FCharacterData& ATowerDefenceGameState::GetCharacterData(const uint32& ID)
 		// SD_print_r(Error, "The current [%s] is invalid", *Hash);
 		return CharacterDataNULL;
 	}
+}
+
+FBuildingTower& ATowerDefenceGameState::GetBuildingTower(const FGuid& ID)
+{
+	if (GetSaveData()->BuildingTowers.Contains(ID))
+	{
+		return GetSaveData()->BuildingTowers[ID];
+	} else
+	{
+		// SD_print_r(Error, "The current [%s] is invalid", *Hash);
+		return BuildingTowerNULL;
+	}
+}
+
+const TArray<const FGuid*> ATowerDefenceGameState::GetBuildingTowersID()
+{
+	TArray<const FGuid*> TowersID;
+	
+	for (const auto &Tmp: GetSaveData()->BuildingTowers)
+	{
+		TowersID.Add(&Tmp.Key);
+	}
+	return TowersID;
 }
 
 UGameSaveData* ATowerDefenceGameState::GetSaveData()

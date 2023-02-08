@@ -4,6 +4,7 @@
 #include "UI/GameUI/UMG/Inventory/UI_InventorySlot.h"
 
 #include "Components/Button.h"
+#include "Core/GameCore/TowerDefenceGameState.h"
 
 void UUI_InventorySlot::NativeConstruct()
 {
@@ -13,4 +14,9 @@ void UUI_InventorySlot::NativeConstruct()
 
 void UUI_InventorySlot::OnClickedWidget()
 {
+}
+
+FBuildingTower& UUI_InventorySlot::GetBuildingTower()
+{
+	return GetGameState()->GetBuildingTower(GUID);
 }

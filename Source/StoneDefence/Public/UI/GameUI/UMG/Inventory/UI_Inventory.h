@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UI_InventorySlot.h"
-#include "UI/Core/UI_RuleOfTheWidget.h"
+#include "UI/GameUI/Core/UI_Slot.h"
 #include "UI_Inventory.generated.h"
 
 class UUniformGridPanel;
@@ -12,7 +12,7 @@ class UUniformGridPanel;
  * 
  */
 UCLASS()
-class STONEDEFENCE_API UUI_Inventory : public UUI_RuleOfTheWidget
+class STONEDEFENCE_API UUI_Inventory : public UUI_Slot
 {
 	GENERATED_BODY()
 	
