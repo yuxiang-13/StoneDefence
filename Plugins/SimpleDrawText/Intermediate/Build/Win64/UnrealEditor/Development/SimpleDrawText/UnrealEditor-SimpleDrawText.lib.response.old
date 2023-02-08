@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-SimpleDrawText.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\yuxiang\Documents\UnrealProjects\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
+"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\SimpleDrawText.cpp.obj"
+"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\Default.rc2.res"
+/OUT:"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\UnrealEditor-SimpleDrawText.lib"

@@ -9,6 +9,7 @@
 #include "RuleOfTheCharacter.generated.h"
 
 class ATowerDefenceGameState;
+class ADrawText;
 UCLASS()
 class STONEDEFENCE_API ARuleOfTheCharacter : public ACharacter, public IRuleCharacterInterface
 {
@@ -26,7 +27,10 @@ private:
 	// 跟踪点
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttrubute", meta = (AllowPrivateAccess = "true"))
 	class USceneComponent *HomingPoint;
-	
+public:
+	// 伤害字
+	UPROPERTY(EditDefaultsOnly, Category="UI")
+	TSubclassOf<ADrawText> DrawTextClass;
 public:
 	// Sets default values for this character's properties
 	ARuleOfTheCharacter();

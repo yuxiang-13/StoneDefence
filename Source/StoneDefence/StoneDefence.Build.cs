@@ -23,7 +23,8 @@ public class StoneDefence : ModuleRules
 			"ApexDestruction",
 			"AIModule", 
 			"GameplayTasks",
-			"NavigationSystem"
+			"NavigationSystem",
+			"SimpleDrawText"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "SimpleScreenLoading" });

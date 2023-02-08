@@ -7,6 +7,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Core/GameCore/TowerDefenceGameState.h"
+#include "Damage/DrawText.h"
 #include "Data/Core/CharacterData.h"
 #include "StoneDefence/StoneDefenceUtils.h"
 #include "UI/Character/UI_Health.h"
@@ -69,6 +70,17 @@ float ARuleOfTheCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Da
 	{
 		GetCharacterData().Health = 0.0f;
 	}
+	
+	// 产生伤害字体
+	if (DrawTextClass)
+	{
+		if (ADrawText *MyValueText = GetWorld()->SpawnActor<ADrawText>(DrawTextClass, GetActorLocation(), FRotator::ZeroRotator))
+		{
+			FString DamageText = FString::Printf(TEXT("-%0.f"), DamageValue);
+			MyValueText->SetTextBlock(DamageText, FLinearColor::Red, DamageValue / GetCharacterData().MaxHealth);
+		}
+	}
+	
 	UpdateUI();
 	return DamageValue;
 }
@@ -95,7 +107,10 @@ bool ARuleOfTheCharacter::IsActive()
 	{
 		return false;
 	}
-};
+}
+
+
+
 
 bool ARuleOfTheCharacter::IsDeath()
 {
