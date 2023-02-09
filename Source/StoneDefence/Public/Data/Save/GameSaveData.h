@@ -52,16 +52,16 @@ struct FBuildingTower
 	UPROPERTY(SaveGame)
 	bool bCallUpdateTowersInfo;
 
-// public:
-// 	FBuildingTower();
-//
-// 	void Init();
-//
-// 	float GetTowerConstructionTimePercentage();
-//
-// 	bool IsValid();
-//
-// 	void ResetCD();
+public:
+	FBuildingTower();
+
+	void Init();
+
+	float GetTowerConstructionTimePercentage();
+
+	bool IsValid();
+
+	void ResetCD();
 };
 
 /**
