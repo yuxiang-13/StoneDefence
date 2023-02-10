@@ -6,8 +6,7 @@
 /NAME:"UnrealEditor-SimpleTutoria.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp.obj"
-"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.gen.cpp.obj"
-"..\Intermediate\Build\Win64\UnrealEditor\Development\Default.rc2.res"
-/OUT:"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\UnrealEditor-SimpleTutoria.lib"
+"C:\Users\yuxiang\Documents\UnrealProjects\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
+"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp.obj"
+"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Default.rc2.res"
+/OUT:"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\UnrealEditor-SimpleTutoria.lib"

@@ -6,7 +6,7 @@
 /NAME:"UnrealEditor-SimpleScreenLoading.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"D:\project\StoneDefence\Plugins\SimpleScreenLoading\Intermediate\Build\Win64\UnrealEditor\Development\SimpleScreenLoading\Module.SimpleScreenLoading.cpp.obj"
-"..\Intermediate\Build\Win64\UnrealEditor\Development\Default.rc2.res"
-/OUT:"D:\project\StoneDefence\Plugins\SimpleScreenLoading\Intermediate\Build\Win64\UnrealEditor\Development\SimpleScreenLoading\UnrealEditor-SimpleScreenLoading.lib"
+"C:\Users\yuxiang\Documents\UnrealProjects\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
+"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleScreenLoading\Intermediate\Build\Win64\UnrealEditor\Development\SimpleScreenLoading\Module.SimpleScreenLoading.cpp.obj"
+"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleScreenLoading\Intermediate\Build\Win64\UnrealEditor\Development\SimpleScreenLoading\Default.rc2.res"
+/OUT:"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleScreenLoading\Intermediate\Build\Win64\UnrealEditor\Development\SimpleScreenLoading\UnrealEditor-SimpleScreenLoading.lib"
