@@ -6,7 +6,10 @@
 /NAME:"UnrealEditor-SimpleArchives.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\yuxiang\Documents\UnrealProjects\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
-"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\Module.SimpleArchives.cpp.obj"
-"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\Default.rc2.res"
-/OUT:"C:\Users\yuxiang\Documents\UnrealProjects\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\UnrealEditor-SimpleArchives.lib"
+"D:\project\StoneDefence\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
+"D:\project\StoneDefence\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\Module.SimpleArchives.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\SimpleArchives.init.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\UI_ArchivesBar.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\UI_ArchivesSystem.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\Default.rc2.res"
+/OUT:"D:\project\StoneDefence\Plugins\SimpleArchives\Intermediate\Build\Win64\UnrealEditor\Development\SimpleArchives\UnrealEditor-SimpleArchives.lib"

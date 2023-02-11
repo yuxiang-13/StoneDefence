@@ -6,8 +6,7 @@
 /NAME:"UnrealEditor-StoneToolClass.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"D:\project\StoneDefence\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
 "D:\project\StoneDefence\Plugins\StoneToolClass\Intermediate\Build\Win64\UnrealEditor\Development\StoneToolClass\Module.StoneToolClass.cpp.obj"
-"D:\project\StoneDefence\Plugins\StoneToolClass\Intermediate\Build\Win64\UnrealEditor\Development\StoneToolClass\Module.StoneToolClass.gen.cpp.obj"
-"..\Intermediate\Build\Win64\UnrealEditor\Development\Default.rc2.res"
+"D:\project\StoneDefence\Plugins\StoneToolClass\Intermediate\Build\Win64\UnrealEditor\Development\StoneToolClass\Default.rc2.res"
 /OUT:"D:\project\StoneDefence\Plugins\StoneToolClass\Intermediate\Build\Win64\UnrealEditor\Development\StoneToolClass\UnrealEditor-StoneToolClass.lib"

@@ -2,14 +2,14 @@
 	"RemapUnityFiles": 
 	{
 		"Module.SimpleTutoria.cpp.obj": [
-			"SimpleTutoria.init.gen.cpp.obj",
-			"UI_TutoriaBase.gen.cpp.obj",
-			"UI_TutoriaSlot.gen.cpp.obj",
-			"UI_TutoriaSystem.gen.cpp.obj",
 			"UI_TutoriaBase.cpp.obj",
 			"SimpleTutoria.cpp.obj",
 			"UI_TutoriaSlot.cpp.obj",
-			"UI_TutoriaSystem.cpp.obj"
+			"UI_TutoriaSystem.cpp.obj",
+			"SimpleTutoria.init.gen.cpp.obj",
+			"UI_TutoriaBase.gen.cpp.obj",
+			"UI_TutoriaSlot.gen.cpp.obj",
+			"UI_TutoriaSystem.gen.cpp.obj"
 		]
 	}
 }
