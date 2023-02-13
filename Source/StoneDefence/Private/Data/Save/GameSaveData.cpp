@@ -2,6 +2,7 @@
 
 
 #include "Data/Save/GameSaveData.h"
+#include "Data/Core/CharacterData.h"
 
 FBuildingTower::FBuildingTower()
 {

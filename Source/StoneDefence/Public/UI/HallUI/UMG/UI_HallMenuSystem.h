@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/Button.h"
 #include "UI/Core/UI_RuleOfTheWidget.h"
-#include "UI_HallMenuSystem.generated.h"
+#include "UI_HallMenuSystem.generated.h" 
 
 class UButton;
 /**

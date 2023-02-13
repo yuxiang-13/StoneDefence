@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "UI_InventorySlot.h"
 #include "UI/GameUI/Core/UI_Slot.h"
-#include "UI_Inventory.generated.h"
+#include "UI_Inventory.generated.h" 
 
 class UUniformGridPanel;
 /**

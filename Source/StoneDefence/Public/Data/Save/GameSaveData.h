@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Core/GameCore/TowerDefenceGameState.h"
 #include "GameFramework/SaveGame.h"
-#include "GameSaveData.generated.h"
+#include "GameSaveData.generated.h" 
 
-struct FCharacterData;
 
 // 建造塔
 USTRUCT()
@@ -74,7 +74,7 @@ class STONEDEFENCE_API UGameSaveData : public USaveGame
 public:
 	
 	UPROPERTY(SaveGame)
-	TMap<FGuid, FCharacterData> CharacterDatas;
+	TMap<FGuid,FCharacterData> CharacterDatas;
 
 	//FGuid格子ID
 	TMap<FGuid, FBuildingTower> BuildingTowers;

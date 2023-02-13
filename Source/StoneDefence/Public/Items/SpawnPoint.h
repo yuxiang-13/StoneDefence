@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/TargetPoint.h"
-#include "SpawnPoint.generated.h"
+#include "SpawnPoint.generated.h" 
 
 /**
  * 

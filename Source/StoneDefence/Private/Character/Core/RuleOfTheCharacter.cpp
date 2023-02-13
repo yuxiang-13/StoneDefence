@@ -154,6 +154,11 @@ FCharacterData& ARuleOfTheCharacter::GetCharacterData()
 	return CharacterDataNULL;
 }
 
+ATowerDefenceGameState* ARuleOfTheCharacter::GetGameState()
+{
+	return GetWorld() ? GetWorld()->GetGameState<ATowerDefenceGameState>() : nullptr; 
+}
+
 #if PLATFORM_WINDOWS
 #pragma optimize("",on)
 #endif

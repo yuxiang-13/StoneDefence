@@ -3,6 +3,7 @@
 
 #include "Character/CharacterCore/Towers.h"
 
+#include "ChaosBlueprint.h"
 #include "DestructibleComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 

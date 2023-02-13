@@ -17,9 +17,8 @@ namespace EGameCharacterType
 	};
 }
 
-
 UENUM(BlueprintType)
-enum class EBulletType: uint8
+enum EBulletType
 {
 	BULLET_NONE,            //不产生任何效果
  

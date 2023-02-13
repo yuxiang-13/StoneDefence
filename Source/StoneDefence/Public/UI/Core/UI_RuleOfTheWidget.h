@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "UI_RuleOfTheWidget.generated.h"
+#include "UI_RuleOfTheWidget.generated.h" 
 
 /**
  * 

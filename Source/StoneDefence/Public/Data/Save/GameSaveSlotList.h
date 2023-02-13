@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
-#include "GameSaveSlotList.generated.h"
+#include "GameSaveSlotList.generated.h" 
 
 USTRUCT()
 struct FSaveSlot

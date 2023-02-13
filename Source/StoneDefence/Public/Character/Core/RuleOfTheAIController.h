@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "RuleOfTheAIController.generated.h"
+#include "RuleOfTheAIController.generated.h" 
 
 class ARuleOfTheCharacter;
 /**

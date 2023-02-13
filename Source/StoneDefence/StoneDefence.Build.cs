@@ -24,7 +24,7 @@ public class StoneDefence : ModuleRules
 			"AIModule", 
 			"GameplayTasks",
 			"NavigationSystem",
-			"SimpleDrawText"
+			"SimpleDrawText",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "SimpleScreenLoading" });

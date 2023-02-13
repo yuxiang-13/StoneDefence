@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "SkillData.h"
 #include "Engine/DataTable.h"
-#include "CharacterData.generated.h"
+#include "CharacterData.generated.h" 
 
 /**
  * 
@@ -24,11 +24,11 @@ public:
 	//初始化角色的 实例蓝图
 	// TAssetSubclassOf ==== TSubclassOf<>
 	UPROPERTY(EditDefaultsOnly, Category="Table")
-	TAssetSubclassOf<class ARuleOfTheCharacter> CharacterBlueprintKey;
+	TSoftClassPtr<class ARuleOfTheCharacter> CharacterBlueprintKey;
 	
 	//角色图片
 	UPROPERTY(EditDefaultsOnly, Category="Table")
-	TAssetPtr<class UTexture2D> Icon;
+	TSoftClassPtr<class UTexture2D> Icon;
 
 	///////////////////////////////////////////////////////////////////////属性
 	//////// 
@@ -138,6 +138,7 @@ public:
 	// 添加 被动攻击力
 	UPROPERTY(EditDefaultsOnly,Category= "Skill")
 	float AddPassiveSkillPhysicalAttack;
+
 	
 	// 添加 被动护甲
 	UPROPERTY(EditDefaultsOnly,Category= "Skill")

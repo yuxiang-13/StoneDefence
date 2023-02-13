@@ -3,25 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Data/Save/GameSaveData.h"
+#include "Data/Core/CharacterData.h"
 #include "GameFramework/GameState.h"
-#include "TowerDefenceGameState.generated.h"
+#include "TowerDefenceGameState.generated.h" 
 
-struct FCharacterData;
 class ARuleOfTheCharacter;
+
+
+class UDataTable;
+class AMonsters;
+class UGameSaveData;
+class UGameSaveSlotList;
+
+struct FBuildingTower;
+struct FCharacterData;
+
 
 //static 与 extern 联系：
 //加了static修饰的全局变量或函数，无法在使用extern在其他源文件中使用。
 // 声明这个变量，cpp上边给 定义这个是静态变量
 extern FCharacterData CharacterDataNULL;
 extern FBuildingTower BuildingTowerNULL;
-
-
-class UDataTable;
-class AMonsters;
-class ATowers;
-class UGameSaveData;
-class UGameSaveSlotList;
 
 /**
  * 
@@ -45,10 +47,10 @@ public:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable, Category="Spawn")
-	ATowers *SpawTowner(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
+	class ATowers *SpawTowner(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
 	
 	UFUNCTION(BlueprintCallable, Category="Spawn")
-	AMonsters *SpawnMonster(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
+	class AMonsters *SpawnMonster(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
 	
 	UFUNCTION(BlueprintCallable, Category="SaveData")
 	bool SaveGameData(int32 SaveNumber);

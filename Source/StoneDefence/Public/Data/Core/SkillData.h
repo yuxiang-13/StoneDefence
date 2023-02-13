@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
-#include "SkillData.generated.h"
+#include "SkillData.generated.h" 
 
 /**
  * 

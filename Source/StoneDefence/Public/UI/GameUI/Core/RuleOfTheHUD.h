@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
-#include "RuleOfTheHUD.generated.h"
+#include "RuleOfTheHUD.generated.h" 
 
 class UUI_MainScreen;
 /**

@@ -6,9 +6,8 @@
 #include "Core/GameCore/TowerDefencePlayerController.h"
 #include "GameFramework/Character.h"
 #include "Interface/Character/RuleCharacterInterface.h"
-#include "RuleOfTheCharacter.generated.h"
+#include "RuleOfTheCharacter.generated.h" 
 
-class ATowerDefenceGameState;
 class ADrawText;
 UCLASS()
 class STONEDEFENCE_API ARuleOfTheCharacter : public ACharacter, public IRuleCharacterInterface
@@ -67,7 +66,7 @@ public:
 	FORCEINLINE ATowerDefencePlayerController* GetGameController() { return GetWorld() ? GetWorld()->GetFirstPlayerController<ATowerDefencePlayerController>() : nullptr; };
 
 	// 获取 GameState 的接口
-	FORCEINLINE ATowerDefenceGameState* GetGameState() { return GetWorld() ? GetWorld()->GetGameState<ATowerDefenceGameState>() : nullptr; };
+	class ATowerDefenceGameState* GetGameState();
 
 	// 获取跟踪点，为子弹做准备
 	FORCEINLINE USceneComponent* GetHomingPoint() const {return HomingPoint; };

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UI/GameUI/Core/UI_Slot.h"
-#include "UI_SkillSlot.generated.h"
+#include "UI_SkillSlot.generated.h" 
 
 class UImage;
 class UTextBlock;

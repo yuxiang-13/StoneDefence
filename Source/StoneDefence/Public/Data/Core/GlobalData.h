@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "GlobalData.generated.h"
+#include "GlobalData.generated.h" 
 
 /**
  * 

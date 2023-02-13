@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "StoneDefence/StoneDefenceType.h"
-#include "RuleOfTheBullet.generated.h"
+#include "RuleOfTheBullet.generated.h"  
 
 UCLASS()
 class STONEDEFENCE_API ARuleOfTheBullet : public AActor

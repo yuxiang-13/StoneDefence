@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
 #include "UI/HallUI/UMG/UI_MainHall.h"
-#include "TowerDefenceHallHUD.generated.h"
+#include "TowerDefenceHallHUD.generated.h" 
 
 /**
  * 

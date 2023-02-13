@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "TowerDefenceHallPawn.generated.h"
+#include "TowerDefenceHallPawn.generated.h" 
 
 UCLASS()
 class STONEDEFENCE_API ATowerDefenceHallPawn : public APawn

@@ -6,7 +6,7 @@
 #include "UObject/Interface.h"
 #include "../StoneDefenceType.h"
 #include "Data/Core/CharacterData.h"
-#include "RuleCharacterInterface.generated.h"
+#include "RuleCharacterInterface.generated.h" 
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)

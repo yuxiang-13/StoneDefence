@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UI/Core/UI_RuleOfTheWidget.h"
-#include "UI_MissionSystem.generated.h"
+#include "UI_MissionSystem.generated.h" 
 
 class UTextBlock;
 class UButton;

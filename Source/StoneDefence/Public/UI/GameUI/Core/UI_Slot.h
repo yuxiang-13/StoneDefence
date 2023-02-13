@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UI/Core/UI_RuleOfTheWidget.h"
-#include "UI_Slot.generated.h"
+#include "UI_Slot.generated.h" 
 
 /**
  * 

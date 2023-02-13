@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimNotifies/AnimNotify.h"
-#include "AnimNotify_SpawnBullet.generated.h"
+#include "AnimNotify_SpawnBullet.generated.h" 
 
 /**
  * 

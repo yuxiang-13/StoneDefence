@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameMode.h"
-#include "TowerDefenceHallGameMode.generated.h"
+#include "TowerDefenceHallGameMode.generated.h" 
 
 /**
  * 

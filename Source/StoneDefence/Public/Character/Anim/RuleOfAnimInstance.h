@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
-#include "RuleOfAnimInstance.generated.h"
+#include "RuleOfAnimInstance.generated.h" 
 
 /**
  * 

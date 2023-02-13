@@ -9,6 +9,8 @@
 #include "Data/Save/GameSaveSlotList.h"
 #include "Kismet/GameplayStatics.h"
 #include "StoneDefence/StoneDefenceMacro.h"
+#include "Character/CharacterCore/Monsters.h"
+#include "Character/CharacterCore/Towers.h"
 
 //static 与 extern 联系：
 //加了static修饰的全局变量或函数，无法在使用extern在其他源文件中使用。
