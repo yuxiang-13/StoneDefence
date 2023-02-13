@@ -35,6 +35,12 @@
 /FUNCTIONPADMIN:6
 "D:\project\StoneDefence\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
 "D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Module.SimpleGameSettings.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\SimpleGameSettings.init.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\UI_GameSettingAudio.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\UI_GameSettingsGame.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\UI_GameSettingsOtherSettings.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\UI_GameSettingsSystem.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\UI_GameSettingsVideo.gen.cpp.obj"
 "D:\project\StoneDefence\Plugins\SimpleGameSettings\Intermediate\Build\Win64\UnrealEditor\Development\SimpleGameSettings\Default.rc2.res"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\CoreUObject\UnrealEditor-CoreUObject.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Engine\UnrealEditor-Engine.lib"

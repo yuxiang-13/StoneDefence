@@ -8,5 +8,8 @@
 /NODEFAULTLIB
 "D:\project\StoneDefence\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
 "D:\project\StoneDefence\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\Module.SimpleDrawText.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\DrawText.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\SimpleDrawText.init.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\UI_InformationWidget.gen.cpp.obj"
 "D:\project\StoneDefence\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\Default.rc2.res"
 /OUT:"D:\project\StoneDefence\Plugins\SimpleDrawText\Intermediate\Build\Win64\UnrealEditor\Development\SimpleDrawText\UnrealEditor-SimpleDrawText.lib"

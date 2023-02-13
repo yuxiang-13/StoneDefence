@@ -2,12 +2,12 @@
 	"RemapUnityFiles": 
 	{
 		"Module.SimpleDrawText.cpp.obj": [
-			"DrawText.cpp.obj",
-			"SimpleDrawText.cpp.obj",
-			"UI_InformationWidget.cpp.obj",
 			"DrawText.gen.cpp.obj",
 			"SimpleDrawText.init.gen.cpp.obj",
-			"UI_InformationWidget.gen.cpp.obj"
+			"UI_InformationWidget.gen.cpp.obj",
+			"DrawText.cpp.obj",
+			"SimpleDrawText.cpp.obj",
+			"UI_InformationWidget.cpp.obj"
 		]
 	}
 }

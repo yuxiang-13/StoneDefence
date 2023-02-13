@@ -2,12 +2,12 @@
 	"RemapUnityFiles": 
 	{
 		"Module.SimpleArchives.cpp.obj": [
-			"UI_ArchivesBar.cpp.obj",
-			"SimpleArchives.cpp.obj",
-			"UI_ArchivesSystem.cpp.obj",
 			"SimpleArchives.init.gen.cpp.obj",
 			"UI_ArchivesBar.gen.cpp.obj",
-			"UI_ArchivesSystem.gen.cpp.obj"
+			"UI_ArchivesSystem.gen.cpp.obj",
+			"UI_ArchivesBar.cpp.obj",
+			"SimpleArchives.cpp.obj",
+			"UI_ArchivesSystem.cpp.obj"
 		]
 	}
 }

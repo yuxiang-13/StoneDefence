@@ -8,5 +8,9 @@
 /NODEFAULTLIB
 "D:\project\StoneDefence\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_0.h.obj"
 "D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Module.SimpleTutoria.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\SimpleTutoria.init.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\UI_TutoriaBase.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\UI_TutoriaSlot.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\UI_TutoriaSystem.gen.cpp.obj"
 "D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\Default.rc2.res"
 /OUT:"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\Development\SimpleTutoria\UnrealEditor-SimpleTutoria.lib"

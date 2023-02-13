@@ -6,7 +6,8 @@
         "PCH": "d:\\project\\stonedefence\\intermediate\\build\\win64\\stonedefenceeditor\\development\\engine\\sharedpch.engine.shadowerrors.inclorderunreal5_0.h.pch",
         "Includes": [
             "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\development\\simpletutoria\\definitions.simpletutoria.h",
-            "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\private\\core\\ui_tutoriabase.cpp",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\simpletutoria.init.gen.cpp",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\ui_tutoriabase.gen.cpp",
             "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\public\\core\\ui_tutoriabase.h",
             "d:\\ue_5.1\\engine\\source\\runtime\\umg\\public\\blueprint\\userwidget.h",
             "d:\\ue_5.1\\engine\\source\\runtime\\coreuobject\\public\\uobject\\objectsavecontext.h",
@@ -164,14 +165,17 @@
             "d:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\widgetanimation.generated.h",
             "d:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\userwidget.generated.h",
             "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\ui_tutoriabase.generated.h",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\ui_tutoriaslot.gen.cpp",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\public\\tutoria\\ui_tutoriaslot.h",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\ui_tutoriaslot.generated.h",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\ui_tutoriasystem.gen.cpp",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\public\\ui_tutoriasystem.h",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\ui_tutoriasystem.generated.h",
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\private\\core\\ui_tutoriabase.cpp",
             "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\private\\simpletutoria.cpp",
             "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\public\\simpletutoria.h",
             "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\private\\tutoria\\ui_tutoriaslot.cpp",
-            "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\public\\tutoria\\ui_tutoriaslot.h",
-            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\ui_tutoriaslot.generated.h",
-            "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\private\\ui_tutoriasystem.cpp",
-            "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\public\\ui_tutoriasystem.h",
-            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\ui_tutoriasystem.generated.h"
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\source\\simpletutoria\\private\\ui_tutoriasystem.cpp"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

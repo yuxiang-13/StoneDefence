@@ -2,18 +2,18 @@
 	"RemapUnityFiles": 
 	{
 		"Module.SimpleGameSettings.cpp.obj": [
-			"UI_GameSettingAudio.cpp.obj",
-			"UI_GameSettingsGame.cpp.obj",
-			"UI_GameSettingsOtherSettings.cpp.obj",
-			"UI_GameSettingsVideo.cpp.obj",
-			"SimpleGameSettings.cpp.obj",
-			"UI_GameSettingsSystem.cpp.obj",
 			"SimpleGameSettings.init.gen.cpp.obj",
 			"UI_GameSettingAudio.gen.cpp.obj",
 			"UI_GameSettingsGame.gen.cpp.obj",
 			"UI_GameSettingsOtherSettings.gen.cpp.obj",
 			"UI_GameSettingsSystem.gen.cpp.obj",
-			"UI_GameSettingsVideo.gen.cpp.obj"
+			"UI_GameSettingsVideo.gen.cpp.obj",
+			"UI_GameSettingAudio.cpp.obj",
+			"UI_GameSettingsGame.cpp.obj",
+			"UI_GameSettingsOtherSettings.cpp.obj",
+			"UI_GameSettingsVideo.cpp.obj",
+			"SimpleGameSettings.cpp.obj",
+			"UI_GameSettingsSystem.cpp.obj"
 		]
 	}
 }
