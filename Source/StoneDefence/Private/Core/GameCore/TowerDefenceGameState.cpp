@@ -158,6 +158,12 @@ const TArray<const FGuid*> ATowerDefenceGameState::GetBuildingTowersID()
 	return TowersID;
 }
 
+bool ATowerDefenceGameState::GetCharacterDataFormTable(TArray<const FCharacterData*>& Datas)
+{
+	AITowerCharacterData->GetAllRows(TEXT("CharacterData Error"), Datas);
+	return Datas.Num() > 0;
+}
+
 UGameSaveData* ATowerDefenceGameState::GetSaveData()
 {
 	if (!SaveData)

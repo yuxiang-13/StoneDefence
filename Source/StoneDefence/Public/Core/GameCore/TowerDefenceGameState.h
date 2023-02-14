@@ -74,6 +74,8 @@ public:
 	FBuildingTower &GetBuildingTower(const FGuid& ID);
 	// 获取所有塔ID 数据
 	const TArray<const FGuid*> GetBuildingTowersID();
+
+	bool GetCharacterDataFormTable(TArray<const FCharacterData*> &Datas);
 protected:
 	UGameSaveData *GetSaveData();
 	UGameSaveSlotList *GetGameSaveSlotList();

@@ -9,7 +9,7 @@
 
 class UUniformGridPanel;
 /**
- * 
+ *  
  */
 UCLASS()
 class STONEDEFENCE_API UUI_Inventory : public UUI_Slot

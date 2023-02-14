@@ -25,7 +25,7 @@ void FBuildingTower::Init()
 
 float FBuildingTower::GetTowerConstructionTimePercentage()
 {
-	return MaxConstructionTowersCD ? CurrentConstrictionTowersCD / MaxConstructionTowersCD : 0.f;
+	return MaxConstructionTowersCD > 0.f ? CurrentConstrictionTowersCD / MaxConstructionTowersCD : 0.f;
 }
 
 bool FBuildingTower::IsValid()

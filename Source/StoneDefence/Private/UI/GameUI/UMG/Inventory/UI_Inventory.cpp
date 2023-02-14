@@ -8,6 +8,7 @@
 #include "Components/UniformGridPanel.h"
 #include "Components/UniformGridSlot.h"
 #include "Core/GameCore/TowerDefenceGameState.h"
+#include "Data/Save/GameSaveData.h"
 
 void UUI_Inventory::NativeConstruct()
 {
@@ -45,6 +46,20 @@ void UUI_Inventory::LayoutInventroySlot(int32 ColumnNumber, int32 RowNumber)
 		for (int32 i = 0; i < ColumnNumber * RowNumber; i++)
 		{
 			InventorySlotArray[i]->GUID = *IDs[i];
+		}
+
+		TArray<const FCharacterData*> Datas;
+		if (GetGameState()->GetCharacterDataFormTable(Datas))
+		{
+			for (int32 i = 0; i < Datas.Num(); i++)
+			{
+				InventorySlotArray[i]->GetBuildingTower().TowerID = Datas[i]->ID;
+				InventorySlotArray[i]->GetBuildingTower().NeedGold = Datas[i]->Glod;
+				InventorySlotArray[i]->GetBuildingTower().MaxConstructionTowersCD = Datas[i]->ConstructionTime;
+				InventorySlotArray[i]->GetBuildingTower().ICO = Cast<UTexture2D>(Datas[i]->Icon.LoadSynchronous());
+				
+				InventorySlotArray[i]->UpdateUI();
+			}
 		}
 	}
 }
