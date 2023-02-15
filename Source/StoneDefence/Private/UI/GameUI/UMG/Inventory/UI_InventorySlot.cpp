@@ -25,18 +25,34 @@ void UUI_InventorySlot::NativeTick(const FGeometry& MyGeometry, float InDeltaTim
 	Super::NativeTick(MyGeometry, InDeltaTime);
 
 	// CD
-	if (!GetBuildingTower().bLockCD)
+	if (GetBuildingTower().IsValid())
 	{
-		if (GetBuildingTower().bDragICO)
+		if (!GetBuildingTower().bLockCD)
 		{
-			UpdateTowersCD(InDeltaTime);
+			if (!GetBuildingTower().bDragICO)
+			{
+				UpdateTowersCD(InDeltaTime);
 			
+			}
 		}
 	}
 }
 
+
 void UUI_InventorySlot::OnClickedWidget()
 {
+	if (GetBuildingTower().IsValid())
+	{
+		if (/*GetBuildingTower().NeedGold*/ 1)
+		{
+			// 建造的塔++
+			GetBuildingTower().TowersPerpareBuildingNumber++;
+			if (GetBuildingTower().CurrentConstrictionTowersCD <= 0)
+			{
+				GetBuildingTower().ResetCD();
+			}
+		}
+	}
 }
 
 void UUI_InventorySlot::UpdateUI()
@@ -67,6 +83,7 @@ void UUI_InventorySlot::UpdateTowersCD(float InDeltatime)
 	{
 		// 绘制CD
 		DrawTowersCD(GetBuildingTower().GetTowerConstructionTimePercentage());
+		
 		GetBuildingTower().CurrentConstrictionTowersCD -= InDeltatime;
 		GetBuildingTower().bCallUpdateTowersInfo = true;
 		
@@ -96,9 +113,11 @@ void UUI_InventorySlot::DrawTowersCD(float InTowersCD)
 		if (InTowersCD > 0.f && InTowersCD < 1.0f)
 		{
 			CDMaterialDynamic->SetScalarParameterValue(TowersClearValueName, true);
+			TowersCD->SetVisibility(ESlateVisibility::HitTestInvisible);
 		} else
 		{
 			CDMaterialDynamic->SetScalarParameterValue(TowersClearValueName, false);
+			TowersCD->SetVisibility(ESlateVisibility::Hidden);
 		}
 		CDMaterialDynamic->SetScalarParameterValue(TowersMatCDName, InTowersCD);
 	}
