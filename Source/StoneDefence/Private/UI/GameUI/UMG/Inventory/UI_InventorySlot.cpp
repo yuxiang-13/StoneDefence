@@ -8,6 +8,9 @@
 #include "Components/TextBlock.h"
 #include "Core/GameCore/TowerDefenceGameState.h"
 #include "Data/Save/GameSaveData.h"
+#include "DragDrop/StoneDefenceDragDropOperation.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "UI/GameUI/UMG/Inventory/DragDrop/UI_ICODragDrog.h"
 
 void UUI_InventorySlot::NativeConstruct()
 {
@@ -77,6 +80,15 @@ FBuildingTower& UUI_InventorySlot::GetBuildingTower()
 	return GetGameState()->GetBuildingTower(GUID);
 }
 
+void UUI_InventorySlot::ClearSlot()
+{
+	TowersIcon->SetVisibility(ESlateVisibility::Hidden);
+	TowersCD->SetVisibility(ESlateVisibility::Hidden);
+	TPBNumber->SetVisibility(ESlateVisibility::Hidden);
+	TCOfCNumber->SetVisibility(ESlateVisibility::Hidden);
+	TowersCDValue->SetVisibility(ESlateVisibility::Hidden);
+}
+
 void UUI_InventorySlot::UpdateTowersCD(float InDeltatime)
 {
 	if (GetBuildingTower().CurrentConstrictionTowersCD > 0.f)
@@ -140,4 +152,83 @@ void UUI_InventorySlot::UpdateTowersBuildingInfo()
 	DisplayNumber(TowersCDValue, GetBuildingTower().CurrentConstrictionTowersCD);
 	DisplayNumber(TCOfCNumber, GetBuildingTower().TowersConstructionNumber);
 	DisplayNumber(TPBNumber, GetBuildingTower().TowersPerpareBuildingNumber);
+}
+
+
+// 开始拖拽
+FReply UUI_InventorySlot::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
+	// UKismetSystemLibrary::PrintString(this, TEXT("RightMouseButton 111"), true, true, FLinearColor::Red, 10.f);
+	
+	// 判断是不是鼠标右键  或者是屏幕触摸事件
+	if (InMouseEvent.GetEffectingButton() == EKeys::RightMouseButton || InMouseEvent.IsTouchEvent()) 
+	{
+		// 查看当前拖拽的Widget是不是有效
+		TSharedPtr<SWidget> SlateWidgetDrag = GetCachedWidget();
+		if (SlateWidgetDrag.IsValid())
+		{
+			FReply Reply = FReply::Handled();
+			// [dɪˈtekt] 发现;查明;侦察出
+			// 表示鼠标右键会创建出Widget
+			Reply.DetectDrag(SlateWidgetDrag.ToSharedRef(), EKeys::RightMouseButton);
+			return Reply;
+		}
+	}
+	
+	return FReply::Unhandled();
+}
+
+// 产生拖拽
+void UUI_InventorySlot::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent,
+	UDragDropOperation*& OutOperation)
+{
+	if (GetBuildingTower().IsValid() && IsValid(IcoDragDropClass))
+	{
+		// 创建拖拽Widget
+		UUI_ICODragDrog* IconDragDrop = CreateWidget<UUI_ICODragDrog>(GetWorld(), IcoDragDropClass);
+		if (IconDragDrop)
+		{
+			// 生成拖拽类
+			if (UStoneDefenceDragDropOperation* StoneDefenceDrag =
+				NewObject<UStoneDefenceDragDropOperation>(GetTransientPackage(), UStoneDefenceDragDropOperation::StaticClass())
+			)
+			{
+				// 标签设置成强引用  目的告诉GC 不要回收
+				StoneDefenceDrag->SetFlags(RF_StrongRefOnFrame);
+				// Payload为代理绑定时传递的额外参数
+				StoneDefenceDrag->Payload = this;
+				// 返回给接口
+				OutOperation = StoneDefenceDrag;
+				// 让拖拽类 长得像 谁
+				StoneDefenceDrag->DefaultDragVisual = IconDragDrop;
+
+				
+				GetBuildingTower().bDragICO = true;
+				// 隐藏自己Slot图标啥的
+				ClearSlot();
+			}
+		}
+	}
+	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
+}
+
+// 拖拽松手
+bool UUI_InventorySlot::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent,
+	UDragDropOperation* InOperation)
+{
+	Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
+
+	
+	return false;
+}
+
+void UUI_InventorySlot::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+}
+
+void UUI_InventorySlot::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseLeave(InMouseEvent);
 }

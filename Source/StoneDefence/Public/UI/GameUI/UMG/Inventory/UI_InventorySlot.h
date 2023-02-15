@@ -43,6 +43,10 @@ class STONEDEFENCE_API UUI_InventorySlot : public UUI_Slot
 	// 塔CD清楚名字
 	UPROPERTY(EditDefaultsOnly, Category=UI)
 		FName TowersClearValueName;
+
+	//  拖拽显示的UI
+	UPROPERTY(EditDefaultsOnly, Category=UI)
+	TSubclassOf<class UUI_ICODragDrog> IcoDragDropClass;
 	
 	// CD动态材质
 	UPROPERTY()
@@ -58,6 +62,9 @@ public:
 	void UpdateUI();
 	
 	FBuildingTower &GetBuildingTower();
+
+	// 隐藏Slot
+	void ClearSlot();
 private:
 	// 更新CD
 	void UpdateTowersCD(float InDeltatime);
@@ -67,4 +74,16 @@ private:
 	void DisplayNumber(UTextBlock* TextNumberBlock, int32 TextNumber);
 	// 塔的 信息
 	void UpdateTowersBuildingInfo();
+
+protected:
+	// 鼠标按下
+	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	// 拖拽动作
+	virtual void NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation) override;
+	// 拖拽后松手
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
+	// 鼠标进入
+	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	// 鼠标出来
+	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
 };

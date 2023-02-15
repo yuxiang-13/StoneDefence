@@ -14,6 +14,8 @@ public class StoneDefence : ModuleRules
 			"CoreUObject",
 			"Engine", 
 			"InputCore", 
+			"Slate",
+			"SlateCore",
 			"UMG",
 			"StoneToolClass",
 			"SimpleScreenLoading",
