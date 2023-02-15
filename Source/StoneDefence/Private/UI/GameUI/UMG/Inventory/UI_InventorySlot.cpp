@@ -60,6 +60,7 @@ void UUI_InventorySlot::OnClickedWidget()
 
 void UUI_InventorySlot::UpdateUI()
 {
+	GUID;
 	// 应用上 图片
 	if (GetBuildingTower().ICO)
 	{
@@ -72,6 +73,16 @@ void UUI_InventorySlot::UpdateUI()
 	} else
 	{
 		TowersIcon->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	
+	if (GetBuildingTower().TowersConstructionNumber > 0)
+	{
+		TCOfCNumber->SetVisibility(ESlateVisibility::HitTestInvisible);
+	}
+	if (GetBuildingTower().TowersPerpareBuildingNumber > 0)
+	{
+		TPBNumber->SetVisibility(ESlateVisibility::HitTestInvisible);
 	}
 }
 
@@ -213,14 +224,32 @@ void UUI_InventorySlot::NativeOnDragDetected(const FGeometry& InGeometry, const 
 	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
 }
 
-// 拖拽松手
+// 拖拽松手 释放
 bool UUI_InventorySlot::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent,
 	UDragDropOperation* InOperation)
 {
 	Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
 
+	bool bDrop = false;
+
+	// 把此拖拽生成的类，转化成自己刚刚 继承自UDragDropOperation的 UStoneDefenceDragDropOperation类
+	if (UStoneDefenceDragDropOperation* StoneDefenceDragDropOperation = Cast<UStoneDefenceDragDropOperation>(InOperation))
+	{
+		// Payload为代理绑定时传递的额外参数 取出来   注意：：：此时发生拖拽，松手时候看看是交换物品还是保持原样
+		if (UUI_InventorySlot* MyInventorySlot = Cast<UUI_InventorySlot>(StoneDefenceDragDropOperation->Payload))
+		{
+			MyInventorySlot->GetBuildingTower().bDragICO = false;
+
+			// 看看这个槽是不是存在 塔   开始交换
+			GetGameState()->RequestInventorySlotSwap(GUID, MyInventorySlot->GUID);
+			// 更新UI
+			UpdateUI();
+			MyInventorySlot->UpdateUI();
+			bDrop = true;
+		}
+	}
 	
-	return false;
+	return bDrop;
 }
 
 void UUI_InventorySlot::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)

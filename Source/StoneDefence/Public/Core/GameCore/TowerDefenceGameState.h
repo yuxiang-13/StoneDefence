@@ -76,6 +76,9 @@ public:
 	const TArray<const FGuid*> GetBuildingTowersID();
 
 	bool GetCharacterDataFormTable(TArray<const FCharacterData*> &Datas);
+
+	// 交换数据，要放到服务器上
+	void RequestInventorySlotSwap(const FGuid &A, const FGuid &B);
 protected:
 	UGameSaveData *GetSaveData();
 	UGameSaveSlotList *GetGameSaveSlotList();

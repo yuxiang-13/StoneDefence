@@ -44,6 +44,6 @@ class STONEDEFENCE_API UUI_MainScreen : public UUI_RuleOfTheWidget
 public:
 	virtual void NativeConstruct() override;
 
-
-	
+	// 拖拽响应
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 };

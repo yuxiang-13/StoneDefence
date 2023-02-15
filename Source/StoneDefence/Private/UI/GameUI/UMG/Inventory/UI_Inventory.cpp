@@ -3,8 +3,6 @@
 
 #include "UI/GameUI/UMG/Inventory/UI_Inventory.h"
 
-#include <Expat/expat-2.2.10/lib/expat.h>
-
 #include "Components/UniformGridPanel.h"
 #include "Components/UniformGridSlot.h"
 #include "Core/GameCore/TowerDefenceGameState.h"
