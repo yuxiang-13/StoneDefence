@@ -35,4 +35,5 @@ return TowerID != INDEX_NONE;
 
 void FBuildingTower::ResetCD()
 {
+	CurrentConstrictionTowersCD = MaxConstructionTowersCD;
 }

@@ -28,7 +28,7 @@ public:
 	
 	//角色图片
 	UPROPERTY(EditDefaultsOnly, Category="Table")
-	TSoftClassPtr<class UTexture2D> Icon;
+	TSoftObjectPtr<class UTexture2D> Icon;
 
 	///////////////////////////////////////////////////////////////////////属性
 	//////// 
