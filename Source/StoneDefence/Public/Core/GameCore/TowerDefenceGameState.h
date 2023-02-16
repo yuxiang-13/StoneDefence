@@ -65,6 +65,9 @@ protected:
 	}
 	
 public:
+	// 是否可生成塔 显示的模型
+	AActor* SpawnTowersDoll(int32 ID);
+	
 	const FCharacterData &AddCharacterData(const FGuid &ID, const FCharacterData &Data);
 	bool RemoveCharacterData(const FGuid &ID);
 	FCharacterData &GetCharacterData(const FGuid& ID);

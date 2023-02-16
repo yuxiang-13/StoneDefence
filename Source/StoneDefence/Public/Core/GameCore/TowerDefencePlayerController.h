@@ -15,6 +15,11 @@ class STONEDEFENCE_API ATowerDefencePlayerController : public APlayerController
 {
 	GENERATED_BODY()
 public:
+	// 按下鼠标中键
+	FSimpleDelegate EventMouseMiddlePressed;
+	// 松开鼠标中键
+	FSimpleDelegate EventMouseMiddleReleased;
+public:
 	//构建我们的函数
 	ATowerDefencePlayerController();
 
@@ -35,7 +40,10 @@ public:
 public:
 	// 锁定鼠标
 	void SetInputModeGameAndUI();
-	
+
+	// 鼠标中键按下松开
+	void MouseMiddleButtonPresed();
+	void MouseMiddleButtonRelease();
 protected:
 	
 	FScreenMoveUnits ScreenMoveUnits;

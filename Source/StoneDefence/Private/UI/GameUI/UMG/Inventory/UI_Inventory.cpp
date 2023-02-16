@@ -6,13 +6,17 @@
 #include "Components/UniformGridPanel.h"
 #include "Components/UniformGridSlot.h"
 #include "Core/GameCore/TowerDefenceGameState.h"
+#include "Core/GameCore/TowerDefencePlayerController.h"
 #include "Data/Save/GameSaveData.h"
+#include "UI/GameUI/UMG/Inventory/UI_Data1.h"
 
 void UUI_Inventory::NativeConstruct()
 {
 	Super::NativeConstruct();
 
 	LayoutInventroySlot(3, 7);
+	GetPlayerController()->EventMouseMiddlePressed.BindUObject(this, &UUI_Inventory::SpawnTowersDollPressed);
+	GetPlayerController()->EventMouseMiddleReleased.BindUObject(this, &UUI_Inventory::SpawnTowersDollReleased);
 }
 
 void UUI_Inventory::LayoutInventroySlot(int32 ColumnNumber, int32 RowNumber)
@@ -60,4 +64,30 @@ void UUI_Inventory::LayoutInventroySlot(int32 ColumnNumber, int32 RowNumber)
 			}
 		}
 	}
+}
+
+void UUI_Inventory::SpawnTowersDollPressed()
+{
+	if (GetBuildingTower().IsValid())
+	{
+		if (GetBuildingTower().TowersConstructionNumber >= 1)
+		{
+			
+		}
+	}
+}
+
+void UUI_Inventory::SpawnTowersDollReleased()
+{
+	if (GetBuildingTower().IsValid())
+	{
+			
+	}
+	// 清楚标记 00000
+	TowerICOGUID = FGuid();
+}
+
+FBuildingTower& UUI_Inventory::GetBuildingTower()
+{
+	return GetGameState()->GetBuildingTower(TowerICOGUID);
 }

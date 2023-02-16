@@ -20,4 +20,5 @@ public:
 	FGuid GUID;
 
 	class ATowerDefenceGameState *GetGameState();
+	class ATowerDefencePlayerController *GetPlayerController();
 };

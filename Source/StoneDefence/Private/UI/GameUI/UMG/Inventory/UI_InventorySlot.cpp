@@ -10,6 +10,7 @@
 #include "Data/Save/GameSaveData.h"
 #include "DragDrop/StoneDefenceDragDropOperation.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "UI/GameUI/UMG/Inventory/UI_Data1.h"
 #include "UI/GameUI/UMG/Inventory/DragDrop/UI_ICODragDrog.h"
 #include "UI/GameUI/UMG/Tip/UI_TowerTip.h"
 
@@ -273,6 +274,8 @@ bool UUI_InventorySlot::NativeOnDrop(const FGeometry& InGeometry, const FDragDro
 void UUI_InventorySlot::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+	// 鼠标移动到塔上，做标记
+	TowerICOGUID = GUID;
 }
 
 void UUI_InventorySlot::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)

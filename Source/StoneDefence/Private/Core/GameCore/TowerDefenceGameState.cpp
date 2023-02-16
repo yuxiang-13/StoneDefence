@@ -11,6 +11,7 @@
 #include "StoneDefence/StoneDefenceMacro.h"
 #include "Character/CharacterCore/Monsters.h"
 #include "Character/CharacterCore/Towers.h"
+#include "Engine/StaticMeshActor.h"
 
 //static 与 extern 联系：
 //加了static修饰的全局变量或函数，无法在使用extern在其他源文件中使用。
@@ -106,6 +107,15 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 				}
 			}
 		}
+	}
+	return nullptr;
+}
+
+AActor* ATowerDefenceGameState::SpawnTowersDoll(int32 ID)
+{
+	// 生成替代模型
+	if (AStaticMeshActor *MeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), FVector::ZeroVector, FRotator::ZeroRotator))
+	{
 	}
 	return nullptr;
 }

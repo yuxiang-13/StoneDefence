@@ -17,3 +17,12 @@ ATowerDefenceGameState* UUI_RuleOfTheWidget::GetGameState()
 	}
 	return nullptr;
 }
+
+ATowerDefencePlayerController* UUI_RuleOfTheWidget::GetPlayerController()
+{
+	if (GetWorld())
+	{
+		return GetWorld()->GetFirstPlayerController<ATowerDefencePlayerController>();
+	}
+	return nullptr;
+}

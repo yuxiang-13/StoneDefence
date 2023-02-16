@@ -26,6 +26,11 @@ public:
 	virtual void NativeConstruct() override;
 	
 	void LayoutInventroySlot(int32 ColumNumber, int32 RowNumber);
+
+	void SpawnTowersDollPressed();
+	void SpawnTowersDollReleased();
+
+	FBuildingTower &GetBuildingTower();
 private: // 技能Item
 	TArray<UUI_InventorySlot*> InventorySlotArray;
 	

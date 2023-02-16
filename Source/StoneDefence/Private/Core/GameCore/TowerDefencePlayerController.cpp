@@ -44,6 +44,19 @@ void ATowerDefencePlayerController::SetupInputComponent()
 	//鼠标滚轮
 	InputComponent->BindAction("MouseWheelUp", IE_Pressed, this, &ATowerDefencePlayerController::MouseWheelUp);
 	InputComponent->BindAction("MouseWheelDown", IE_Pressed, this, &ATowerDefencePlayerController::MouseWheelDown);
+
+	InputComponent->BindAction("MouseMiddleButton", IE_Pressed, this, &ATowerDefencePlayerController::MouseMiddleButtonPresed);
+	InputComponent->BindAction("MouseMiddleButton", IE_Pressed, this, &ATowerDefencePlayerController::MouseMiddleButtonRelease);
+}
+
+void ATowerDefencePlayerController::MouseMiddleButtonPresed()
+{
+	EventMouseMiddlePressed.ExecuteIfBound();
+}
+
+void ATowerDefencePlayerController::MouseMiddleButtonRelease()
+{
+	EventMouseMiddleReleased.ExecuteIfBound();
 }
 
 static float WheelValue = 15.f;
