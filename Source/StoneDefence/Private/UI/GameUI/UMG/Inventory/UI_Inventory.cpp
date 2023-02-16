@@ -47,7 +47,7 @@ void UUI_Inventory::LayoutInventroySlot(int32 ColumnNumber, int32 RowNumber)
 		}
 
 		TArray<const FCharacterData*> Datas;
-		if (GetGameState()->GetCharacterDataFormTable(Datas))
+		if (GetGameState()->GetTowersDataFormTable(Datas))
 		{
 			for (int32 i = 0; i < Datas.Num(); i++)
 			{

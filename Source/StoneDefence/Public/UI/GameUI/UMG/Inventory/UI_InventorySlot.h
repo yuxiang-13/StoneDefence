@@ -48,6 +48,10 @@ class STONEDEFENCE_API UUI_InventorySlot : public UUI_Slot
 	UPROPERTY(EditDefaultsOnly, Category=UI)
 	TSubclassOf<class UUI_ICODragDrog> IcoDragDropClass;
 	
+	// Tip显示的UI
+	UPROPERTY(EditDefaultsOnly, Category=UI)
+	TSubclassOf<class UUI_TowerTip> TowerTipClass;
+	
 	// CD动态材质
 	UPROPERTY()
 	class UMaterialInstanceDynamic* CDMaterialDynamic;
@@ -59,6 +63,9 @@ public:
 	UFUNCTION()
 	void OnClickedWidget();
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category=Tip)
+	UWidget *GetTowerTip();
+	
 	void UpdateUI();
 	
 	FBuildingTower &GetBuildingTower();

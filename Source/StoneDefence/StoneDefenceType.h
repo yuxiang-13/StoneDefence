@@ -32,4 +32,9 @@ enum EBulletType
 };
 
 
-
+UENUM(BlueprintType)
+enum class ECharacterType :uint8
+{
+	TOWER,
+	MONSTER,
+};

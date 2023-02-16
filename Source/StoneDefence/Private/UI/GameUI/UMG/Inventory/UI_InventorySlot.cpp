@@ -11,6 +11,7 @@
 #include "DragDrop/StoneDefenceDragDropOperation.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "UI/GameUI/UMG/Inventory/DragDrop/UI_ICODragDrog.h"
+#include "UI/GameUI/UMG/Tip/UI_TowerTip.h"
 
 void UUI_InventorySlot::NativeConstruct()
 {
@@ -56,6 +57,23 @@ void UUI_InventorySlot::OnClickedWidget()
 			}
 		}
 	}
+}
+
+UWidget* UUI_InventorySlot::GetTowerTip()
+{
+	if (TowerTipClass)
+	{
+		if (UUI_TowerTip *TowerTip = CreateWidget<UUI_TowerTip>(GetWorld(), TowerTipClass))
+		{
+			const FCharacterData &TowerDataInfo = GetGameState()->GetCharacterDataByID(GetBuildingTower().TowerID);
+			if (TowerDataInfo.ID != INDEX_NONE)
+			{
+				TowerTip->InitTip(TowerDataInfo);
+				return TowerTip;
+			}
+		}
+	}
+	return nullptr;
 }
 
 void UUI_InventorySlot::UpdateUI()

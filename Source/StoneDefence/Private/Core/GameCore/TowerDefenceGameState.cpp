@@ -161,10 +161,59 @@ const TArray<const FGuid*> ATowerDefenceGameState::GetBuildingTowersID()
 	return TowersID;
 }
 
-bool ATowerDefenceGameState::GetCharacterDataFormTable(TArray<const FCharacterData*>& Datas)
+bool ATowerDefenceGameState::GetTowersDataFormTable(TArray<const FCharacterData*>& Datas)
 {
-	AITowerCharacterData->GetAllRows(TEXT("CharacterData Error"), Datas);
+	if (!CacheTowerDatas.Num())
+	{
+		AITowerCharacterData->GetAllRows(TEXT("CharacterData Error"), CacheTowerDatas);
+	}
+	for (const auto &Tmp: CacheTowerDatas)
+	{
+		Datas.Add(Tmp);
+	}
 	return Datas.Num() > 0;
+}
+
+bool ATowerDefenceGameState::GetMonstersDataFormTable(TArray<const FCharacterData*>& Datas)
+{
+	if (!CacheMonsterDatas.Num())
+	{
+		AITowerCharacterData->GetAllRows(TEXT("CharacterData Error"), CacheMonsterDatas);
+	}
+	for (const auto &Tmp: CacheMonsterDatas)
+	{
+		Datas.Add(Tmp);
+	}
+	return Datas.Num() > 0;
+}
+
+const FCharacterData& ATowerDefenceGameState::GetCharacterDataByID(int32 ID, ECharacterType Type)
+{
+	TArray<const FCharacterData*> Datas;
+	switch (Type)
+	{
+	case ECharacterType::TOWER:
+		{
+			GetTowersDataFormTable(Datas);
+			break;
+		}
+	case ECharacterType::MONSTER:
+		{
+			GetMonstersDataFormTable(Datas);
+			break;
+		}
+	default:
+		break;
+	}
+
+	for (const auto &Tmp: Datas)
+	{
+		if (Tmp->ID == ID)
+		{
+			return *Tmp;
+		}
+	}
+	return CharacterDataNULL;
 }
 
 // A 是拖拽释放点

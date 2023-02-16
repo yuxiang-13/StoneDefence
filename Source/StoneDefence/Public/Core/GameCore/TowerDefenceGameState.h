@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Data/Core/CharacterData.h"
 #include "GameFramework/GameState.h"
+#include "StoneDefence/StoneDefenceType.h"
 #include "TowerDefenceGameState.generated.h" 
 
 class ARuleOfTheCharacter;
@@ -17,7 +18,6 @@ class UGameSaveSlotList;
 
 struct FBuildingTower;
 struct FCharacterData;
-
 
 //static 与 extern 联系：
 //加了static修饰的全局变量或函数，无法在使用extern在其他源文件中使用。
@@ -75,8 +75,11 @@ public:
 	// 获取所有塔ID 数据
 	const TArray<const FGuid*> GetBuildingTowersID();
 
-	bool GetCharacterDataFormTable(TArray<const FCharacterData*> &Datas);
+	bool GetTowersDataFormTable(TArray<const FCharacterData*> &Datas);
+	bool GetMonstersDataFormTable(TArray<const FCharacterData*> &Datas);
 
+	const FCharacterData &GetCharacterDataByID(int32 ID, ECharacterType Type = ECharacterType::TOWER);
+	
 	// 交换数据，要放到服务器上
 	void RequestInventorySlotSwap(const FGuid &A, const FGuid &B);
 protected:
@@ -88,4 +91,7 @@ private:
 	
 	UPROPERTY()
 	UGameSaveSlotList *SlotList;
+
+	TArray<FCharacterData*> CacheTowerDatas;
+	TArray<FCharacterData*> CacheMonsterDatas;
 };
