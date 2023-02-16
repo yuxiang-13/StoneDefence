@@ -274,8 +274,11 @@ bool UUI_InventorySlot::NativeOnDrop(const FGeometry& InGeometry, const FDragDro
 void UUI_InventorySlot::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
-	// 鼠标移动到塔上，做标记
-	TowerICOGUID = GUID;
+	if (!bLocalGUID)
+	{
+		// 鼠标移动到塔上，做标记
+		TowerICOGUID = GUID;
+	}
 }
 
 void UUI_InventorySlot::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)

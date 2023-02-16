@@ -4,3 +4,7 @@
 #include "CoreMinimal.h"
 
 extern FGuid TowerICOGUID;
+
+extern AActor *TowerDoll;
+
+extern bool bLocalGUID;

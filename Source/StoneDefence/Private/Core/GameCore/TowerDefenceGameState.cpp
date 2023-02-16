@@ -113,11 +113,55 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 
 AActor* ATowerDefenceGameState::SpawnTowersDoll(int32 ID)
 {
-	// 生成替代模型
-	if (AStaticMeshActor *MeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), FVector::ZeroVector, FRotator::ZeroRotator))
+	AActor *OutActor = nullptr;
+	
+	TArray<const FCharacterData*> InDatas;
+	GetTowersDataFormTable(InDatas);
+	for (const auto &Tmp: CacheTowerDatas)
 	{
+		if (Tmp->ID == ID)
+		{
+			/*初始化角色的 实例蓝图
+			 *  TAssetSubclassOf ==== TSubclassOf<>
+				UPROPERTY(EditDefaultsOnly, Category="Table")
+				TSoftClassPtr<class ARuleOfTheCharacter> CharacterBlueprintKey;
+			 * 
+			*/
+			// 获取DataTable配置好的 class  LoadSynchronous 同步加载
+			UClass* NewClass = Tmp->CharacterBlueprintKey.LoadSynchronous();
+
+		
+			if (GetWorld() && NewClass)
+			{
+				if (ARuleOfTheCharacter * RuleOfTheCharacter = GetWorld()->SpawnActor<ARuleOfTheCharacter>(NewClass, FVector::ZeroVector, FRotator::ZeroRotator))
+				{
+					// 生成替代模型(AStaticMeshActor 系统自己的)
+					if (AStaticMeshActor *MeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), FVector::ZeroVector, FRotator::ZeroRotator))
+					{
+						if (UStaticMesh *InMesh = RuleOfTheCharacter->GetDollMesh())
+						{
+							MeshActor->SetMobility(EComponentMobility::Movable);
+							MeshActor->GetStaticMeshComponent()->SetStaticMesh(InMesh);
+							// 可移动
+							MeshActor->GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
+							OutActor = MeshActor;
+							RuleOfTheCharacter->Destroy();
+						} else
+						{
+							MeshActor->Destroy();
+							RuleOfTheCharacter->Destroy();
+						}
+					} else
+					{
+						RuleOfTheCharacter->Destroy();
+					}
+				}
+			}
+			break;
+		}
 	}
-	return nullptr;
+	
+	return OutActor;
 }
 
 const FCharacterData &ATowerDefenceGameState::AddCharacterData(const FGuid &ID,const FCharacterData& Data)

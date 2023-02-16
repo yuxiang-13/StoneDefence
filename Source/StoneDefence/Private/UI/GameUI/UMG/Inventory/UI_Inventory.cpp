@@ -8,6 +8,7 @@
 #include "Core/GameCore/TowerDefenceGameState.h"
 #include "Core/GameCore/TowerDefencePlayerController.h"
 #include "Data/Save/GameSaveData.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "UI/GameUI/UMG/Inventory/UI_Data1.h"
 
 void UUI_Inventory::NativeConstruct()
@@ -70,9 +71,12 @@ void UUI_Inventory::SpawnTowersDollPressed()
 {
 	if (GetBuildingTower().IsValid())
 	{
+		bLocalGUID = true;
 		if (GetBuildingTower().TowersConstructionNumber >= 1)
 		{
-			
+			int32 TowerID = GetBuildingTower().TowerID;
+			// 生成拖拽对象
+			TowerDoll = GetGameState()->SpawnTowersDoll(TowerID);
 		}
 	}
 }
@@ -81,8 +85,14 @@ void UUI_Inventory::SpawnTowersDollReleased()
 {
 	if (GetBuildingTower().IsValid())
 	{
-			
+		if (TowerDoll)
+		{
+			TowerDoll->Destroy();
+			TowerDoll = nullptr;
+		}
+		
 	}
+	bLocalGUID = false;
 	// 清楚标记 00000
 	TowerICOGUID = FGuid();
 }

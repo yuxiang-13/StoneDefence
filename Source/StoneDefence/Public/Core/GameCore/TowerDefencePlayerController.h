@@ -47,4 +47,7 @@ public:
 protected:
 	
 	FScreenMoveUnits ScreenMoveUnits;
+
+	// 鼠标 射线检测
+	FHitResult MouseTaceHit;
 };

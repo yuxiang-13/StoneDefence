@@ -9,8 +9,12 @@
 #include "Core/GameCore/TowerDefenceGameState.h"
 #include "Damage/DrawText.h"
 #include "Data/Core/CharacterData.h"
+#include "Particles/ParticleEmitter.h"
+#include "Particles/ParticleLODLevel.h"
 #include "StoneDefence/StoneDefenceUtils.h"
 #include "UI/Character/UI_Health.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Particles/TypeData/ParticleModuleTypeDataMesh.h"
 
 #if PLATFORM_WINDOWS
 #pragma optimize("",off)
@@ -152,6 +156,49 @@ FCharacterData& ARuleOfTheCharacter::GetCharacterData()
 	}
 	// ATowerDefenceGameState 中 定义了这个变量
 	return CharacterDataNULL;
+}
+
+UStaticMesh* ARuleOfTheCharacter::GetDollMesh()
+{
+	TArray<USceneComponent*> SceneComponent;
+	RootComponent->GetChildrenComponents(true, SceneComponent);
+	for (auto &Tmp: SceneComponent)
+	{
+		if (Tmp->IsA(UStaticMeshComponent::StaticClass()))
+		{
+			if (UStaticMeshComponent *NewStaticMeshComponent = Cast<UStaticMeshComponent>(Tmp))
+			{
+				if (NewStaticMeshComponent->GetStaticMesh())
+				{
+					return NewStaticMeshComponent->GetStaticMesh();
+				}
+			}
+		}
+		else if (Tmp->IsA(UParticleSystemComponent::StaticClass()))
+		{
+			UParticleSystemComponent * NewParticleSystemComponent = Cast<UParticleSystemComponent>(Tmp);
+			// 粒子中获取mesh
+			if (NewParticleSystemComponent->Template && NewParticleSystemComponent->Template->Emitters.Num() > 0)
+			{
+				for (const UParticleEmitter *Tmp111 : NewParticleSystemComponent->Template->Emitters)
+				{
+					if (Tmp111->LODLevels[0]->bEnabled)
+					{
+						if (UParticleModuleTypeDataMesh* MyUParticleModuleTypeDataMesh = Cast<UParticleModuleTypeDataMesh>(Tmp111->LODLevels[0]->TypeDataModule))
+						{
+							return MyUParticleModuleTypeDataMesh->Mesh;
+						}
+					}
+				}
+			}
+		}
+		else if (Tmp->IsA(USkeletalMeshComponent::StaticClass()))
+		{
+			
+		}
+
+	}
+	return NULL;
 }
 
 ATowerDefenceGameState* ARuleOfTheCharacter::GetGameState()

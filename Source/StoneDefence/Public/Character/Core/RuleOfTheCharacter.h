@@ -59,7 +59,10 @@ public:
 	
 	virtual EGameCharacterType::Type GetType();
 	virtual FCharacterData &GetCharacterData();
-	
+
+	// 获取拖拽时候的Mesh
+	UFUNCTION(Blueprintable,BlueprintPure,Category = "Towers|Test")
+	UStaticMesh *GetDollMesh();
 public:	
 
 	// 获取游戏控制器 的接口

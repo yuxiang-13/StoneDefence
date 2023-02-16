@@ -4,6 +4,8 @@
 #include "Core/GameCore/TowerDefencePlayerController.h"
 
 #include "Core/GameCore/TowerDefenceGameCamera.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "UI/GameUI/UMG/Inventory/UI_Data1.h"
 
 ATowerDefencePlayerController::ATowerDefencePlayerController()
 {
@@ -18,6 +20,31 @@ void ATowerDefencePlayerController::Tick(float DeltaSeconds)
 
 	float ScreenMoveSpeed = 20.f;
 	ScreenMoveUnits.ListenScreenMove(this, ScreenMoveSpeed);
+	
+	// 是否正在拖拽 塔
+	if (TowerDoll)
+	{
+		if (MouseTaceHit.Location != FVector::ZeroVector)
+		{
+			MouseTaceHit.Location = FVector::ZeroVector;
+		}
+		/*
+		 *UE C++获取鼠标点击
+		* 只要是继承于ACharacter或APawn类的，都可以把Controller转换成APlayerController来用GetHitResultUnderCursor这个函数，
+		* 本质上其实是射线检测GetWorld()->LineTraceSingleByChannel，只是做了很多安全判断，比如保证获得玩家屏幕，保证点击的不是UI。
+		* 通过Hit传引用进去，传结果出来。Hit.bBlockingHit代表检测到了物体
+		*
+		* [ˈkɜːrsər] 鼠标;鼠标指针
+		 */
+		// 检测
+		FHitResult TaceOutHit;	
+		GetHitResultUnderCursor(ECollisionChannel::ECC_GameTraceChannel4, true, TaceOutHit);
+		TowerDoll->SetActorLocation(TaceOutHit.Location);
+		
+	} else // 是否 点击怪物详情 TODO:
+	{
+		GetHitResultUnderCursor(ECollisionChannel::ECC_WorldStatic, true, MouseTaceHit);
+	}
 }
 
 void ATowerDefencePlayerController::BeginPlay()
@@ -46,7 +73,7 @@ void ATowerDefencePlayerController::SetupInputComponent()
 	InputComponent->BindAction("MouseWheelDown", IE_Pressed, this, &ATowerDefencePlayerController::MouseWheelDown);
 
 	InputComponent->BindAction("MouseMiddleButton", IE_Pressed, this, &ATowerDefencePlayerController::MouseMiddleButtonPresed);
-	InputComponent->BindAction("MouseMiddleButton", IE_Pressed, this, &ATowerDefencePlayerController::MouseMiddleButtonRelease);
+	InputComponent->BindAction("MouseMiddleButton", IE_Released, this, &ATowerDefencePlayerController::MouseMiddleButtonRelease);
 }
 
 void ATowerDefencePlayerController::MouseMiddleButtonPresed()
