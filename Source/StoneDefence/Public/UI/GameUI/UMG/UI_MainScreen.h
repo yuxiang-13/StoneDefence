@@ -41,8 +41,18 @@ class STONEDEFENCE_API UUI_MainScreen : public UUI_RuleOfTheWidget
 	UPROPERTY(meta = (BindWidget))
 	class UUI_ToolBarSystem* ToolBarSystem;
 
+	// 怪物信息UI
+	UPROPERTY(meta = (BindWidget))
+	class UUI_TowerTip* CharacterTip;
+
+	// 火力集中点
+	UPROPERTY(meta = (BindWidget))
+	class UImage* FireConcentrationPoint;
+	
 public:
 	virtual void NativeConstruct() override;
+
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	// 拖拽响应
 	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;

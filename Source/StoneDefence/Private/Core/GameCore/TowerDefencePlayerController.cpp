@@ -26,7 +26,7 @@ void ATowerDefencePlayerController::Tick(float DeltaSeconds)
 	{
 		if (MouseTaceHit.Location != FVector::ZeroVector)
 		{
-			MouseTaceHit.Location = FVector::ZeroVector;
+			MouseTaceHit = FHitResult();
 		}
 		/*
 		 *UE C++获取鼠标点击
@@ -43,7 +43,8 @@ void ATowerDefencePlayerController::Tick(float DeltaSeconds)
 		
 	} else // 是否 点击怪物详情 TODO:
 	{
-		GetHitResultUnderCursor(ECollisionChannel::ECC_WorldStatic, true, MouseTaceHit);
+		// 鼠标检测  把检测到的怪物 复制到 MouseTaceHit
+		GetHitResultUnderCursor(ECollisionChannel::ECC_GameTraceChannel5, true, MouseTaceHit);
 	}
 }
 
@@ -84,6 +85,11 @@ void ATowerDefencePlayerController::MouseMiddleButtonPresed()
 void ATowerDefencePlayerController::MouseMiddleButtonRelease()
 {
 	EventMouseMiddleReleased.ExecuteIfBound();
+}
+
+const FHitResult& ATowerDefencePlayerController::GetHitResult()
+{
+	return MouseTaceHit;
 }
 
 static float WheelValue = 15.f;

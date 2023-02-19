@@ -130,7 +130,6 @@ AActor* ATowerDefenceGameState::SpawnTowersDoll(int32 ID)
 			// 获取DataTable配置好的 class  LoadSynchronous 同步加载
 			UClass* NewClass = Tmp->CharacterBlueprintKey.LoadSynchronous();
 
-		
 			if (GetWorld() && NewClass)
 			{
 				if (ARuleOfTheCharacter * RuleOfTheCharacter = GetWorld()->SpawnActor<ARuleOfTheCharacter>(NewClass, FVector::ZeroVector, FRotator::ZeroRotator))

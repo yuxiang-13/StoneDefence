@@ -11,13 +11,20 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "UI/GameUI/UMG/Inventory/UI_Data1.h"
 
+#if PLATFORM_WINDOWS
+#pragma optimize("",off)
+#endif
+
 void UUI_Inventory::NativeConstruct()
 {
 	Super::NativeConstruct();
 
 	LayoutInventroySlot(3, 7);
-	GetPlayerController()->EventMouseMiddlePressed.BindUObject(this, &UUI_Inventory::SpawnTowersDollPressed);
-	GetPlayerController()->EventMouseMiddleReleased.BindUObject(this, &UUI_Inventory::SpawnTowersDollReleased);
+	if (ATowerDefencePlayerController* TmpPlayerController = GetPlayerController())
+	{
+		GetPlayerController()->EventMouseMiddlePressed.BindUObject(this, &UUI_Inventory::SpawnTowersDollPressed);
+		GetPlayerController()->EventMouseMiddleReleased.BindUObject(this, &UUI_Inventory::SpawnTowersDollReleased);
+	}
 }
 
 void UUI_Inventory::LayoutInventroySlot(int32 ColumnNumber, int32 RowNumber)
@@ -101,3 +108,6 @@ FBuildingTower& UUI_Inventory::GetBuildingTower()
 {
 	return GetGameState()->GetBuildingTower(TowerICOGUID);
 }
+#if PLATFORM_WINDOWS
+#pragma optimize("",on)
+#endif

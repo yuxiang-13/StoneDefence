@@ -44,6 +44,8 @@ public:
 	// 鼠标中键按下松开
 	void MouseMiddleButtonPresed();
 	void MouseMiddleButtonRelease();
+
+	const FHitResult &GetHitResult();
 protected:
 	
 	FScreenMoveUnits ScreenMoveUnits;
