@@ -18,9 +18,8 @@ void FGameInstanceDatas::Init()
 	SpawnMonsterState = 0;
 	CurrentLevel = INDEX_NONE;
 	TimeInterval = 0.5f;
-	MaxStagesAreMonsters = 0;
 	CurrentSpawnMosnterTime = 0.0f;
-	GameCount = 0;
+	GameCount = 6000;
 	MaxGameCount = 0;
 	GoldGrowthTime = 1.f;
 	GoldGrowthMaxTime = 1.5f;
@@ -30,17 +29,25 @@ void FGameInstanceDatas::Init()
 	MainTowersDeathNumber = 0;
 }
 
-// bool FGameInstanceDatas::IsVaild()
-// {
-// }
-//
-// int32 FGameInstanceDatas::GetSurplusMonsters()
-// {
-// }
-//
-// float FGameInstanceDatas::GetPerOfRemMonsters()
-// {
-// }
+float FGameInstanceDatas::GetPerOfRemMonsters()
+{
+	int32 MaxMonsterNumber = GetMaxMonstersNumber();
+	if (MaxMonsterNumber != 0)
+	{
+		return (float)(NumberOfMonster / MaxMonsterNumber);
+	}
+	return 0.f;
+}
+
+int32 FGameInstanceDatas::GetMaxMonstersNumber()
+{
+	int32 MaxMonsterNumber = 0;
+	for (auto &Tmp : PerNumberOfMonsters)
+	{
+		MaxMonsterNumber += Tmp;
+	}
+	return MaxMonsterNumber;
+}
 //
 // void FGameInstanceDatas::ResetSpawnMosnterTime()
 // {

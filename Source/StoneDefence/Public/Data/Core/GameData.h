@@ -21,7 +21,7 @@ struct FGameInstanceDatas
 
 	//bool IsValid();
 
-	//该关卡内存在最大多少怪物数量
+	//该关卡内存在多少怪物数量
 	UPROPERTY(SaveGame)
 	int32 NumberOfMonster;
 
@@ -52,11 +52,6 @@ struct FGameInstanceDatas
 	//时间间隔（多久生成一次怪物）
 	UPROPERTY(SaveGame)
 	float TimeInterval;
-
-	
-	//有多少波怪物
-	UPROPERTY(SaveGame)
-	int32 MaxStagesAreMonsters;
 
 	//每波怪物当前数量 数量是动态
 	UPROPERTY(SaveGame)
@@ -98,8 +93,15 @@ struct FGameInstanceDatas
 	UPROPERTY(SaveGame)
 	int32 MainTowersDeathNumber;
 
-	int32 GetSurplusMonsters();
+	
+	// 当前敌人
+	UPROPERTY(SaveGame)
+	int32 CurrentStagesAreMonsters;
 
+	// 获取最大怪物数量
+	int32 GetMaxMonstersNumber();
+
+	// 获取剩余怪物百分比
 	float GetPerOfRemMonsters();
 
 	void ResetSpawnMosnterTime();

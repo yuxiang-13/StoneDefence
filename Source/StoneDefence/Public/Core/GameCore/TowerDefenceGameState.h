@@ -45,6 +45,8 @@ public:
 	ATowerDefenceGameState();
 
 	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaSeconds) override;
 	
 	UFUNCTION(BlueprintCallable, Category="Spawn")
 	class ATowers *SpawTowner(int32 CharacterID, int32 CharacterLevel,  const FVector &Location, const FRotator &Rotator);
@@ -86,6 +88,9 @@ public:
 	
 	// 交换数据，要放到服务器上
 	void RequestInventorySlotSwap(const FGuid &A, const FGuid &B);
+
+	struct FPlayerData &GetPlayerData();
+	struct FGameInstanceDatas &GetGameDatas();
 protected:
 	UGameSaveData *GetSaveData();
 	UGameSaveSlotList *GetGameSaveSlotList();

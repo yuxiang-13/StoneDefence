@@ -45,6 +45,13 @@ void ATowerDefenceGameState::BeginPlay()
 	Super::BeginPlay();
 }
 
+void ATowerDefenceGameState::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	GetGameDatas().GameCount -= DeltaSeconds;
+}
+
 ATowers* ATowerDefenceGameState::SpawTowner(int32 CharacterID, int32 CharacterLevel, const FVector& Location,
                                             const FRotator& Rotator)
 {
@@ -287,6 +294,16 @@ void ATowerDefenceGameState::RequestInventorySlotSwap(const FGuid& A, const FGui
 		BSlot.Init();
 	}
 	
+}
+
+FPlayerData& ATowerDefenceGameState::GetPlayerData()
+{
+	return GetSaveData()->PlayerData;
+}
+
+FGameInstanceDatas& ATowerDefenceGameState::GetGameDatas()
+{
+	return GetSaveData()->GameDatas;
 }
 
 UGameSaveData* ATowerDefenceGameState::GetSaveData()

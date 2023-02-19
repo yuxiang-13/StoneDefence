@@ -88,5 +88,5 @@ public:
 
 	// 当前关卡内游戏数据
 	UPROPERTY(SaveGame)
-	FGameInstanceDatas GameData;
+	FGameInstanceDatas GameDatas;
 };

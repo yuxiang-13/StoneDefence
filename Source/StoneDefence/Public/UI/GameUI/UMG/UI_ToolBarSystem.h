@@ -34,5 +34,9 @@ class STONEDEFENCE_API UUI_ToolBarSystem : public UUI_RuleOfTheWidget
 	UProgressBar* GSQProgressBar; // 剩余敌人进度条
 public:
 	virtual void NativeConstruct()override;
-	
+
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+private:
+	// 时间
+	FString GetCurrentCountTime(float NewTimeCount);
 };
