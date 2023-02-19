@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Core/GameCore/TowerDefenceGameState.h"
+#include "Data/Core/GameData.h"
+#include "Data/Core/PlayerData.h"
 #include "GameFramework/SaveGame.h"
 #include "GameSaveData.generated.h" 
 
@@ -77,5 +79,14 @@ public:
 	TMap<FGuid,FCharacterData> CharacterDatas;
 
 	//FGuid格子ID
+	UPROPERTY(SaveGame)
 	TMap<FGuid, FBuildingTower> BuildingTowers;
+
+	// 玩家数据
+	UPROPERTY(SaveGame)
+	FPlayerData PlayerData;
+
+	// 当前关卡内游戏数据
+	UPROPERTY(SaveGame)
+	FGameInstanceDatas GameData;
 };
