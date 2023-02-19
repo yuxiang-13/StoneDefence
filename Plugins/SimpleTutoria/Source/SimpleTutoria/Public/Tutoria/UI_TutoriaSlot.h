@@ -7,6 +7,7 @@
 #include "UI_TutoriaSlot.generated.h"
 
 class UButton;
+class UMediaSource;
 /**
  * 
  */
@@ -14,4 +15,8 @@ UCLASS()
 class SIMPLETUTORIA_API UUI_TutoriaSlot : public UUI_TutoriaBase
 {
 	GENERATED_BODY()
+public:
+	// 载入视频源
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=UI)
+	UMediaSource* MediaSource;
 };
