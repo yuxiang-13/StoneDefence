@@ -9,6 +9,7 @@
 #include "Core/GameCore/TowerDefenceGameState.h"
 #include "Damage/DrawText.h"
 #include "Data/Core/CharacterData.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Particles/ParticleEmitter.h"
 #include "Particles/ParticleLODLevel.h"
 #include "StoneDefence/StoneDefenceUtils.h"
@@ -54,7 +55,17 @@ void ARuleOfTheCharacter::BeginPlay()
 		SpawnDefaultController();
 	}
 	UpdateUI();
+
+	//DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_TwoParams( FComponentOnClickedSignature, UPrimitiveComponent, OnClicked, UPrimitiveComponent*, TouchedComponent , FKey, ButtonPressed);
+	TraceShowCharacterInformation->OnClicked.AddDynamic(this, &ARuleOfTheCharacter::OnClicked);
 }
+
+void ARuleOfTheCharacter::OnClicked(UPrimitiveComponent* TouchedComponent, FKey ButtonPressed)
+{
+	// UKismetSystemLibrary::PrintString(this, TEXT("- - ->>>>111"), true, true, FLinearColor::Red, 10.f);
+	
+}
+
 
 // Called every frame
 void ARuleOfTheCharacter::Tick(float DeltaTime)

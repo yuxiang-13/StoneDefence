@@ -11,6 +11,9 @@ ATowerDefencePlayerController::ATowerDefencePlayerController()
 {
 	// 打开鼠标显示
 	bShowMouseCursor = true;
+
+	// 打开事件敲击
+	bEnableClickEvents = true;
 	
 }
 

@@ -6,9 +6,12 @@
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Character/Core/RuleOfTheCharacter.h"
 #include "Components/CanvasPanelSlot.h"
+#include "Components/Image.h"
 #include "Core/GameCore/TowerDefencePlayerController.h"
 #include "Data/Save/GameSaveData.h"
 #include "DragDrop/StoneDefenceDragDropOperation.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "UI/GameUI/UMG/Inventory/UI_Data1.h"
 #include "UI/GameUI/UMG/Inventory/UI_InventorySlot.h"
 #include "UI/GameUI/UMG/Tip/UI_TowerTip.h"
 
@@ -22,6 +25,8 @@ void UUI_MainScreen::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
 
+	//  显示角色信息
+	
 	// 获取选中Actor
 	if (ARuleOfTheCharacter * InCharacter = Cast<ARuleOfTheCharacter>(GetPlayerController()->GetHitResult().GetActor()))
 	{
@@ -44,9 +49,28 @@ void UUI_MainScreen::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 		{
 			CharacterTip->SetVisibility(ESlateVisibility::Hidden);
 		}
-	} else
+	}
+	else
 	{
 			CharacterTip->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	//  显示集火对象
+	if (IsValid(ClickedTargetMonster) && ClickedTargetMonster->IsActive())
+	{
+		// 获取集火UI
+		if (UCanvasPanelSlot* NewPanelSlot = Cast<UCanvasPanelSlot>(FireConcentrationPoint->Slot))
+		{
+			FVector2D ScreenLocation = FVector2D::ZeroVector;
+			// 把敌人  的世界空间   转化成   Widget空间
+			UWidgetLayoutLibrary::ProjectWorldLocationToWidgetPosition(GetPlayerController(), ClickedTargetMonster->GetActorLocation(), ScreenLocation, true);
+			NewPanelSlot->SetPosition(ScreenLocation);
+			FireConcentrationPoint->SetVisibility(ESlateVisibility::HitTestInvisible);
+		}
+	} else
+	{
+		ClickedTargetMonster = nullptr;
+		FireConcentrationPoint->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
 

@@ -17,6 +17,7 @@ private:
 	// 让射线 捕捉 对象
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttrubute", meta = (AllowPrivateAccess = "true"))
 	class UBoxComponent *TraceShowCharacterInformation;
+	
 	// 开火点
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttrubute", meta = (AllowPrivateAccess = "true"))
 	class USceneComponent *OpenFirePoint;
@@ -41,6 +42,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
+	virtual void OnClicked(UPrimitiveComponent* TouchedComponent , FKey ButtonPressed);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/Core/RuleOfTheCharacter.h"
-#include "Monsters.generated.h" 
+#include "Monsters.generated.h"
 
 /**
  * 怪物
@@ -16,7 +16,9 @@ class STONEDEFENCE_API AMonsters : public ARuleOfTheCharacter
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
-	virtual bool IsTeam(); 
-	
+	virtual bool IsTeam();
+
 	virtual EGameCharacterType::Type GetType();
+protected:
+	virtual void OnClicked(UPrimitiveComponent* TouchedComponent, FKey ButtonPressed);
 };

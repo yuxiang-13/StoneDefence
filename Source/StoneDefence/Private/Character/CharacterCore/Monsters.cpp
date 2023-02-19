@@ -3,6 +3,8 @@
 
 #include "Character/CharacterCore/Monsters.h"
 
+#include "UI/GameUI/UMG/Inventory/UI_Data1.h"
+
 void AMonsters::BeginPlay()
 {
 	Super::BeginPlay();
@@ -21,4 +23,17 @@ bool AMonsters::IsTeam()
 EGameCharacterType::Type AMonsters::GetType()
 {
 	return EGameCharacterType::Type::MONSTER;
+}
+
+void AMonsters::OnClicked(UPrimitiveComponent* TouchedComponent, FKey ButtonPressed)
+{
+	Super::OnClicked(TouchedComponent, ButtonPressed);
+	
+	if (ClickedTargetMonster == nullptr)
+	{
+		ClickedTargetMonster = this;
+	} else
+	{
+		ClickedTargetMonster = nullptr;
+	}
 }

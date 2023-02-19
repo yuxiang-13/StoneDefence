@@ -6,6 +6,7 @@
 #include "ChaosBlueprint.h"
 #include "DestructibleComponent.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "UI/GameUI/UMG/Inventory/UI_Data1.h"
 
 ATowers::ATowers()
 {
@@ -24,6 +25,19 @@ float ATowers::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 	Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
 	return 0;
+}
+
+void ATowers::OnClicked(UPrimitiveComponent* TouchedComponent, FKey ButtonPressed)
+{
+	Super::OnClicked(TouchedComponent, ButtonPressed);
+
+	if (ClickedTargetTower == nullptr)
+	{
+		ClickedTargetTower = this;
+	} else
+	{
+		ClickedTargetTower = nullptr;
+	}
 }
 
 EGameCharacterType::Type ATowers::GetType()
