@@ -16,7 +16,10 @@ class SIMPLETUTORIA_API UUI_TutoriaSlot : public UUI_TutoriaBase
 {
 	GENERATED_BODY()
 public:
-	// 载入视频源
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=UI)
-	UMediaSource* MediaSource;
+	UUI_TutoriaSlot();
+
+	UPROPERTY()
+	int32 Index;
+
+	bool IsIndexValid();
 };

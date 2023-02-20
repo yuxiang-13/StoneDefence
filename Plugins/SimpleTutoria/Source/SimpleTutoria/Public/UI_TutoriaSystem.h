@@ -19,9 +19,6 @@ class SIMPLETUTORIA_API UUI_TutoriaSystem : public UUI_TutoriaBase
 {
 	GENERATED_BODY()
 
-	UPROPERTY(meta=(BindWidget))
-	UCheckBox *MainBord;
-
 	// 重新播放
 	UPROPERTY(meta=(BindWidget))
 	UButton *ReplayButton;
@@ -72,6 +69,8 @@ private:
 	UFUNCTION()
 	void ActivationMovie();
 
+	UFUNCTION()
+	bool Play(int32 Index);
 
 	// 重新 播放电影
 	UFUNCTION()

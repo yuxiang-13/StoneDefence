@@ -3,6 +3,8 @@
 
 #include "UI_TutoriaSystem.h"
 
+#include "MediaPlaylist.h"
+#include "MediaSource.h"
 #include "Components/Button.h"
 #include "Components/CheckBox.h"
 #include "Components/Image.h"
@@ -19,8 +21,7 @@ void UUI_TutoriaSystem::NativeConstruct()
 	MediaPlayer->OnEndReached.AddDynamic(this, &UUI_TutoriaSystem::FinishPlayMovie);
 
 	ReplayButton->OnClicked.AddDynamic(this, &UUI_TutoriaSystem::Replay);
-	ReplayButton->OnClicked.AddDynamic(this, &UUI_TutoriaSystem::Close);
-	ReplayButton->OnClicked.AddDynamic(this, &UUI_TutoriaSystem::Pause);
+	PauseButton->OnClicked.AddDynamic(this, &UUI_TutoriaSystem::Pause);
 	
 	MovieProgress->OnMouseCaptureBegin.AddDynamic(this, &UUI_TutoriaSystem::MouseCaptureBegin);
 	MovieProgress->OnMouseCaptureEnd.AddDynamic(this, &UUI_TutoriaSystem::MouseCaptureEnd);
@@ -44,13 +45,38 @@ void UUI_TutoriaSystem::NativeTick(const FGeometry& MyGeometry, float InDeltaTim
 
 void UUI_TutoriaSystem::InitMadia(bool bPlayMovie)
 {
-  	if (UUI_TutoriaSlot *TutoriaSlot = CreateWidget<UUI_TutoriaSlot>(GetWorld(), TutoriaSloClass))
-  	{
-  		if (MediaPlayer)
-  		{
-  			MediaPlayer->OpenSource(TutoriaSlot->MediaSource);
-  		}
-  	}
+	if (MediaPlayer)
+	{
+		// 遍历文件 找出所有视频文件
+		TArray<FString> MadiaFilenames;
+		// 获取相对路径
+		FString MadiaPath = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir() / TEXT("Media/"));
+		// 找出视频
+		IFileManager::Get().FindFiles(MadiaFilenames, *(MadiaPath + TEXT("*")), true, false);
+		for (int32 i = 0; i < MadiaFilenames.Num(); i++)
+		{
+	
+			if (UUI_TutoriaSlot *TutoriaSlot = CreateWidget<UUI_TutoriaSlot>(GetWorld(), TutoriaSloClass))
+			{
+				TutoriaSlot->Index = i;
+				MediaPlayer->GetPlaylist()->AddFile(MadiaPath);
+			}
+		}
+		
+		if (UMediaSource Media = MediaPlayer->GetPlaylist()->Get(0))
+		{
+			MediaPlayer->OpenSource(Media);
+		}
+	}
+}
+
+bool UUI_TutoriaSystem::Play(int32 Index)
+{
+	if (UMediaSource Media = MediaPlayer->GetPlaylist()->Get(0))
+	{
+		return MediaPlayer->OpenSource(Media);
+	}
+	return false;
 }
 
 void UUI_TutoriaSystem::ClickedCheckBox(bool ClickedWidget)
