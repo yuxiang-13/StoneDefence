@@ -15,11 +15,19 @@ UCLASS()
 class SIMPLETUTORIA_API UUI_TutoriaSlot : public UUI_TutoriaBase
 {
 	GENERATED_BODY()
+	
+	UPROPERTY(meta=(BindWidget))
+	UButton *PlayButton;
 public:
-	UUI_TutoriaSlot();
+	UUI_TutoriaSlot(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY()
-	int32 Index;
+	FString TutoriaPath;
 
 	bool IsIndexValid();
+
+	UFUNCTION()
+	void Play();
+protected:
+	virtual void NativeConstruct() override;
 };

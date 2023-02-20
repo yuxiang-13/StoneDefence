@@ -5,19 +5,27 @@
 
 #include "MediaPlaylist.h"
 #include "MediaSource.h"
+#include "GlobalTutoriaProxy.h"
 #include "Components/Button.h"
 #include "Components/CheckBox.h"
 #include "Components/Image.h"
+#include "Components/ScrollBox.h"
 #include "Components/Slider.h"
 #include "Components/TextBlock.h"
 #include "MediaAssets/Public/MediaPlayer.h"
 #include "Tutoria/UI_TutoriaSlot.h"
+#include "MediaSoundComponent.h"
+#include "HAL/FileManager.h"
+
 
 void UUI_TutoriaSystem::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	InitMadia(true);
+	//绑定代理
+	// SimpleTutoriaMulticastDelegate.BindUObject(this, &UUI_TutoriaSystem::Play);
+
+	InitMadia();
 	MediaPlayer->OnEndReached.AddDynamic(this, &UUI_TutoriaSystem::FinishPlayMovie);
 
 	ReplayButton->OnClicked.AddDynamic(this, &UUI_TutoriaSystem::Replay);
@@ -43,7 +51,7 @@ void UUI_TutoriaSystem::NativeTick(const FGeometry& MyGeometry, float InDeltaTim
 	}
 }
 
-void UUI_TutoriaSystem::InitMadia(bool bPlayMovie)
+void UUI_TutoriaSystem::InitMadia()
 {
 	if (MediaPlayer)
 	{
@@ -58,24 +66,20 @@ void UUI_TutoriaSystem::InitMadia(bool bPlayMovie)
 	
 			if (UUI_TutoriaSlot *TutoriaSlot = CreateWidget<UUI_TutoriaSlot>(GetWorld(), TutoriaSloClass))
 			{
-				TutoriaSlot->Index = i;
-				MediaPlayer->GetPlaylist()->AddFile(MadiaPath);
+				TutoriaSlot->TutoriaPath = MadiaFilenames[i];
+				ScrollMediaList->AddChild(TutoriaSlot);
 			}
 		}
-		
-		if (UMediaSource Media = MediaPlayer->GetPlaylist()->Get(0))
+		if (MadiaFilenames.Num() > 0)
 		{
-			MediaPlayer->OpenSource(Media);
+			Play(MadiaFilenames[0]);
 		}
 	}
 }
 
-bool UUI_TutoriaSystem::Play(int32 Index)
+bool UUI_TutoriaSystem::Play(const FString &InPath)
 {
-	if (UMediaSource Media = MediaPlayer->GetPlaylist()->Get(0))
-	{
-		return MediaPlayer->OpenSource(Media);
-	}
+	MediaPlayer->OpenFile(InPath);
 	return false;
 }
 

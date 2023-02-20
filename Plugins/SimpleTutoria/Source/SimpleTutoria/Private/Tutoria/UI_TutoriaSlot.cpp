@@ -1,11 +1,29 @@
 #include "Tutoria/UI_TutoriaSlot.h"
 
-UUI_TutoriaSlot::UUI_TutoriaSlot()
+#include "./GlobalTutoriaProxy.h"
+#include "Components/Button.h"
+
+UUI_TutoriaSlot::UUI_TutoriaSlot(const FObjectInitializer& ObjectInitializer):Super(ObjectInitializer)
 {
-	Index = INDEX_NONE;
+	
 }
 
 bool UUI_TutoriaSlot::IsIndexValid()
 {
-	return Index != INDEX_NONE;
+	return TutoriaPath != "";
+}
+
+void UUI_TutoriaSlot::Play()
+{
+	// if (SimpleTutoriaMulticastDelegate.IsBound())
+	// {
+	// 	SimpleTutoriaMulticastDelegate.Execute(TutoriaPath);
+	// }
+}
+
+void UUI_TutoriaSlot::NativeConstruct()
+{
+	Super::NativeConstruct();
+	
+	PlayButton->OnClicked.AddDynamic(this, &UUI_TutoriaSlot::Play);
 }
