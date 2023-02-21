@@ -10,12 +10,11 @@ FGameInstanceDatas::FGameInstanceDatas()
 
 void FGameInstanceDatas::Init()
 {
-	NumberOfMonster = 20;
+	MaxMonsters = 100;
 	GameDifficulty = 0;
 	bAllMainTowerDie = false;
 	bGameOver = false;
 	bCurrentLevelMissionSuccess = false;
-	SpawnMonsterState = 0;
 	CurrentLevel = INDEX_NONE;
 	TimeInterval = 0.5f;
 	CurrentSpawnMosnterTime = 0.0f;
@@ -29,35 +28,86 @@ void FGameInstanceDatas::Init()
 	MainTowersDeathNumber = 0;
 }
 
-float FGameInstanceDatas::GetPerOfRemMonsters()
+int32 FGameInstanceDatas::GetSurplusMonsters()
 {
-	int32 MaxMonsterNumber = GetMaxMonstersNumber();
-	if (MaxMonsterNumber != 0)
+	int32 InSurplus = 0;
+	for (auto &Tmp: PerNumberOfMonsters)
 	{
-		return (float)(NumberOfMonster / MaxMonsterNumber);
+		InSurplus += Tmp;
 	}
-	return 0.f;
+	return InSurplus;
 }
 
-int32 FGameInstanceDatas::GetMaxMonstersNumber()
+float FGameInstanceDatas::GetPerOfRemMonsters()
 {
-	int32 MaxMonsterNumber = 0;
-	for (auto &Tmp : PerNumberOfMonsters)
+	if (MaxMonsters != 0)
 	{
-		MaxMonsterNumber += Tmp;
+		return (float)(GetSurplusMonsters() / (float)MaxMonsters);
 	}
-	return MaxMonsterNumber;
+	return 0.f;
 }
 
 void FGameInstanceDatas::ResetSpawnMosnterTime()
 {
 	CurrentSpawnMosnterTime = 0.f;
 }
-//
-// void FGameInstanceDatas::StageDecision()
-// {
-// }
-//
-// void FGameInstanceDatas::AssignedMonsterAmount()
-// {
-// }
+
+void FGameInstanceDatas::StageDecision()
+{
+	int32 CurrentStagesAreMonsters = PerNumberOfMonsters.Num() - 1;
+	if (!PerNumberOfMonsters.Num())
+	{
+		if (PerNumberOfMonsters[CurrentStagesAreMonsters] > 0)
+		{
+			PerNumberOfMonsters[CurrentStagesAreMonsters]--;
+		} else
+		{
+			PerNumberOfMonsters.Remove(CurrentStagesAreMonsters);
+		}
+	} else
+	{
+		bCurrentLevelMissionSuccess = true;
+	}
+}
+
+void FGameInstanceDatas::AssignedMonsterAmount()
+{
+	//多少的怪物
+	int32 CurrentMonsterNumber = MaxMonsters;
+
+	//最大阶段
+	int32 CurrentStagesNumber = GetSurplusMonsters();
+
+	//每阶段的数量
+	int32 CurrentAssignedNum = 0;
+
+	if (CurrentMonsterNumber > 1)
+	{
+		for (int32 i = 0; i < GetSurplusMonsters(); i++) //每阶段
+			{
+			//每阶段的平均值
+			float StagesNumber = (float)CurrentMonsterNumber / (float)CurrentStagesNumber;
+		
+			//减去该阶段
+			CurrentStagesNumber--;
+			if (CurrentStagesNumber > 0)
+			{	
+				//随机阶段，从平均值一般到平均值分配
+				CurrentAssignedNum = FMath::RandRange(StagesNumber / 6, StagesNumber);
+			}
+			else
+			{
+				CurrentAssignedNum = StagesNumber;
+			}
+
+			PerNumberOfMonsters.Add(CurrentAssignedNum);
+
+			//减去分配的数量
+			CurrentMonsterNumber -= CurrentAssignedNum;
+			}
+	}
+	else
+	{
+		PerNumberOfMonsters.Add(CurrentAssignedNum);
+	}
+}
