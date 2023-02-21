@@ -104,15 +104,17 @@ struct FGameInstanceDatas
 	// 获取剩余怪物百分比
 	float GetPerOfRemMonsters();
 
-	void ResetSpawnMosnterTime();
-
 	//每个阶段进行检测判定
 	void StageDecision();
 
 	//分配数量梯度，数量从少变多
 	void AssignedMonsterAmount();
 
+	// 0.5 生成一次
 	FORCEINLINE bool IsAllowSpawnMosnter() { return CurrentSpawnMosnterTime >= TimeInterval; }
+
+	// 刷新生成时间
+	void ResetSpawnMosnterTime();
 };
 
 

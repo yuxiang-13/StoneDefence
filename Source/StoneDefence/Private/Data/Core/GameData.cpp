@@ -48,10 +48,11 @@ int32 FGameInstanceDatas::GetMaxMonstersNumber()
 	}
 	return MaxMonsterNumber;
 }
-//
-// void FGameInstanceDatas::ResetSpawnMosnterTime()
-// {
-// }
+
+void FGameInstanceDatas::ResetSpawnMosnterTime()
+{
+	CurrentSpawnMosnterTime = 0.f;
+}
 //
 // void FGameInstanceDatas::StageDecision()
 // {

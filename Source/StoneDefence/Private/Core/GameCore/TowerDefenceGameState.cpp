@@ -3,6 +3,7 @@
 
 #include "Core/GameCore/TowerDefenceGameState.h"
 
+#include "EngineUtils.h"
 #include "Character/Core/RuleOfTheCharacter.h"
 #include "Data/Core/CharacterData.h"
 #include "Data/Save/GameSaveData.h"
@@ -12,6 +13,8 @@
 #include "Character/CharacterCore/Monsters.h"
 #include "Character/CharacterCore/Towers.h"
 #include "Engine/StaticMeshActor.h"
+#include "Items/SpawnPoint.h"
+#include "StoneDefence/StoneDefenceUtils.h"
 
 //static 与 extern 联系：
 //加了static修饰的全局变量或函数，无法在使用extern在其他源文件中使用。
@@ -50,6 +53,52 @@ void ATowerDefenceGameState::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	GetGameDatas().GameCount -= DeltaSeconds;
+	
+	SpawnMonsters(DeltaSeconds);
+}
+
+
+
+void ATowerDefenceGameState::SpawnMonsters(float DeltaSeconds)
+{
+	// 当前关卡是否胜利
+	if (GetGameDatas().bCurrentLevelMissionSuccess)
+	{
+		// 是不是输掉了
+		if (GetGameDatas().bGameOver)
+		{
+			// 还有剩余波次
+			if (GetGameDatas().PerNumberOfMonsters.Num())
+			{
+				GetGameDatas().CurrentSpawnMosnterTime += DeltaSeconds;
+				// 0.5 生成一次
+				if (GetGameDatas().IsAllowSpawnMosnter())
+				{
+					GetGameDatas().ResetSpawnMosnterTime();
+					TArray<ASpawnPoint*> SpawnPointArray = StoneDefenceUtils::GetAllActor<ASpawnPoint>(GetWorld());
+
+					// 生成怪物
+					if (ARuleOfTheCharacter* MyMonster = SpawnMonster(0,1,FVector::ZeroVector, FRotator::ZeroRotator))
+					{
+						TArray<ASpawnPoint *> MonsterSpawnPoints;
+						for (ASpawnPoint* TargetPoint: SpawnPointArray)
+						{
+							if (MyMonster->IsTeam() == TargetPoint->bTeam)
+							{
+								MonsterSpawnPoints.Add(TargetPoint);
+							}
+						}
+						
+						ASpawnPoint* TargetPoint = MonsterSpawnPoints[FMath::RandRange(0, MonsterSpawnPoints.Num() - 1)];
+						MyMonster->SetActorLocationAndRotation(TargetPoint->GetActorLocation(), TargetPoint->GetActorRotation());
+					}
+				}
+			}
+		}
+	} else
+	{
+		
+	}
 }
 
 ATowers* ATowerDefenceGameState::SpawTowner(int32 CharacterID, int32 CharacterLevel, const FVector& Location,
