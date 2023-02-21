@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-SimpleTutoria-Win64-DebugGame.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\project\StoneDefence\Intermediate\Build\Win64\StoneDefenceEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.InclOrderUnreal5_0.h.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\DebugGame\SimpleTutoria\Module.SimpleTutoria.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\DebugGame\SimpleTutoria\UI_TutoriaSystem.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\DebugGame\SimpleTutoria\SimpleTutoria.init.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\DebugGame\SimpleTutoria\UI_TutoriaBase.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\DebugGame\SimpleTutoria\UI_TutoriaSlot.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\DebugGame\SimpleTutoria\UI_TutoriaSystem.gen.cpp.obj"
+"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\DebugGame\SimpleTutoria\Default.rc2.res"
+/OUT:"D:\project\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UnrealEditor\DebugGame\SimpleTutoria\UnrealEditor-SimpleTutoria-Win64-DebugGame.lib"

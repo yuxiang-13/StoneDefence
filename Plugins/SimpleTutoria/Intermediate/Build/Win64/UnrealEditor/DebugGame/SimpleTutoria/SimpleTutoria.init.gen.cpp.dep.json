@@ -1,0 +1,13 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\inc\\simpletutoria\\uht\\simpletutoria.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\project\\stonedefence\\intermediate\\build\\win64\\stonedefenceeditor\\debuggame\\engine\\sharedpch.engine.nonoptimized.shadowerrors.inclorderunreal5_0.h.pch",
+        "Includes": [
+            "d:\\project\\stonedefence\\plugins\\simpletutoria\\intermediate\\build\\win64\\unrealeditor\\debuggame\\simpletutoria\\definitions.simpletutoria.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

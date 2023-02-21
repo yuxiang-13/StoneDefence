@@ -30,6 +30,7 @@ FBuildingTower BuildingTowerNULL;
 
 ATowerDefenceGameState::ATowerDefenceGameState()
 {
+	PrimaryActorTick.bCanEverTick = true;
 	static ConstructorHelpers::FObjectFinder<UDataTable> MyTable_Towers(TEXT("/Game/GameData/TowersData"));
 	static ConstructorHelpers::FObjectFinder<UDataTable> MyTable_Monster(TEXT("/Game/GameData/MonsterData"));
 
@@ -55,11 +56,28 @@ void ATowerDefenceGameState::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	GetGameDatas().GameCount -= DeltaSeconds;
+	if (GetGameDatas().GameCount <= 0.f)
+	{
+		GetGameDatas().bGameOver = true;
+	} else
+	{
+		GetGameDatas().GameCount -= DeltaSeconds;
+	}
+
+	int32 TowersNum = 0;
+	TArray<ATowers*> InTowers;
+	StoneDefenceUtils::GetAllActor<ATowers>(GetWorld(), InTowers);
 	
+	for (ARuleOfTheCharacter*Tower : InTowers)
+	{
+		TowersNum++;
+	}
+	if (TowersNum == 0)
+	{
+		GetGameDatas().bGameOver = true;
+	}
 	SpawnMonsters(DeltaSeconds);
 }
-
 
 template <class T>
 FDifficultyDetermination ATowerDefenceGameState::GetDifficultyDetermination(TArray<T*> & RuleOfTheCharacter)
@@ -85,7 +103,7 @@ FDifficultyDetermination ATowerDefenceGameState::GetDifficultyDetermination(TArr
 	{
 		if (Tmp->IsActive())
 		{
-			float InValue = (float)Tmp->GetCharacterData().Lv - DifficultyDetermination.Level;
+			float InValue = ((float)Tmp->GetCharacterData().Lv - DifficultyDetermination.Level);
 			DifficultyDetermination.Variance += InValue * InValue;
 		}
 	}
@@ -123,10 +141,10 @@ int32 ATowerDefenceGameState::GetMonsterLevel()
 void ATowerDefenceGameState::SpawnMonsters(float DeltaSeconds)
 {
 	// 当前关卡是否胜利
-	if (GetGameDatas().bCurrentLevelMissionSuccess)
+	if (!GetGameDatas().bCurrentLevelMissionSuccess)
 	{
 		// 是不是输掉了
-		if (GetGameDatas().bGameOver)
+		if (!GetGameDatas().bGameOver)
 		{
 			// 还有剩余波次
 			if (GetGameDatas().PerNumberOfMonsters.Num())
@@ -200,6 +218,7 @@ bool ATowerDefenceGameState::ReadGameData(int32 SaveNumber)
 
 ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, int32 CharacterLevel, UDataTable* InCharacterData,const FVector& Location, const FRotator& Rotator)
 {
+	ARuleOfTheCharacter* Character = nullptr;
 	if (InCharacterData)
 	{
 		TArray<FCharacterData*> Datas;
@@ -227,11 +246,12 @@ ARuleOfTheCharacter* ATowerDefenceGameState::SpawnCharacter(int32 CharacterID, i
 				{
 					CharacterData->UpdateHealth();
 					AddCharacterData(RuleOfTheCharacter->GUID, *CharacterData);
+					Character = RuleOfTheCharacter;
 				}
 			}
 		}
 	}
-	return nullptr;
+	return Character;
 }
 
 AActor* ATowerDefenceGameState::SpawnTowersDoll(int32 ID)

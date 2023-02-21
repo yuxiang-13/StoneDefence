@@ -9,7 +9,7 @@
 
 void UUI_TowerTip::InitTip(const FCharacterData& InData)
 {
-	// LVBlock->SetText(FText::AsNumber(InData.Lv));
+	LVBlock->SetText(FText::AsNumber(InData.Lv));
 	CharacterNameBlock->SetText(FText::FromName(InData.Name));
 	ComsumeGlodBlock->SetText(FText::AsNumber(InData.Glod));
 	CharacterHealthBlock->SetText(FText::AsNumber(InData.MaxHealth));

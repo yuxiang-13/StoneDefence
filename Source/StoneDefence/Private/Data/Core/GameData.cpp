@@ -56,7 +56,7 @@ void FGameInstanceDatas::ResetSpawnMosnterTime()
 void FGameInstanceDatas::StageDecision()
 {
 	int32 CurrentStagesAreMonsters = PerNumberOfMonsters.Num() - 1;
-	if (!PerNumberOfMonsters.Num())
+	if (PerNumberOfMonsters.Num())
 	{
 		if (PerNumberOfMonsters[CurrentStagesAreMonsters] > 0)
 		{
@@ -77,15 +77,16 @@ void FGameInstanceDatas::AssignedMonsterAmount()
 	int32 CurrentMonsterNumber = MaxMonsters;
 
 	//最大阶段
-	int32 CurrentStagesNumber = GetSurplusMonsters();
+	// int32 CurrentStagesNumber = GetSurplusMonsters();
+	int32 CurrentStagesNumber = MaxStagesAreMonsters;
 
 	//每阶段的数量
 	int32 CurrentAssignedNum = 0;
 
 	if (CurrentMonsterNumber > 1)
 	{
-		for (int32 i = 0; i < GetSurplusMonsters(); i++) //每阶段
-			{
+		for (int32 i = 0; i < MaxStagesAreMonsters; i++) //每阶段
+		{
 			//每阶段的平均值
 			float StagesNumber = (float)CurrentMonsterNumber / (float)CurrentStagesNumber;
 		
@@ -105,7 +106,7 @@ void FGameInstanceDatas::AssignedMonsterAmount()
 
 			//减去分配的数量
 			CurrentMonsterNumber -= CurrentAssignedNum;
-			}
+		}
 	}
 	else
 	{
