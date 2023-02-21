@@ -21,10 +21,10 @@ struct FGameInstanceDatas
 
 	//bool IsValid();
 
-	//该关卡内存在多少怪物数量
+	//该关卡内存 最大怪物数量
 	UPROPERTY(SaveGame)
-	int32 NumberOfMonster;
-
+	int32 MaxMonsters;
+	
 	//游戏难度有关
 	UPROPERTY(SaveGame)
 	uint8 GameDifficulty;
@@ -41,10 +41,6 @@ struct FGameInstanceDatas
 	UPROPERTY(Transient)
 	uint8 bCurrentLevelMissionSuccess : 1;
 
-	// 生成怪物阶段
-	UPROPERTY(SaveGame)
-	int32 SpawnMonsterState;
-	
 	//当前关卡
 	UPROPERTY(SaveGame)
 	int32 CurrentLevel;
@@ -53,7 +49,7 @@ struct FGameInstanceDatas
 	UPROPERTY(SaveGame)
 	float TimeInterval;
 
-	//每波怪物当前数量 数量是动态
+	//每波怪物当前数量 数量是动态 
 	UPROPERTY(SaveGame)
 	TArray<int32> PerNumberOfMonsters;
 
@@ -93,26 +89,22 @@ struct FGameInstanceDatas
 	UPROPERTY(SaveGame)
 	int32 MainTowersDeathNumber;
 
+	int32 GetSurplusMonsters();
 	
-	// 当前敌人
-	UPROPERTY(SaveGame)
-	int32 CurrentStagesAreMonsters;
-
-	// 获取最大怪物数量
-	int32 GetMaxMonstersNumber();
-
 	// 获取剩余怪物百分比
 	float GetPerOfRemMonsters();
-
-	void ResetSpawnMosnterTime();
 
 	//每个阶段进行检测判定
 	void StageDecision();
 
 	//分配数量梯度，数量从少变多
-	void AssignedMonsterAmount();
+	void AssignedMonsterAmount(); 
 
+	// 0.5 生成一次
 	FORCEINLINE bool IsAllowSpawnMosnter() { return CurrentSpawnMosnterTime >= TimeInterval; }
+
+	// 刷新生成时间
+	void ResetSpawnMosnterTime();
 };
 
 

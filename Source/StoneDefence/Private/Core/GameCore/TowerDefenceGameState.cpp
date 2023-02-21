@@ -3,6 +3,7 @@
 
 #include "Core/GameCore/TowerDefenceGameState.h"
 
+#include "EngineUtils.h"
 #include "Character/Core/RuleOfTheCharacter.h"
 #include "Data/Core/CharacterData.h"
 #include "Data/Save/GameSaveData.h"
@@ -12,6 +13,8 @@
 #include "Character/CharacterCore/Monsters.h"
 #include "Character/CharacterCore/Towers.h"
 #include "Engine/StaticMeshActor.h"
+#include "Items/SpawnPoint.h"
+#include "StoneDefence/StoneDefenceUtils.h"
 
 //static 与 extern 联系：
 //加了static修饰的全局变量或函数，无法在使用extern在其他源文件中使用。
@@ -43,6 +46,9 @@ ATowerDefenceGameState::ATowerDefenceGameState()
 void ATowerDefenceGameState::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// 初始化 每波生成多少怪物
+	GetGameDatas().AssignedMonsterAmount();
 }
 
 void ATowerDefenceGameState::Tick(float DeltaSeconds)
@@ -50,6 +56,150 @@ void ATowerDefenceGameState::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	GetGameDatas().GameCount -= DeltaSeconds;
+	
+	SpawnMonsters(DeltaSeconds);
+}
+
+// 塔的 等级
+int32 GetMonsterLevel(UWorld *InWorld)
+{
+	// 难度判定系数
+	struct FDifficultyDetermination
+	{
+		FDifficultyDetermination()
+		{
+			Level = 0.f;
+			Combination = 0.f;
+			Attack = 0.f;
+			Defense = 0.f;
+			Variance = 0.f;
+		}
+		// 平均等级
+		float Level;
+		// 配合度
+		float Combination;
+		// 平均攻击
+		float Attack;
+		// 防御
+		float Defense;
+		// 离散程度
+		float Variance;
+	};
+
+	auto GetDifficultyDetermination = [&](TArray<ARuleOfTheCharacter*> & RuleOfTheCharacter) -> FDifficultyDetermination
+	{
+		int32 Index = 0;
+		FDifficultyDetermination DifficultyDetermination;
+		for (ARuleOfTheCharacter* Tmp: RuleOfTheCharacter)
+		{
+			if (Tmp->IsActive())
+			{
+				DifficultyDetermination.Level += (float)Tmp->GetCharacterData().Lv;
+				DifficultyDetermination.Attack += Tmp->GetCharacterData().PhysicalAttack;
+				DifficultyDetermination.Defense += Tmp->GetCharacterData().Armor;
+				Index++;
+			}
+		}
+
+		DifficultyDetermination.Level /= Index;
+		DifficultyDetermination.Attack /= Index;
+		DifficultyDetermination.Defense /= Index;
+
+		for (ARuleOfTheCharacter* Tmp: RuleOfTheCharacter)
+		{
+			if (Tmp->IsActive())
+			{
+				float InValue = (float)Tmp->GetCharacterData().Lv - DifficultyDetermination.Level;
+				DifficultyDetermination.Variance += InValue * InValue;
+			}
+		}
+		// 求出方差
+		DifficultyDetermination.Variance / Index;
+
+		return DifficultyDetermination;
+	};
+
+	
+	
+	
+	TArray<ATowers*> Towers;
+	TArray<AMonsters*> Monsters;
+	StoneDefenceUtils::GetAllActor<ATowers>(InWorld, Towers);
+	StoneDefenceUtils::GetAllActor<AMonsters>(InWorld, Monsters);
+	FDifficultyDetermination TowersDD = GetDifficultyDetermination(Towers);
+	FDifficultyDetermination MonstersDD = GetDifficultyDetermination(Monsters);
+
+	int32 ReturnLevel = TowersDD.Level;
+	if (TowersDD.Attack > MonstersDD.Attack)
+	{
+		ReturnLevel++;
+	}
+	if (TowersDD.Defense > MonstersDD.Defense)
+	{
+		ReturnLevel++;
+	}
+	// ReturnLevel += FMath::Abs(2 - FMath::Sqrt(TowersDD.Variance));
+	
+	return ReturnLevel;
+}
+
+// 塔之间的配合度
+float ATowerDefenceGameState::GetTowersLevel()
+{
+	
+}
+// 塔的 等级分都
+float ATowerDefenceGameState::GetTowersLevel()
+{
+	
+}
+
+void ATowerDefenceGameState::SpawnMonsters(float DeltaSeconds)
+{
+	// 当前关卡是否胜利
+	if (GetGameDatas().bCurrentLevelMissionSuccess)
+	{
+		// 是不是输掉了
+		if (GetGameDatas().bGameOver)
+		{
+			// 还有剩余波次
+			if (GetGameDatas().PerNumberOfMonsters.Num())
+			{
+				GetGameDatas().CurrentSpawnMosnterTime += DeltaSeconds;
+				// 0.5 生成一次
+				if (GetGameDatas().IsAllowSpawnMosnter())
+				{
+					GetGameDatas().ResetSpawnMosnterTime();
+					
+					int32 MonsterLevel = 1;
+					
+					TArray<ASpawnPoint*> SpawnPointArray = StoneDefenceUtils::GetAllActor<ASpawnPoint>(GetWorld());
+
+					// 生成怪物
+					if (ARuleOfTheCharacter* MyMonster = SpawnMonster(0,MonsterLevel,FVector::ZeroVector, FRotator::ZeroRotator))
+					{
+						TArray<ASpawnPoint *> MonsterSpawnPoints;
+						for (ASpawnPoint* TargetPoint: SpawnPointArray)
+						{
+							if (MyMonster->IsTeam() == TargetPoint->bTeam)
+							{
+								MonsterSpawnPoints.Add(TargetPoint);
+							}
+						}
+						
+						ASpawnPoint* TargetPoint = MonsterSpawnPoints[FMath::RandRange(0, MonsterSpawnPoints.Num() - 1)];
+						MyMonster->SetActorLocationAndRotation(TargetPoint->GetActorLocation(), TargetPoint->GetActorRotation());
+
+						// 阶段--
+						GetGameDatas().StageDecision();
+					}
+				}
+			}
+		}
+	} else
+	{
+		
+	}
 }
 
 ATowers* ATowerDefenceGameState::SpawTowner(int32 CharacterID, int32 CharacterLevel, const FVector& Location,

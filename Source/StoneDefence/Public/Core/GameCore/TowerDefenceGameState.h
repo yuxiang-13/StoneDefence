@@ -94,6 +94,8 @@ public:
 protected:
 	UGameSaveData *GetSaveData();
 	UGameSaveSlotList *GetGameSaveSlotList();
+	// 怪物生成
+	void SpawnMonsters(float DeltaSeconds);
 private:
 	UPROPERTY()
 	UGameSaveData *SaveData;
