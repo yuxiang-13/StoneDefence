@@ -10,6 +10,7 @@ FGameInstanceDatas::FGameInstanceDatas()
 
 void FGameInstanceDatas::Init()
 {
+	MaxStagesAreMonsters = 4;
 	MaxMonsters = 100;
 	GameDifficulty = 0;
 	bAllMainTowerDie = false;

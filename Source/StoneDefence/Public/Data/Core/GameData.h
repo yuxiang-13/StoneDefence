@@ -24,6 +24,10 @@ struct FGameInstanceDatas
 	//该关卡内存 最大怪物数量
 	UPROPERTY(SaveGame)
 	int32 MaxMonsters;
+
+	//有多少波怪物
+	UPROPERTY(SaveGame)
+	int32 MaxStagesAreMonsters;
 	
 	//游戏难度有关
 	UPROPERTY(SaveGame)

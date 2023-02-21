@@ -60,72 +60,49 @@ void ATowerDefenceGameState::Tick(float DeltaSeconds)
 	SpawnMonsters(DeltaSeconds);
 }
 
-// 塔的 等级
-int32 GetMonsterLevel(UWorld *InWorld)
+
+template <class T>
+FDifficultyDetermination ATowerDefenceGameState::GetDifficultyDetermination(TArray<T*> & RuleOfTheCharacter)
 {
-	// 难度判定系数
-	struct FDifficultyDetermination
+	int32 Index = 0;
+	FDifficultyDetermination DifficultyDetermination;
+	for (T* Tmp: RuleOfTheCharacter)
 	{
-		FDifficultyDetermination()
+		if (Tmp->IsActive())
 		{
-			Level = 0.f;
-			Combination = 0.f;
-			Attack = 0.f;
-			Defense = 0.f;
-			Variance = 0.f;
+			DifficultyDetermination.Level += (float)Tmp->GetCharacterData().Lv;
+			DifficultyDetermination.Attack += Tmp->GetCharacterData().PhysicalAttack;
+			DifficultyDetermination.Defense += Tmp->GetCharacterData().Armor;
+			Index++;
 		}
-		// 平均等级
-		float Level;
-		// 配合度
-		float Combination;
-		// 平均攻击
-		float Attack;
-		// 防御
-		float Defense;
-		// 离散程度
-		float Variance;
-	};
+	}
 
-	auto GetDifficultyDetermination = [&](TArray<ARuleOfTheCharacter*> & RuleOfTheCharacter) -> FDifficultyDetermination
+	DifficultyDetermination.Level /= Index;
+	DifficultyDetermination.Attack /= Index;
+	DifficultyDetermination.Defense /= Index;
+
+	for (T* Tmp: RuleOfTheCharacter)
 	{
-		int32 Index = 0;
-		FDifficultyDetermination DifficultyDetermination;
-		for (ARuleOfTheCharacter* Tmp: RuleOfTheCharacter)
+		if (Tmp->IsActive())
 		{
-			if (Tmp->IsActive())
-			{
-				DifficultyDetermination.Level += (float)Tmp->GetCharacterData().Lv;
-				DifficultyDetermination.Attack += Tmp->GetCharacterData().PhysicalAttack;
-				DifficultyDetermination.Defense += Tmp->GetCharacterData().Armor;
-				Index++;
-			}
+			float InValue = (float)Tmp->GetCharacterData().Lv - DifficultyDetermination.Level;
+			DifficultyDetermination.Variance += InValue * InValue;
 		}
+	}
+	// 求出方差
+	DifficultyDetermination.Variance /= Index;
 
-		DifficultyDetermination.Level /= Index;
-		DifficultyDetermination.Attack /= Index;
-		DifficultyDetermination.Defense /= Index;
+	return DifficultyDetermination;
+}
 
-		for (ARuleOfTheCharacter* Tmp: RuleOfTheCharacter)
-		{
-			if (Tmp->IsActive())
-			{
-				float InValue = (float)Tmp->GetCharacterData().Lv - DifficultyDetermination.Level;
-				DifficultyDetermination.Variance += InValue * InValue;
-			}
-		}
-		// 求出方差
-		DifficultyDetermination.Variance / Index;
-
-		return DifficultyDetermination;
-	};
-
-	
-	
+// 塔的 等级
+int32 ATowerDefenceGameState::GetMonsterLevel()
+{
 	
 	TArray<ATowers*> Towers;
 	TArray<AMonsters*> Monsters;
-	StoneDefenceUtils::GetAllActor<ATowers>(InWorld, Towers);
-	StoneDefenceUtils::GetAllActor<AMonsters>(InWorld, Monsters);
+	StoneDefenceUtils::GetAllActor<ATowers>(GetWorld(), Towers);
+	StoneDefenceUtils::GetAllActor<AMonsters>(GetWorld(), Monsters);
 	FDifficultyDetermination TowersDD = GetDifficultyDetermination(Towers);
 	FDifficultyDetermination MonstersDD = GetDifficultyDetermination(Monsters);
 
@@ -141,17 +118,6 @@ int32 GetMonsterLevel(UWorld *InWorld)
 	// ReturnLevel += FMath::Abs(2 - FMath::Sqrt(TowersDD.Variance));
 	
 	return ReturnLevel;
-}
-
-// 塔之间的配合度
-float ATowerDefenceGameState::GetTowersLevel()
-{
-	
-}
-// 塔的 等级分都
-float ATowerDefenceGameState::GetTowersLevel()
-{
-	
 }
 
 void ATowerDefenceGameState::SpawnMonsters(float DeltaSeconds)

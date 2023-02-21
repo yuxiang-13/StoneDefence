@@ -25,6 +25,29 @@ struct FCharacterData;
 extern FCharacterData CharacterDataNULL;
 extern FBuildingTower BuildingTowerNULL;
 
+// 难度判定系数
+struct FDifficultyDetermination
+{
+	FDifficultyDetermination()
+	{
+		Level = 0.f;
+		Combination = 0.f;
+		Attack = 0.f;
+		Defense = 0.f;
+		Variance = 0.f;
+	}
+	// 平均等级
+	float Level;
+	// 配合度
+	float Combination;
+	// 平均攻击
+	float Attack;
+	// 防御
+	float Defense;
+	// 离散程度
+	float Variance;
+};
+
 /**
  * 
  */
@@ -58,6 +81,11 @@ public:
 	bool SaveGameData(int32 SaveNumber);
 	UFUNCTION(BlueprintCallable, Category="SaveData")
 	bool ReadGameData(int32 SaveNumber);
+
+	
+	template<class T>
+	FDifficultyDetermination GetDifficultyDetermination(TArray<T*> & RuleOfTheCharacter);
+	int32 GetMonsterLevel();
 protected:
 	ARuleOfTheCharacter *SpawnCharacter(int32 CharacterID, int32 CharacterLevel, UDataTable* InCharacterData,  const FVector &Location, const FRotator &Rotator);
 	template<class T>
