@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Character/Core/RuleOfTheCharacter.h"
 #include "Interface/Character/RuleCharacterInterface.h"
 
 class ARuleOfTheCharacter;
@@ -10,6 +11,7 @@ class IRuleCharacterInterface;
 
 namespace StoneDefenceUtils
 {
+
 	ARuleOfTheCharacter* FindTargetRecently(const TArray<ARuleOfTheCharacter*> &InCharacters, const FVector &Loc);
 
 	template<class Type>
@@ -37,6 +39,30 @@ namespace StoneDefenceUtils
 			}
 		}
 		return Array;
+	}
+	
+	
+	// 寻找范围内的人
+	void FindRangeTargetRecently(ARuleOfTheCharacter* InOwner, float Range, TArray<ARuleOfTheCharacter*> &Target);
+
+	inline void FindRangeTargetRecently(ARuleOfTheCharacter* InOwner, float Range,
+		TArray<ARuleOfTheCharacter*>& Target)
+	{
+		if (InOwner && Range > 0.f)
+		{
+			TArray<ARuleOfTheCharacter*> NewTargets;
+			StoneDefenceUtils::GetAllActor<ARuleOfTheCharacter>(InOwner->GetWorld(), NewTargets);
+			for (ARuleOfTheCharacter * Tmp : NewTargets)
+			{
+				if (Tmp->IsTeam() != InOwner->IsTeam())
+				{
+					if ((InOwner->GetActorLocation() - Tmp->GetActorLocation()).Size() <= Range)
+					{
+						Target.Add(Tmp);
+					}
+				}
+			}
+		}
 	}
 }
 

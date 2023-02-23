@@ -17,7 +17,7 @@ void FGameInstanceDatas::Init()
 	bGameOver = false;
 	bCurrentLevelMissionSuccess = false;
 	CurrentLevel = INDEX_NONE;
-	TimeInterval = 0.5f;
+	TimeInterval = 5.f;
 	CurrentSpawnMosnterTime = 0.0f;
 	GameCount = 6000;
 	MaxGameCount = 0;

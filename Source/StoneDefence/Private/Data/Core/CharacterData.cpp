@@ -32,6 +32,16 @@ FCharacterData::FCharacterData()
 	// Rotator = FRotator::ZeroRotator;
 	// Team = ETeam::RED;
 }
+
+float FCharacterData::GetEPPercent() const
+{
+	if (MaxEmpircalValue != 0)
+	{
+		return EmpircalValue / MaxEmpircalValue;
+	}
+	return 0.f;
+}
+
 // 判断是否有效
 bool FCharacterData::IsValid()
 {
@@ -41,4 +51,34 @@ bool FCharacterData::IsValid()
 void FCharacterData::UpdateHealth()
 {
 	Health = MaxHealth;
+}
+
+bool FCharacterData::UpdateLevel(float InExp)
+{
+	EmpircalValue += InExp;
+	// 自动升级
+	if (EmpircalValue >= MaxEmpircalValue)
+	{
+		EmpircalValue = EmpircalValue - MaxEmpircalValue;
+		//被动技能加成
+		float Coefficient = .1f;
+		
+		Lv++;
+		Glod += (Lv - 1)*AddGlod * Coefficient;
+		MaxHealth += (Lv - 1)*AddHealth * Coefficient;
+		PhysicalAttack += (Lv - 1)*AddPhysicalAttack * Coefficient;
+		AttackSpeed += (Lv - 1)*AddAttackSpeed * Coefficient;
+		Armor += (Lv - 1)*AddArmor * Coefficient;
+		MaxEmpircalValue += (Lv - 1)*AddEmpiricalValue * Coefficient;
+		RestoreHealth += (RestoreHealth * Lv) / 100;
+		
+		AddPassiveSkillHealth += ((Lv - 1)*AddPassiveSkillHealth)* (Coefficient - 0.09f);
+		AddPassiveSkillPhysicalAttack += (Lv - 1)*AddPassiveSkillPhysicalAttack *(Coefficient - 0.09f);
+		AddPassiveSkillAttackSpeed += (Lv - 1)*AddPassiveSkillAttackSpeed *(Coefficient - 0.09f);
+		// AddPassiveSkilldArmor = +(Lv - 1)*AddPassiveSkilldArmor * (Coefficient - 0.09f);
+		
+		Health = MaxHealth;
+		return true;
+	}
+	return false;
 }

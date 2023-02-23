@@ -30,6 +30,8 @@ FBuildingTower BuildingTowerNULL;
 
 ATowerDefenceGameState::ATowerDefenceGameState()
 {
+	// GetSaveData()->CharacterDatas.Empty();
+	
 	PrimaryActorTick.bCanEverTick = true;
 	static ConstructorHelpers::FObjectFinder<UDataTable> MyTable_Towers(TEXT("/Game/GameData/TowersData"));
 	static ConstructorHelpers::FObjectFinder<UDataTable> MyTable_Monster(TEXT("/Game/GameData/MonsterData"));

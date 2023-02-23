@@ -54,8 +54,7 @@ void ARuleOfTheCharacter::BeginPlay()
 	{
 		SpawnDefaultController();
 	}
-	UpdateUI();
-
+	
 	//DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_TwoParams( FComponentOnClickedSignature, UPrimitiveComponent, OnClicked, UPrimitiveComponent*, TouchedComponent , FKey, ButtonPressed);
 	TraceShowCharacterInformation->OnClicked.AddDynamic(this, &ARuleOfTheCharacter::OnClicked);
 }
@@ -72,32 +71,91 @@ void ARuleOfTheCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	UpdateUI();
 }
 
 float ARuleOfTheCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
 	AActor* DamageCauser)
 {
 	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
 	
+	auto DrawGameTest = [&](ARuleOfTheCharacter *InOwner, FStringFormatNamedArguments NamedArgs, float InDamgageValue, FLinearColor InColor)
+	{
+		if (DrawTextClass)
+		{
+			if (ADrawText* MyValueText = GetWorld()->SpawnActor<ADrawText>(DrawTextClass, InOwner->GetActorLocation(), FRotator::ZeroRotator))
+			{
+				const FString DamageText = FString::Format(TEXT("{Var1}  {Var2}"), NamedArgs);
+				
+				MyValueText->SetTextBlock(DamageText, InColor, InDamgageValue / InOwner->GetCharacterData().MaxHealth);
+			}
+		}
+	};
+
 	float DamageValue = Expression::GetDamage(Cast<ARuleOfTheCharacter>(DamageCauser), this);
 	
 	GetCharacterData().Health -= DamageValue;
-	if (!IsActive())
-	{
-		GetCharacterData().Health = 0.0f;
-	}
 	
-	// 产生伤害字体
-	if (DrawTextClass)
+	FCharacterData InCharacterData = GetCharacterData();
+	if (InCharacterData.IsValid())
 	{
-		if (ADrawText *MyValueText = GetWorld()->SpawnActor<ADrawText>(DrawTextClass, GetActorLocation(), FRotator::ZeroRotator))
+		if (!IsActive())
 		{
-			FString DamageText = FString::Printf(TEXT("-%0.f"), DamageValue);
-			MyValueText->SetTextBlock(DamageText, FLinearColor::Red, DamageValue / GetCharacterData().MaxHealth);
+			GetCharacterData().Health = 0.0f;
+			SetLifeSpan(3.0f);
+
+			Widget->SetVisibility(false);
+
+			// 谁杀死我，谁得到我提供的最懂经验
+			if (ARuleOfTheCharacter*CauserCharacter = Cast<ARuleOfTheCharacter>(DamageCauser))
+			{
+				if (CauserCharacter->IsActive())
+				{
+					if (CauserCharacter->GetCharacterData().UpdateLevel(InCharacterData.AddEmpiricalValue))
+					{
+					
+					}
+
+					FStringFormatNamedArguments NamedArgs1;
+					NamedArgs1.Add(TEXT("Var1"), "+EP ");
+					NamedArgs1.Add(TEXT("Var2"),   FString::Printf(TEXT("%0.f"), GetCharacterData().AddEmpiricalValue));
+				
+					// 添加经验值
+					DrawGameTest(CauserCharacter, NamedArgs1, InCharacterData.AddEmpiricalValue, FLinearColor::Yellow);
+				}
+				// 寻找范围内最近敌人 给加0.3倍经验减半
+				TArray<ARuleOfTheCharacter*> EnemyCharacters;
+				StoneDefenceUtils::FindRangeTargetRecently(this, 1000.f, EnemyCharacters);
+				for (ARuleOfTheCharacter* InEnemy : EnemyCharacters)
+				{
+					if (InEnemy != CauserCharacter)
+					{
+						if (InEnemy->IsActive())
+						{
+							if (InEnemy->GetCharacterData().UpdateLevel(InCharacterData.AddEmpiricalValue * 0.3f))
+							{
+					
+							}
+							FStringFormatNamedArguments NamedArgs2;
+							NamedArgs2.Add(TEXT("Var1"), "+EP ");
+							NamedArgs2.Add(TEXT("Var2"),   FString::Printf(TEXT("%0.f"), GetCharacterData().AddEmpiricalValue));
+							DrawGameTest(InEnemy, NamedArgs2, InCharacterData.AddEmpiricalValue, FLinearColor::Yellow);
+						}
+					}
+				}
+			}
+
+			GetGameState()->RemoveCharacterData(GUID);
 		}
+		FStringFormatNamedArguments NamedArgs3;
+		NamedArgs3.Add(TEXT("Var1"), " ");
+		NamedArgs3.Add(TEXT("Var2"),   FString::Printf(TEXT("%0.f"), DamageValue));
+		// 产生伤害字体 TEXT("-%0.f")
+		DrawGameTest(this, NamedArgs3, DamageValue, FLinearColor::Red);
 	}
 	
-	UpdateUI();
+	
 	return DamageValue;
 }
 
@@ -105,10 +163,13 @@ void ARuleOfTheCharacter::UpdateUI()
 {
 	if (Widget)
 	{
-		if (UUI_Health* HealthUI = Cast<UUI_Health>(Widget->GetUserWidgetObject()))
+		if (GetCharacterData().IsValid())
 		{
-			HealthUI->SetTitle(GetCharacterData().Name.ToString());
-			HealthUI->SetHealth(GetHealth() / GetMaxHealth());
+			if (UUI_Health* HealthUI = Cast<UUI_Health>(Widget->GetUserWidgetObject()))
+			{
+				HealthUI->SetTitle(GetCharacterData().Name.ToString());
+				HealthUI->SetHealth(GetHealth() / GetMaxHealth());
+			}
 		}
 	}
 }
